@@ -39,6 +39,7 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    bcrypt (3.1.11-x64-mingw32)
     builder (3.2.3)
     concurrent-ruby (1.0.5)
     erubis (2.7.0)
@@ -108,6 +109,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   byebug
   puma (~> 3.0)
   rails (~> 5.0.2)
