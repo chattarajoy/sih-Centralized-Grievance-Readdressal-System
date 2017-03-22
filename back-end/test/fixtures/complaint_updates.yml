@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  complaint_id: 1
+  assigned_to: 1
+  notes: MyText
+
+two:
+  complaint_id: 1
+  assigned_to: 1
+  notes: MyText

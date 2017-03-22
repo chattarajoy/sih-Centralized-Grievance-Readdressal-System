@@ -1,0 +1,2 @@
+class ComplaintUpdate < ApplicationRecord
+end
