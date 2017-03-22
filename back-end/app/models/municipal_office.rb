@@ -1,0 +1,2 @@
+class MunicipalOffice < ApplicationRecord
+end

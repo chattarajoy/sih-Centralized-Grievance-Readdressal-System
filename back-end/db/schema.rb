@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170322202730) do
+ActiveRecord::Schema.define(version: 20170322204023) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "name"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20170322202730) do
     t.integer  "municipality_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "password_digest"
+  end
+
+  create_table "municipal_offices", force: :cascade do |t|
+    t.string   "state"
+    t.string   "district"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -30,6 +38,7 @@ ActiveRecord::Schema.define(version: 20170322202730) do
     t.boolean  "aadhar_verified"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "password_digest"
   end
 
 end
