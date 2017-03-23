@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  description: MyText
+  image: MyText
+  latitude: 9.99
+  longitude: 9.99
+  city: MyString
+  state: MyString
+  pincode: 1
+
+two:
+  subject: MyString
+  description: MyText
+  image: MyText
+  latitude: 9.99
+  longitude: 9.99
+  city: MyString
+  state: MyString
+  pincode: 1
