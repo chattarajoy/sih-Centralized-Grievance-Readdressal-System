@@ -16,16 +16,7 @@ gem 'puma', '~> 3.0'
 # gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
-# Use ActiveModel has_secure_password
-<<<<<<< HEAD
 gem 'bcrypt', '~> 3.1.7'
-# jwt for api access tokens
-gem 'jwt'
-# simple command for login Authentication\
-gem 'simple_command'
-=======
- gem 'bcrypt', '~> 3.1.7'
->>>>>>> 605af6941aaf1c1c1df6ae4dc7ff4d8823f51dbe
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
