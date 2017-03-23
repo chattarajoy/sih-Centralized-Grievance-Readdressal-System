@@ -7,5 +7,7 @@ class CreateComplaintUpdates < ActiveRecord::Migration[5.0]
 
       t.timestamps
     end
+    add_index :complaint_updates, :complaint_id
+    add_index :complaint_updates, :assigned_to
   end
 end
