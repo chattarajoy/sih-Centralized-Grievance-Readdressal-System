@@ -1,20 +1,15 @@
 class AdminUserController < ApplicationController
-	def new
-    @admin_user = AdminUser.new
-  end
 
-  def create
-    @admin_user = AdminUser.new(params[:admin_user])    # Not the final implementation!
-    if @admin_user.save
-      # Handle a successful save.
+  def signup
+    admin_user = AdminUser.new(name: params[:name], email: params[:email],
+		 phone: params[:phone], access_level: params[:access_level],
+		 municipality_id: params[:municipality_id], password: params[:password])   # Not the final implementation!
+
+    if admin_user.save!
+      render json: {status: 200, notice: "done!"}
     else
-      render 'new'
+      render json: {status: 500, notice: "can't save"}
     end
   end
 
-  private
-    def admin_user_params
-      params.require(:admin_user).permit(:name, :email,
-                                   :phone, :access_level, :municipality_id)
-    end
 end
