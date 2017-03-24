@@ -15,14 +15,14 @@ class AuthController < ApplicationController
             secret_key = api_key.secret_key
             access_token = api_key.user_token
 
-            render json: {status: 200, access_token: access_token, secret_key: secret_key}
+            render json: {status: "success", access_token: access_token, secret_key: secret_key}
         else
           notice = "Invalid email or password"
         end
     else
         notice = "Invalid Params"
     end
-    render json: {status: "error", notice: notice} unless user_token
+    render json: {status: "error", notice: notice} unless access_token
 
   end
 
