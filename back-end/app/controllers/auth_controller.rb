@@ -26,7 +26,30 @@ class AuthController < ApplicationController
 
   end
 
-  def office_login
+  def admin_login
+
+    def user_login
+
+      if params[:password] && params[:email]
+
+          user = AdminUser.where(email: params[:email]).first
+
+          if user && user.authenticate(params[:password])
+              api_key = ApiKey.new
+              api_key.user_id = user.id
+              api_key.user_type = "admin"
+              api_key.save
+              secret_key = api_key.secret_key
+              access_token = api_key.user_token
+
+              render json: {status: "success", access_token: access_token, secret_key: secret_key}
+          else
+            notice = "Invalid email or password"
+          end
+      else
+          notice = "Invalid Params"
+      end
+      render json: {status: "error", notice: notice} unless access_token
 
   end
 
@@ -34,5 +57,9 @@ class AuthController < ApplicationController
 
   end
 
+  private
+    def delete_keys(user_id)
+
+    end
 
 end

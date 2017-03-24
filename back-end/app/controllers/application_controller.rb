@@ -5,7 +5,7 @@ class ApplicationController < ActionController::API
         if request.headers["HTTP_ACCESS_TOKEN"] && request.headers["HTTP_SECRET_KEY"]
 
           user = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
-            user_token: request.headers["HTTP_ACCESS_TOKEN"]).first
+            user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "visitor").first
 
             if user
               return true
