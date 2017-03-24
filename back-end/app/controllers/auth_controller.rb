@@ -10,17 +10,19 @@ class AuthController < ApplicationController
         if user && user.authenticate(params[:password])
             api_key = ApiKey.new
             api_key.user_id = user.id
+            api_key.user_type = "visitor"
             api_key.save
-            token = api_key.secret_key
+            secret_key = api_key.secret_key
+            access_token = api_key.user_token
 
-            render json: {status: 200, access_token: token}
+            render json: {status: 200, access_token: access_token, secret_key: secret_key}
         else
           notice = "Invalid email or password"
         end
     else
         notice = "Invalid Params"
     end
-    render json: {status: "error", notice: notice} unless token
+    render json: {status: "error", notice: notice} unless user_token
 
   end
 
