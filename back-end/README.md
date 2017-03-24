@@ -10,6 +10,8 @@
 * Admin : url  /auth/admin_login
 > parameters: email and password
 
+> Returns status, access_token, secret_key
+
 ## Registering a User
 
 * User : url: /user/siginup
@@ -22,6 +24,8 @@
 > parameters: name, email, phone, access_level, municipality_id, password
 
 *access_level and municipality_id will be handled by us in further iterations, please fill anything in it for now.*
+
+> Returns Status and (notice on error)
 
 ## Registering a complaint
 
