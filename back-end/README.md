@@ -16,7 +16,7 @@
 > parameters: name, contact, email, password 
 
 *Please input password twice on front-end and ensure both are same*
-*Contact refers to contact number or phone number*
+<br>*Contact refers to contact number or phone number*
 
 * Admin user : url: /admin_user/signup
 > parameters: name, email, phone, access_level, municipality_id, password
