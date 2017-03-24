@@ -13,7 +13,7 @@ class AuthController < ApplicationController
             api_key.save
             token = api_key.secret_key
 
-            render json: {status: "success", access_token: token}
+            render json: {status: 200, access_token: token}
         else
           notice = "Invalid email or password"
         end
