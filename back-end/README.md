@@ -18,7 +18,7 @@
 
 ### Registering a User
 
-* User : url: /user/siginup
+* User : url: /user/signup
 `parameters: name, contact, email, password`
 
 *Please input password twice on front-end and ensure both are same*
