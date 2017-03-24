@@ -1,12 +1,17 @@
 class ComplaintController < ApplicationController
 
-    before_action :check_user_logged_in
 
+  before_action :check_user_logged_in
 
-    def index
+  def new
+    @complaint = Complaint.new
+  end
 
-      render json: {status: 200}
+  def create
+    @complaint = Complaint.new(complaint_params)
+  end
 
-    end
+  def update
+  end
 
 end
