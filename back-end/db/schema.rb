@@ -10,17 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324082049) do
+ActiveRecord::Schema.define(version: 20170324111644) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
-    t.integer  "phone"
     t.string   "access_level"
     t.integer  "municipality_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.string   "phone"
   end
 
   create_table "api_keys", force: :cascade do |t|
@@ -65,13 +65,13 @@ ActiveRecord::Schema.define(version: 20170324082049) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
-    t.integer  "contact"
     t.string   "email"
     t.boolean  "phone_no_verified"
     t.boolean  "aadhar_verified"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "password_digest"
+    t.string   "contact"
   end
 
 end
