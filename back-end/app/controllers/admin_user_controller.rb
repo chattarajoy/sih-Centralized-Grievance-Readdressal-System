@@ -12,4 +12,27 @@ class AdminUserController < ApplicationController
     end
   end
 
+  def update
+
+    user = AdminUser.find(email: params[:email])
+
+
+
+      if user
+        if params[:password]
+          user.password = params[:password]
+        end
+        if params[:phone]
+          user.phone = params[:phone]
+        end
+        if user.save
+          render json: {status: "success"}
+        else
+          notice = "Update failed, contact admin"
+        end
+      else
+        notice = "user not found"
+        render json: {status: "error", notice: notice}
+      end
+    end
 end
