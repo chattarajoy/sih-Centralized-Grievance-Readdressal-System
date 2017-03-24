@@ -7,6 +7,8 @@
 * User : url: /auth/user_login
 `parameters: email and password`
 
+* example call: `192.168.117.60:8000/auth/user_login?email=xyz@xyz.com&password=tiru`
+
 * Admin : url  /auth/admin_login
 `parameters: email and password`
 
