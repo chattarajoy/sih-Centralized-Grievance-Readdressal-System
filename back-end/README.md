@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+#### API Server running on : 192.168.117.60:8000
 
-Things you may want to cover:
+## Logging in
 
-* Ruby version
+* User : url: /auth/user_login
+> parameters: email and password
 
-* System dependencies
+* Admin : url  /auth/admin_login
+> parameters: email and password
 
-* Configuration
+## Registering a User
 
-* Database creation
+* User : url: /user/siginup
+> parameters: name, contact, email, password 
+** Please input password twice on front-end and ensure both are same
+** Contact refers to contact number or phone number
 
-* Database initialization
+* Admin user : url: /admin_user/signup
+> parameters: name, email, phone, access_level, municipality_id, password
+** access_level and municipality_id will be handled by us in further iterations, please fill anything in it for now.
 
-* How to run the test suite
+## Registering a complaint
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*Comming soon*
