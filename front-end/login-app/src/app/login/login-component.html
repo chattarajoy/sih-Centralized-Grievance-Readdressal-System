@@ -13,11 +13,11 @@
   <div class="card-reveal">
   <span class="card-title grey-text text-darken-4">Login<i class="material-icons right">close</i></span>
                    <div class="input-field">
-          <input id="user_name" type="text" class="validate" [(ngModel)]="localUser.username">
-          <label for="user_name">Username</label>
+          <input id="user_name" type="email" class="validate" [(ngModel)]="localuser.emailId">
+          <label for="user_name">Email Id</label>
         </div>
         <div class="input-field">
-          <input id="password" type="password" class="validate" [(ngModel)]="localUser.password">
+          <input id="password" type="password" class="validate" [(ngModel)]="localuser.password">
           <label for="password">Password</label>
         </div>
         <button class="waves-effect waves-light btn" (click)="login()">Login</button>

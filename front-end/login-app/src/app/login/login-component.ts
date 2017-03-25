@@ -21,9 +21,14 @@ export class LoginComponent {
   ){}
 
  login(){
+   console.log('start');
    this._service.loginfn(this.localuser).then((res)=>{
+     console.log('check');
+
      if(res)
-     this._router.navigate(['/dashboard']);
+
+     this._router.navigate(['dashboard']);
+    //console.log('yes');
      else
      console.log('HHAAH');
    })
