@@ -22,13 +22,12 @@ class AuthController < ApplicationController
     else
         notice = "Invalid Params"
     end
+
     render json: {status: "error", notice: notice} unless access_token
 
   end
 
   def admin_login
-
-    def user_login
 
       if params[:password] && params[:email]
 
@@ -57,9 +56,5 @@ class AuthController < ApplicationController
 
   end
 
-  private
-    def delete_keys(user_id)
-
-    end
 
 end

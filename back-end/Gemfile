@@ -18,6 +18,9 @@ gem 'puma', '~> 3.0'
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 
+# for cors error
+gem 'rack-cors'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
