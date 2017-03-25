@@ -16,7 +16,7 @@ class ComplaintController < ApplicationController
                                 priority: "new")
 
       if complaint.save
-        render json: {status: "success"}
+        render json: {status: "success", complaint: complaint}
       else
         render json: {status: "error", error_message: complaint.errors.full_messages}
       end
@@ -40,5 +40,7 @@ class ComplaintController < ApplicationController
     else
       render json: {status: "error", error_message: "complaint not found"}
     end
+
+  end
 
 end

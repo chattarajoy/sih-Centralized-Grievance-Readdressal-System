@@ -3,8 +3,12 @@ class UserController < ApplicationController
   before_action :check_user_logged_in, only: [:update_password]
 
   def signup
-    user = User.new(name: params[:name], contact: params[:contact], email: params[:email],
-     password: params[:password], phone_no_verified: false, aadhar_verified: false)    # Not the final implementation!
+    user = User.new(name: params[:name],
+                    contact: params[:contact],
+                    email: params[:email],
+                    password: params[:password],
+                    phone_no_verified: false,
+                    aadhar_verified: false) 
 
     if user.save
       render json: {status: "success", error_message: "done!"}

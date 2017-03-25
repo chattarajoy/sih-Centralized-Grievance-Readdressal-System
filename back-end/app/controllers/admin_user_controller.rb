@@ -3,9 +3,12 @@ class AdminUserController < ApplicationController
   before_action :check_user_logged_in, only: [:update_password]
 
   def signup
-    admin_user = AdminUser.new(name: params[:name], email: params[:email],
-		 phone: params[:phone], access_level: params[:access_level],
-		 municipality_id: params[:municipality_id], password: params[:password])   # Not the final implementation!
+    admin_user = AdminUser.new(name: params[:name],
+                                email: params[:email],
+		                            phone: params[:phone],
+                                access_level: params[:access_level],
+		                            municipality_id: params[:municipality_id], 
+                                password: params[:password])
 
     if admin_user.save!
       render json: {status: "success", error_message: "done!"}
