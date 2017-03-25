@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 //custom components
 import { LoginComponent } from './login/login-component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { DashboardComponent } from './dashboard/dashboard.component'; 
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 //custom components above
 
@@ -17,7 +17,8 @@ import { routes } from './app.routes';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
