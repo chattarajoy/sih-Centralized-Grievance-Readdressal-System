@@ -33,7 +33,7 @@ export class AuthServiceService {
     this._http.post(`http://54.169.134.133:80/auth/user_login?email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
       .subscribe((data) =>{
         console.log('from auth-service',data.json());
-        if(data.json()){
+        if(data.json().status === "success"){
           console.log('successCheck');
           window.localStorage.setItem('access_token',data.json().access_token);
           window.localStorage.setItem('secret_key',data.json().secret_key);
