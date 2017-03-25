@@ -5,9 +5,9 @@ class UserController < ApplicationController
      password: params[:password], phone_no_verified: false, aadhar_verified: false)    # Not the final implementation!
 
     if user.save!
-      render json: {status: 200, notice: "done!"}
+      render json: {status: "success", error_message: "done!"}
     else
-      render json: {status: 500, notice: "can't save"}
+      render json: {status: "error", error_message: "can't save, database error!"}
     end
   end
 
@@ -20,11 +20,11 @@ class UserController < ApplicationController
       if user.save
         render json: {status: "success"}
       else
-        notice = "Update failed, contact admin"
+        error_message = "Update failed, contact admin"
       end
     else
-      notice = "user not found"
-      render json: {status: "error", notice: notice}
+      error_message = "user not found"
+      render json: {status: "error", error_message: error_message}
     end
   end
 

@@ -3,7 +3,7 @@ class ComplaintController < ApplicationController
   before_action :check_user_logged_in
 
   def index
-    render json: {status: "success"}
+    render json: {status: "success", user_id: get_logged_in_user_id}
   end
 
   def create

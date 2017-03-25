@@ -17,13 +17,13 @@ class AuthController < ApplicationController
 
             render json: {status: "success", access_token: access_token, secret_key: secret_key}
         else
-          notice = "Invalid email or password"
+          error_message = "Invalid email or password"
         end
     else
-        notice = "Invalid Params"
+        error_message = "Invalid Params"
     end
 
-    render json: {status: "error", notice: notice} unless access_token
+    render json: {status: "error", error_message: error_message} unless access_token
 
   end
 
@@ -43,12 +43,12 @@ class AuthController < ApplicationController
 
               render json: {status: "success", access_token: access_token, secret_key: secret_key}
           else
-            notice = "Invalid email or password"
+            error_message = "Invalid email or password"
           end
       else
-          notice = "Invalid Params"
+          error_message = "Invalid Params"
       end
-      render json: {status: "error", notice: notice} unless access_token
+      render json: {status: "error", error_message: error_message} unless access_token
 
   end
 
