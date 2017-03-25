@@ -1,4 +1,5 @@
 class AdminUser < ApplicationRecord
+
 	has_many :complaint_updates
 	has_one :municipal_office
 	before_save { self.email = email.downcase }
@@ -7,7 +8,7 @@ class AdminUser < ApplicationRecord
 	validates :email, presence: true, length: { maximum: 255 },
     	              format: { with: VALID_EMAIL_REGEX },
         	          uniqueness: { case_sensitive: false }
-    validates :phone, presence: true
-  	has_secure_password
+  validates :phone, presence: true
+  has_secure_password
 
 end

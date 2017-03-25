@@ -8,7 +8,7 @@ class AdminUserController < ApplicationController
     if admin_user.save!
       render json: {status: "success", error_message: "done!"}
     else
-      render json: {status: "error", error_message: "can't save, database error"}
+      render json: {status: "error", error_message: admin_user.errors.full_messages}
     end
   end
 
@@ -28,7 +28,7 @@ class AdminUserController < ApplicationController
         if user.save
           render json: {status: "success"}
         else
-          error_message = "Update failed, contact admin"
+          error_message = user.errors.full_messages
         end
       else
         error_message = "user not found"

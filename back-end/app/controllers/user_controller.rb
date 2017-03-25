@@ -4,10 +4,10 @@ class UserController < ApplicationController
     user = User.new(name: params[:name], contact: params[:contact], email: params[:email],
      password: params[:password], phone_no_verified: false, aadhar_verified: false)    # Not the final implementation!
 
-    if user.save!
+    if user.save
       render json: {status: "success", error_message: "done!"}
     else
-      render json: {status: "error", error_message: "can't save, database error!"}
+      render json: {status: "error", error_message: user.errors.full_messages}
     end
   end
 
@@ -20,7 +20,7 @@ class UserController < ApplicationController
       if user.save
         render json: {status: "success"}
       else
-        error_message = "Update failed, contact admin"
+        error_message = user.errors.full_messages
       end
     else
       error_message = "user not found"
