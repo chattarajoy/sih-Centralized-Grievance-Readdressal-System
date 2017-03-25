@@ -16,7 +16,7 @@ class AuthController < ApplicationController
             secret_key = api_key.secret_key
             access_token = api_key.user_token
 
-            render json: {status: "success", access_token: access_token, secret_key: secret_key}
+            render json: {status: "success", access_token: access_token, secret_key: secret_key, user: user}
         else
           error_message = "Invalid email or password"
         end
@@ -42,7 +42,7 @@ class AuthController < ApplicationController
               secret_key = api_key.secret_key
               access_token = api_key.user_token
 
-              render json: {status: "success", access_token: access_token, secret_key: secret_key}
+              render json: {status: "success", access_token: access_token, secret_key: secret_key, user: user}
           else
             error_message = "Invalid email or password"
           end
