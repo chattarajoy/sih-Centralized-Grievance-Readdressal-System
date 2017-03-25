@@ -30,7 +30,7 @@ export class DashboardComponent {
       this._router.navigate(['']);
   }
 
-  getUsers(){
+  getStatus(){
     this._service.getStatusX()
      .subscribe(res=>{
        this.status = res.status;
