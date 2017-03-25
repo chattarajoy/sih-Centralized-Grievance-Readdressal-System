@@ -1,29 +1,7 @@
-<div class="container">
-    <nav class="navbar navbar-default">
-        <div class="navbar-header">
-          <a class="navbar-brand" routerLink="/dashboard"></a>
-        </div>
-        <!-- On the left side of our navbar we'll display the two links for public and private deals -->
-        <ul class="nav navbar-nav">
-          <li>
-            <a routerLink="/deals" routerLinkActive="active">Deals</a>
-          </li>
-          <li>
-            <a routerLink="/special" routerLinkActive="active">Private Deals</a>
-          </li>
-        </ul>
-        <!-- On the right side of our navbar we'll display the login and logout actions depending on user state -->
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a>Log In</a>
-          </li>
-          <li>
-            <a>Log Out</a>
-          </li>
-        </ul>
-    </nav>
-    <div class="col-sm-12">
-      <!-- The router-outlet directive will display the component based on the route we are on, more on this soon -->
-      <router-outlet></router-outlet>
-    </div>
+<div class="main">
+  <div class="container">
+   <router-outlet></router-outlet>
+
   </div>
+
+</div>

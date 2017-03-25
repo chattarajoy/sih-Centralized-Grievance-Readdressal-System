@@ -11,4 +11,21 @@ class UserController < ApplicationController
     end
   end
 
+  def update_password
+
+    user = User.find(email: params[:email])
+
+    if user
+      user.password = params[:password]
+      if user.save
+        render json: {status: "success"}
+      else
+        notice = "Update failed, contact admin"
+      end
+    else
+      notice = "user not found"
+      render json: {status: "error", notice: notice}
+    end
+  end
+
 end
