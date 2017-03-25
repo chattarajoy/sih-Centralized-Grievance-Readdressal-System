@@ -1,5 +1,7 @@
 class UserController < ApplicationController
 
+  before_action :check_user_logged_in, only: [:update_password]
+
   def signup
     user = User.new(name: params[:name], contact: params[:contact], email: params[:email],
      password: params[:password], phone_no_verified: false, aadhar_verified: false)    # Not the final implementation!
@@ -13,18 +15,26 @@ class UserController < ApplicationController
 
   def update_password
 
-    user = User.find(email: params[:email])
+    if params[:email] && params[:password]
 
-    if user
-      user.password = params[:password]
-      if user.save
-        render json: {status: "success"}
-      else
-        error_message = user.errors.full_messages
-      end
+        user = User.where(email: params[:email]).first
+
+          if user.id == get_logged_in_user_id
+
+            user.password = params[:password]
+
+              if user.save
+                render json: {status: "success"}
+              else
+                error_message = user.errors.full_messages
+              end
+
+          else
+            error_message = "user not found"
+            render json: {status: "error", error_message: error_message}
+          end
     else
-      error_message = "user not found"
-      render json: {status: "error", error_message: error_message}
+      render json: {status: "error", error_message: "params missing"}
     end
   end
 

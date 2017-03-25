@@ -23,7 +23,15 @@ class ApplicationController < ActionController::API
     def get_logged_in_user_id
 
       user = ApiKey.where(user_token: request.headers["HTTP_ACCESS_TOKEN"],
-       secret_key: request.headers["HTTP_SECRET_KEY"]).first
+       secret_key: request.headers["HTTP_SECRET_KEY"], user_type: "visitor").first
+      return user.user_id
+
+    end
+
+    def get_logged_in_admin_id
+
+      user = ApiKey.where(user_token: request.headers["HTTP_ACCESS_TOKEN"],
+       secret_key: request.headers["HTTP_SECRET_KEY"], user_type: "admin").first
       return user.user_id
 
     end
