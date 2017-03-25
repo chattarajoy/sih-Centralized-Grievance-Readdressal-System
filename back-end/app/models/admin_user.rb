@@ -8,6 +8,6 @@ class AdminUser < ApplicationRecord
 	validates :email, presence: true, length: { maximum: 255 },
     	              format: { with: VALID_EMAIL_REGEX },
         	          uniqueness: { case_sensitive: false }
-    validates :phones, presence: true
+    validates :phone, presence: true
   	has_secure_password
 end

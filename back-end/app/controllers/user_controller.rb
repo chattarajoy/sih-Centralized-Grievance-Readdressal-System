@@ -8,10 +8,10 @@ class UserController < ApplicationController
                     email: params[:email],
                     password: params[:password],
                     phone_no_verified: false,
-                    aadhar_verified: false) 
+                    aadhar_verified: false)
 
     if user.save
-      render json: {status: "success", error_message: "done!"}
+      render json: {status: "success"}
     else
       render json: {status: "error", error_message: user.errors.full_messages}
     end

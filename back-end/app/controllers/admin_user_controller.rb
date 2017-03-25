@@ -7,11 +7,11 @@ class AdminUserController < ApplicationController
                                 email: params[:email],
 		                            phone: params[:phone],
                                 access_level: params[:access_level],
-		                            municipality_id: params[:municipality_id], 
+		                            municipality_id: params[:municipality_id],
                                 password: params[:password])
 
-    if admin_user.save!
-      render json: {status: "success", error_message: "done!"}
+    if admin_user.save
+      render json: {status: "success"}
     else
       render json: {status: "error", error_message: admin_user.errors.full_messages}
     end
