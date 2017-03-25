@@ -24,7 +24,7 @@ Returns json
  {status: "success" or "error", 
   access_token: "", 
   secret_key: "",
-  name: "",
+  user_name: "",
   email: "",
   contact: "",
   aadhaar_verified: true/false,
@@ -49,7 +49,7 @@ Returns json
   access_token: "", 
   secret_key: "",
   name: "",
-  email: "",
+  usr_eemail: "",
   contact: "",
   role: "",
   error_message: "if there is an error"}
