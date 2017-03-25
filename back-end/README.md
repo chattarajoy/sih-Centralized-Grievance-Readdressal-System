@@ -1,20 +1,39 @@
 # README
 
-#### API Server running on : 192.168.117.60:8000 and 54.169.134.133
+*API Server running on : 192.168.117.60:8000 and 54.169.134.133*
 
-### Logging in
+## Authentication
 
-* User : url: /auth/user_login
-`parameters: email and password`
+* User : `url: /auth/user_login`
+```
+parameters: email, password
 
-* example call: `192.168.117.60:8000/auth/user_login?email=xyz@xyz.com&password=tiru`
+```
 
-* Admin : url  /auth/admin_login
-`parameters: email and password`
+```
+example call
+
+192.168.117.60:8000/auth/user_login?email=xyz@xyz.com&password=tiru
+
+```
+* Admin : url  `/auth/admin_login`
+
+```
+parameters: email, password
+
+```
 
 #### Return Structure
 
-```Returns json {status, access_token, secret_key and (notice on error)}```
+```
+Returns json 
+
+ {status: "success" or "error", 
+  access_token: "", 
+  secret_key: "",
+  error_message: "if there is an error"}
+
+```
 
 ### Registering a User
 
