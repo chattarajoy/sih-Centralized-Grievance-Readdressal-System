@@ -10,7 +10,8 @@ import 'rxjs/add/operator/toPromise';
 export class AuthServiceService {
 
    isLoggedIn : boolean;
-
+   authKey : any;
+   secKey : any;
    //url : '192.168.117.60:8000/auth/user_login?email=xyz@xyz.com&password=tiru';
 
   constructor(
@@ -29,20 +30,22 @@ export class AuthServiceService {
    console.log(usercreds.emailId);
    console.log(usercreds.password);
 
-    this._http.post(`http://192.168.117.60.:8000/auth/user_login?email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
+    this._http.post(`http://54.169.134.133:80/auth/user_login?email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
       .subscribe((data) =>{
         console.log('from auth-service',data.json());
-        if(data.json().status === "success"){
+        if(data.json()){
           console.log('successCheck');
-          window.localStorage.setItem('access_token',data.json().token);
-          window.localStorage.setItem('secret_key',data.json().token);
+          window.localStorage.setItem('access_token',data.json().access_token);
+          window.localStorage.setItem('secret_key',data.json().secret_key);
+
           this.isLoggedIn = true;
           resolve(this.isLoggedIn);
-      //      var headers = new Headers();
-      //      headers.append('access_token',data.json().token);
-      //      headers.append('secret_key',data.json().token);
-      //
-      // this._http.get(`http://192.168.117.60:8000/complaints/index`,{headers:headers})
+           var headers = new Headers();
+           headers.append('access_token',data.json().access_token);
+           headers.append('secret_key',data.json().secret_key);
+
+
+      // this._http.get(`http://54.169.134.133:80/complaints/index`,{headers:headers})
       //
       //  .map( res => console.log('inside',res.json()));
 
@@ -56,11 +59,17 @@ export class AuthServiceService {
   }
 
 
-getStatusX(){
-  return this._http.get(`http://192.168.117.94:5000/users`,{headers:headers})
-       .map( res => res.json());
-}
+  getStatusX(){
+       return this._http.get(`http://54.169.134.133:80/complaint/index`,{headers:this.getHeaders()})
+        .map( res => res.json());
+    }
 
+    private getHeaders(){
+      let headers = new Headers();
+       headers.append('access_token',window.localStorage.getItem('access_token'));
+       headers.append('secret_key',window.localStorage.getItem('secret_key'));
+      return headers;
+    }
 
 
 
