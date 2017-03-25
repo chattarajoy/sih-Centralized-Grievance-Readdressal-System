@@ -110,7 +110,24 @@ parameters: subject, description, image, latitude, longitude, city, state, pinco
 
 Returns json 
  {status: "success" or "error",
-  error_message: "if there is an error"}
+  error_message: "if there is an error",
+  "complaint": {
+    "id": 1,
+    "subject": "New",
+    "description": "kaafi dikkat hai",
+    "image": null,
+    "latitude": null,
+    "longitude": null,
+    "city": "Ranchi",
+    "state": "Jharkhand",
+    "pincode": 835215,
+    "created_at": "2017-03-25T14:52:17.834Z",
+    "updated_at": "2017-03-25T14:52:17.834Z",
+    "user_id": 1,
+    "status": "new",
+    "priority": "new"
+  }
+  }
 
 ```
 
