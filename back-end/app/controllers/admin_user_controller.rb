@@ -6,9 +6,9 @@ class AdminUserController < ApplicationController
 		 municipality_id: params[:municipality_id], password: params[:password])   # Not the final implementation!
 
     if admin_user.save!
-      render json: {status: 200, notice: "done!"}
+      render json: {status: "success", error_message: "done!"}
     else
-      render json: {status: 500, notice: "can't save"}
+      render json: {status: "error", error_message: admin_user.errors.full_messages}
     end
   end
 
@@ -28,11 +28,11 @@ class AdminUserController < ApplicationController
         if user.save
           render json: {status: "success"}
         else
-          notice = "Update failed, contact admin"
+          error_message = user.errors.full_messages
         end
       else
-        notice = "user not found"
-        render json: {status: "error", notice: notice}
+        error_message = "user not found"
+        render json: {status: "error", error_message: error_message}
       end
     end
 end

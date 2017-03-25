@@ -1,4 +1,5 @@
 class AdminUser < ApplicationRecord
+
 	has_many :complaint_updates
 	has_one :municipal_office
 	before_save { self.email = email.downcase }
@@ -9,5 +10,4 @@ class AdminUser < ApplicationRecord
         	          uniqueness: { case_sensitive: false }
     validates :phones, presence: true
   	has_secure_password
-
 end
