@@ -48,8 +48,8 @@ Returns json
  {status: "success" or "error", 
   access_token: "", 
   secret_key: "",
-  name: "",
-  usr_eemail: "",
+  user_name: "",
+  email: "",
   contact: "",
   role: "",
   error_message: "if there is an error"}
