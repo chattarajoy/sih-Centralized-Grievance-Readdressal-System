@@ -1,5 +1,6 @@
 class AuthController < ApplicationController
 
+  before_action :check_user_logged_in, only: [:logout_user, :logout_admin]
 
   def user_login
 
@@ -52,9 +53,28 @@ class AuthController < ApplicationController
 
   end
 
-  def logout
+  def logout_user
 
+    key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
+      user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "visitor").first
+
+    if key.delete
+      render json: {status: "success"}
+    else
+      render json: {status: "error", error_message: key.errors.full_messages}
+    end
   end
 
+  def logout_admin
+
+    key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
+      user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "admin").first
+
+    if key.delete
+      render json: {status: "success"}
+    else
+      render json: {status: "error", error_message: key.errors.full_messages}
+    end
+  end
 
 end
