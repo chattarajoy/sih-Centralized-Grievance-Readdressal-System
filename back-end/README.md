@@ -1,6 +1,6 @@
 # README
 
-#### API Server running on : 192.168.117.60:8000
+#### API Server running on : 192.168.117.60:8000 and 54.169.134.133
 
 ### Logging in
 
