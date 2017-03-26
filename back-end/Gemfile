@@ -17,7 +17,8 @@ gem 'puma', '~> 3.0'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
-
+# for sending confirmation emails
+gem 'actionmailer' 
 # for cors error
 gem 'rack-cors'
 

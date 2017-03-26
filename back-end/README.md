@@ -16,14 +16,7 @@ example call
 192.168.117.60:8000/auth/user_login?email=xyz@xyz.com&password=tiru
 
 ```
-* Admin : url  `/auth/admin_login`
-
-```
-parameters: email, password
-
-```
-
-#### Return Structure - Login
+#### Return Structure - User Login
 
 ```
 Returns json 
@@ -31,6 +24,34 @@ Returns json
  {status: "success" or "error", 
   access_token: "", 
   secret_key: "",
+  user_name: "",
+  email: "",
+  contact: "",
+  aadhaar_verified: true/false,
+  phone_no_verified: true/false,
+  error_message: "if there is an error"}
+
+```
+
+* Admin : url  `/auth/admin_login`
+
+```
+parameters: email, password
+
+```
+
+#### Return Structure - Admin Login
+
+```
+Returns json 
+
+ {status: "success" or "error", 
+  access_token: "", 
+  secret_key: "",
+  user_name: "",
+  email: "",
+  contact: "",
+  role: "",
   error_message: "if there is an error"}
 
 ```

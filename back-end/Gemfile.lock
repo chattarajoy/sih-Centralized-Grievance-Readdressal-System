@@ -121,6 +121,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  actionmailer
   bcrypt (~> 3.1.7)
   byebug
   puma (~> 3.0)
