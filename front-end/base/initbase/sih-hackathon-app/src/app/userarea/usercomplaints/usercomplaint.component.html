@@ -1,18 +1,55 @@
 <h3>Existing Complaints</h3>
-<ul *ngFor="let res of Status">
-  <li>{{res.city}}</li>
-</ul>
-
-<!-- <h1>Hello</h1>
-
-<button (click)="logout()">LOGOUT</button>
-<button (click)="getStatus()">Complaints</button>
-<div *ngIf="status?.length > 0">
-  <div *ngFor="let res of status">
-    {{res.state}}
-
-  </div>
-</div>
-<div *ngIf="status?.length === 0">
-<h1>No complaints yet</h1>
-</div> -->
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Column heading</th>
+      <th>Column heading</th>
+      <th>Column heading</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="info">
+      <td>3</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="success">
+      <td>4</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="danger">
+      <td>5</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="warning">
+      <td>6</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+    <tr class="active">
+      <td>7</td>
+      <td>Column content</td>
+      <td>Column content</td>
+      <td>Column content</td>
+    </tr>
+  </tbody>
+</table>

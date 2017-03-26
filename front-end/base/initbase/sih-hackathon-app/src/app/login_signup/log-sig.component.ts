@@ -13,15 +13,15 @@ export class LogSigComponent {
   //title = 'app works!';
 
   localuser = {
-     emailId:'',
-     password:''
+    emailId:'',
+    password:''
   }
 
   signUpUser = {
-      name : '',
-      contact : '',
-      emailId : '',
-      password : ''
+    name : '',
+    contact : '',
+    emailId : '',
+    password : ''
 
   }
 
@@ -33,31 +33,24 @@ export class LogSigComponent {
 
   login(){
     this._service.loginFun(this.localuser).then((res)=>{
-
-      console.log('stuff',res);
       if(res){
-        console.log('this is',res);
-
-   }
+        this._router.navigate(['user']);
+        alert('logged in');
+      }
       else if(res == false){
-      console.log('false!');
-    }
-  })
+        alert('false!');
+      }
+    })
   }
 
 
 
 
   signUp(){
-
     this._service.signUpFun(this.signUpUser).then((res)=>{
-
       console.log('stuff',res);
       this._router.navigate(['']);
-
-
-
-  })
+    })
 
   }
 
