@@ -43,7 +43,7 @@ private
 
       @client.account.messages.create({
         :from => '+14843417052',
-        :to => to,
+        :to => "+91" + to,
         :body => message_body,
       })
     end

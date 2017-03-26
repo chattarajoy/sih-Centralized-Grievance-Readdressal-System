@@ -8,4 +8,6 @@ class User < ApplicationRecord
     validates :contact, presence: true
     has_secure_password
 
+		validates_length_of :aadhar_number, minimum: 12, maximum: 12, allow_blank: true
+	  validates_length_of :contact, minimum: 10, maximum: 10, allow_blank: true
 end

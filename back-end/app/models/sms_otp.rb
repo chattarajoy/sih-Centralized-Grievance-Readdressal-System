@@ -1,0 +1,2 @@
+class SmsOtp < ApplicationRecord
+end
