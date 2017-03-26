@@ -6,6 +6,9 @@ import { AdminComponent } from '../admin/adminarea.component';
 import { AppComponent } from '../app.component';
 import { HomeComponent } from '../homearea/home.component';
 
+//services
+import { AuthManager } from '../services/authmanager.service';
+
 export const routes: Routes = [
   //  { path : 'about' , component: AboutComponent},
   //   { path : '' , component: SearchComponent},
@@ -13,7 +16,7 @@ export const routes: Routes = [
   //   { path : 'albums/:id' , component:AlbumComponent }
 
   { path : '' , component : HomeComponent},
-  { path : 'user' , component : UserComponent},
+  { path : 'user' , component : UserComponent , canActivate: [AuthManager]},
   { path : 'admin' , component : AdminComponent}
 
 ]
