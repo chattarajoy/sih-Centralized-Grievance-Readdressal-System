@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h2>Hi <%= @user.name %></h2>
+    <p>
+      Thank you for registering on ASAR. Please click on the link below to verify your email.
+      <br><br>
+      Click here:
+      54.169.134.133/email/verify?verify_token=<%=@verification_code.verify_token%>&user_token=<%=@verification_code.user_token%>
+    </p>
+  </body>
+</html>

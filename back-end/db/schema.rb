@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324111644) do
+ActiveRecord::Schema.define(version: 20170326105929) do
+
+  create_table "aadhars", force: :cascade do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.string   "phone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "name"
@@ -56,6 +64,14 @@ ActiveRecord::Schema.define(version: 20170324111644) do
     t.string   "priority"
   end
 
+  create_table "emails", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "verify_token"
+    t.string   "user_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "municipal_offices", force: :cascade do |t|
     t.string   "state"
     t.string   "district"
@@ -72,6 +88,7 @@ ActiveRecord::Schema.define(version: 20170324111644) do
     t.datetime "updated_at",        null: false
     t.string   "password_digest"
     t.string   "contact"
+    t.boolean  "email_verified"
   end
 
 end
