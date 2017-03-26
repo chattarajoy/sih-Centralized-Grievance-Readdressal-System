@@ -9,11 +9,17 @@ import { LogSigComponent } from './login_signup/log-sig.component';
 import { UserComponent } from './userarea/userarea.component';
 import { AdminComponent } from './admin/adminarea.component';
 import { HomeComponent } from './homearea/home.component';
+import { UserComplaintComponent } from './userarea/usercomplaints/usercomplaint.component';
+import { UserFormComponent } from './userarea/userform/userform.component';
 //custom-components
 
 import { AppComponent } from './app.component';
 import { routes } from './routes/app-routes';
 import { RouterModule,Routes } from '@angular/router';
+
+//services
+import {AuthManager} from './services/authmanager.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +27,9 @@ import { RouterModule,Routes } from '@angular/router';
     LogSigComponent,
     UserComponent,
     AdminComponent,
-    HomeComponent
+    HomeComponent,
+    UserFormComponent,
+    UserComplaintComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,7 @@ import { RouterModule,Routes } from '@angular/router';
     HttpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AuthManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
