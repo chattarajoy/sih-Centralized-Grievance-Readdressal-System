@@ -1,7 +1,7 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit, Input } from '@angular/core';
 import { LoginComponent } from '../login/login-component';
 import { Router } from '@angular/router';
-import { Status } from 'status';
+import { Status } from '../status';
 import { AuthServiceService } from '../services/auth-service.service';
 
 @Component({
@@ -10,10 +10,11 @@ import { AuthServiceService } from '../services/auth-service.service';
   styleUrls: ['./dashboard.component.css'],
   providers : [AuthServiceService]
 })
-export class DashboardComponent {
-  title = 'app works!';
+export class DashboardComponent implements OnInit {
 
- status : Status[];
+ @Input()
+ someString : string;
+  status : Status[];
 
 
   constructor(private _router:Router,
@@ -30,17 +31,26 @@ export class DashboardComponent {
       this._router.navigate(['']);
   }
 
+   ngOnInit(){
+
+
+
+   }
+
+
+
   getStatus(){
     this._service.getStatusX()
      .subscribe(res=>{
-       this.status = res.status;
-       console.log(res.status);
+       this.status = res;
        console.log(this.status);
+       console.log(this.status.length);
+
 
      })
-
-
   }
+
+
 
 
 }
