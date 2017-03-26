@@ -8,7 +8,8 @@ class UserController < ApplicationController
                     email: params[:email],
                     password: params[:password],
                     phone_no_verified: false,
-                    aadhar_verified: false)
+                    aadhar_verified: false
+                    email_verified: false)
 
     if user.save
       email_verification = Email.new(user_id: user.id)

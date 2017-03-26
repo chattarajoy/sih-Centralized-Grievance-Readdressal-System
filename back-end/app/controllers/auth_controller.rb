@@ -23,7 +23,8 @@ class AuthController < ApplicationController
                           email: user.email,
                           contact: user.contact,
                           aadhar_verified: user.aadhar_verified,
-                          phone_no_verified: user.phone_no_verified}
+                          phone_no_verified: user.phone_no_verified
+                          email_verified: user.email_verified}
         else
           error_message = "Invalid email or password"
         end

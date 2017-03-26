@@ -10,7 +10,7 @@ class EmailController < ApplicationController
       if email_verification
         user_id = email_verification.user_id
         user = User.find(user_id)
-        #user.email_verified = true
+        user.email_verified = true
 
         if user.save
           redirect_to('/') and return
