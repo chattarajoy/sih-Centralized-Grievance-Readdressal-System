@@ -39,6 +39,11 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     arel (7.1.4)
+    aws-ses (0.4.4)
+      builder
+      mail (> 2.2.5)
+      mime-types
+      xml-simple
     bcrypt (3.1.11-x64-mingw32)
     bcrypt (3.1.11-x86-mingw32)
     builder (3.2.3)
@@ -115,6 +120,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
+    xml-simple (1.1.5)
 
 PLATFORMS
   x64-mingw32
@@ -122,6 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer
+  aws-ses (~> 0.4.4)
   bcrypt (~> 3.1.7)
   byebug
   puma (~> 3.0)

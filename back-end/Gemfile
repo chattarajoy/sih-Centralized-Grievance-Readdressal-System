@@ -18,12 +18,16 @@ gem 'puma', '~> 3.0'
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 # for sending confirmation emails
-gem 'actionmailer' 
+gem 'actionmailer'
 # for cors error
 gem 'rack-cors'
 
 # to send sms
 gem 'twilio-ruby'
+
+# sending emails by success
+gem 'aws-ses', '~> 0.4.4', require: 'aws/ses'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

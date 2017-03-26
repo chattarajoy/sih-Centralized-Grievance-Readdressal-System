@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324111644) do
+ActiveRecord::Schema.define(version: 20170326073925) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,14 @@ ActiveRecord::Schema.define(version: 20170324111644) do
     t.integer  "user_id"
     t.string   "status"
     t.string   "priority"
+  end
+
+  create_table "emails", force: :cascade do |t|
+    t.string   "user_id"
+    t.string   "verify_token"
+    t.string   "user_token"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "municipal_offices", force: :cascade do |t|

@@ -11,8 +11,14 @@ class UserController < ApplicationController
                     aadhar_verified: false)
 
     if user.save
-      SignupMailer.sample_email(@user).deliver
-      render json: {status: "success"}
+      email_verification = Email.new(user_id: user.id)
+      if email_verification.save
+        SignupMailer.confirmation_email(user, email_verification).deliver
+      else
+        render json: {status: "success", message: "email not sent"}
+      end
+
+      render json: {status: "success", message: "email sent"}
     else
       render json: {status: "error", error_message: user.errors.full_messages}
     end
