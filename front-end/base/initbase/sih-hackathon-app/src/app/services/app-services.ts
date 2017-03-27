@@ -67,6 +67,7 @@ signUpFun(usercreds){
 
   headers.append('Content-type','application/x-www-form=urlencoded')
 
+console.log(usercreds);
  return new Promise ((resolve) => {
 
 
@@ -108,9 +109,7 @@ getStatusX(){
     return headers;
   }
 
- storeDetails(){
 
- }
 
 
 }

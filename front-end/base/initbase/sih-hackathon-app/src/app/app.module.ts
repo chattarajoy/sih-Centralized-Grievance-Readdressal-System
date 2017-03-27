@@ -20,6 +20,7 @@ import { RouterModule,Routes } from '@angular/router';
 //services
 import {AuthManager} from './services/authmanager.service';
 import { AppService } from './services/app-services';
+import { EqualValidator } from './services/equal-validator';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AppService } from './services/app-services';
     AdminComponent,
     HomeComponent,
     UserFormComponent,
-    UserComplaintComponent
+    UserComplaintComponent,
+    EqualValidator
   ],
   imports: [
     BrowserModule,

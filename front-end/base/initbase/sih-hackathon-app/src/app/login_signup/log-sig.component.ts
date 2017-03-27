@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component , OnInit} from '@angular/core';
 import { AppService } from '../services/app-services';
 import { Router } from '@angular/router';
 import { StatusLog } from '../login_signup/classes/status';
+import { signUp } from '../login_signup/classes/signupuser';
 
 @Component({
   selector: 'logsig-component',
@@ -9,7 +10,7 @@ import { StatusLog } from '../login_signup/classes/status';
   styleUrls: ['./log-sig.component.css'],
   providers :[AppService]
 })
-export class LogSigComponent {
+export class LogSigComponent implements OnInit {
   //title = 'app works!';
 
   localuser = {
@@ -25,6 +26,8 @@ export class LogSigComponent {
 
   }
 
+  //  public signUpUser: signUp;
+
   data : StatusLog[];
 
 
@@ -32,6 +35,19 @@ export class LogSigComponent {
     private _service : AppService,
     private _router : Router
   ){}
+
+
+  ngOnInit(){
+
+    // this.signUpUser = {
+    //         name: '',
+    //         contact:'',
+    //         email: '',
+    //         password: '',
+    //         confirmPassword: ''
+    //     }
+
+  }
 
   login(){
     this._service.loginFun(this.localuser).then((res)=>{
@@ -52,10 +68,13 @@ console.log('2 res',this.data);
 
 
   signUp(){
+
+      console.log('ok');
     this._service.signUpFun(this.signUpUser).then((res)=>{
       console.log('stuff',res);
-      this._router.navigate(['']);
+
     })
+
 
   }
 
