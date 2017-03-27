@@ -19,6 +19,7 @@ import { RouterModule,Routes } from '@angular/router';
 
 //services
 import {AuthManager} from './services/authmanager.service';
+import { AppService } from './services/app-services';
 
 @NgModule({
   declarations: [

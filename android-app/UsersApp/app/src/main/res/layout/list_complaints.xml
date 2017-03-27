@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:padding="8dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/com_facebook_button_like_background"
+        android:id="@+id/imageView3"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@+id/imageView3"
+        android:layout_toEndOf="@+id/imageView3"
+        android:layout_marginLeft="49dp"
+        android:layout_marginStart="49dp"
+        android:id="@+id/textView10"
+        android:textSize="18sp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView10"
+        android:layout_alignLeft="@+id/textView10"
+        android:layout_alignStart="@+id/textView10"
+        android:layout_marginTop="5dp"
+        android:id="@+id/textView11" />
+
+</RelativeLayout>
