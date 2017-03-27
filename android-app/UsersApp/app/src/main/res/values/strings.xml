@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">UsersApp</string>
+    <string name="facebook_app_id">347301902334087</string>
+    <string name="no_geocoder_available">No Geocode Available! :(</string>
+    <string name="service_not_available">Service Not Available! :(</string>
+    <string name="invalid_lat_long_used">Invalid Latitude or Longitude! :(</string>
+    <string name="no_address_found">No Address Found</string>
+    <string name="address_found">Address Found! :)</string>
+</resources>

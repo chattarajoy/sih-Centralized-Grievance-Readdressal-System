@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "144705553859",
+    "project_id": "firebase-municipal-corporation"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144705553859:android:4b13753e43553a30",
+        "android_client_info": {
+          "package_name": "com.example.pari.usersapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144705553859-2cdpba58raepe1nc39gt869nk22st2jh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pari.usersapp",
+            "certificate_hash": "dfec2a0199af5bbc842b6bb085f04b49807e9c40"
+          }
+        },
+        {
+          "client_id": "144705553859-j42koo54pireirmragkm0qnl51j7l0s0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRSH2nHEUf4-RoNtZv6ZDJcljgVshhK4k"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
