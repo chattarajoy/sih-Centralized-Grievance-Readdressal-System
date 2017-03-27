@@ -6,22 +6,26 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 
 
+
 @Injectable()
 export class AppService {
 
   isLoggedIn : boolean;
 
 
+
+
   constructor(
     private _http: Http
   ) { }
 
- loginFun(usercreds){
+ loginFun(usercreds):Promise<any>{
    this.isLoggedIn = false;
    var headers = new Headers();
    var creds = 'email=' + usercreds.emailId + '&password'+ usercreds.password;
    headers.append('Content-type','application/x-www-form=urlencoded')
-
+   window.localStorage.setItem('a',usercreds.emailId);
+   window.localStorage.setItem('b',usercreds.password);
   return new Promise ((resolve) => {
 
   console.log(usercreds.emailId);
@@ -38,8 +42,8 @@ export class AppService {
          window.localStorage.setItem('access_token',res.access_token);
          window.localStorage.setItem('secret_key',res.secret_key);
 
-         this.isLoggedIn = true;
-         resolve(this.isLoggedIn);
+
+         resolve(res);
      // this._http.get(`http://54.169.134.133:80/complaints/index`,{headers:headers})
      //
      //  .map( res => console.log('inside',res.json()));
@@ -47,12 +51,13 @@ export class AppService {
        }
        else if(res.status === "error"){
 
-
+             resolve(res);
        }
      })
 
 
    })
+
 
  }
 //this._http.post(`http://54.169.134.133:80/user/signup?name=`+usercreds.name+`&contact=`+usercreds.contact+`&email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
@@ -103,4 +108,12 @@ getStatusX(){
     return headers;
   }
 
+ storeDetails(){
+
+ }
+
+
 }
+
+
+////

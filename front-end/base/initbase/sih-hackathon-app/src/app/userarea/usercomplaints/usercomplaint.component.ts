@@ -11,7 +11,7 @@ export class UserComplaintComponent implements OnInit {
   //title = 'app works!';
 
   status:Status[];
-
+   
   constructor(
     private _service:AppService
   ){}
@@ -24,7 +24,7 @@ export class UserComplaintComponent implements OnInit {
     this._service.getStatusX()
      .subscribe(res=>{
        this.status = res;
-       console.log(res[1].state);
+       console.log(res);
        console.log(this.status.length);
 
 
