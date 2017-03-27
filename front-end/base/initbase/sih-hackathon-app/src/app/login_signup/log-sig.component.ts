@@ -3,6 +3,7 @@ import { AppService } from '../services/app-services';
 import { Router } from '@angular/router';
 import { StatusLog } from '../login_signup/classes/status';
 import { signUp } from '../login_signup/classes/signupuser';
+import {ValidationManager} from "ng2-validation-manager";
 
 @Component({
   selector: 'logsig-component',
@@ -12,6 +13,8 @@ import { signUp } from '../login_signup/classes/signupuser';
 })
 export class LogSigComponent implements OnInit {
   //title = 'app works!';
+
+  form;
 
   localuser = {
     emailId:'',
@@ -47,6 +50,16 @@ export class LogSigComponent implements OnInit {
     //         confirmPassword: ''
     //     }
 
+    this.form = new ValidationManager({
+      'name'        : 'required|minLength:4|maxLength:12|alphaSpace',
+      'contact'       : 'required',
+      'email'       : 'required|email',
+      'password'    : 'required|rangeLength:8,50',
+      'repassword'  : 'required|equalTo:password'
+    });
+
+     this.form.setValue('name', 'Default');
+
   }
 
   login(){
@@ -77,5 +90,7 @@ console.log('2 res',this.data);
 
 
   }
+
+  
 
 }

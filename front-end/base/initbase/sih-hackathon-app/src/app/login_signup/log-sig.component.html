@@ -45,7 +45,7 @@
 									</div> -->
 								</form>
 								<form  id="register-form"  style="display: none;">
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<input [(ngModel)]="signUpUser.name" type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
                   <div class="form-group">
@@ -59,7 +59,45 @@
 									</div>
 									<div class="form-group">
 										<input  type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div>
+									</div> -->
+                  <form [formGroup]="form.getForm()" (ngSubmit)="save()">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input [(ngModel)]="signUpUser.name" type="text" class="form-control" formControlName="name">
+                    <div *ngIf="form.hasError('name')" class="alert alert-danger">
+                      {{form.getError('name')}}
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Contact</label>
+                    <input [(ngModel)]="signUpUser.contact" type="text" class="form-control" formControlName="contact">
+                  </div>
+
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input [(ngModel)]="signUpUser.emailId" type="text" class="form-control" formControlName="email">
+                      <div *ngIf="form.hasError('email')" class="alert alert-danger">
+                        {{form.getError('email')}}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>Password</label>
+                      <input [(ngModel)]="signUpUser.password" type="password" class="form-control" formControlName="password">
+                      <div *ngIf="form.hasError('password')" class="alert alert-danger">
+                        {{form.getError('password')}}
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label>RE-Password</label>
+                      <input (ngModel)="signUpUser.password" type="repassword" class="form-control" formControlName="repassword">
+                      <div *ngIf="form.hasError('repassword')" class="alert alert-danger">
+                        {{form.getError('repassword')}}
+                      </div>
+                    </div>
+                </form>
 									<div class="form-group">
 										<div class="row">
 											<div class="col-sm-6 col-sm-offset-3">
@@ -79,3 +117,38 @@
 			</div>
 		</div>
 	</div>
+
+  <!-- <form [formGroup]="form.getForm()" (ngSubmit)="save()">
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <div *ngIf="form.hasError('name')" class="alert alert-danger">
+      {{form.getError('name')}}
+    </div>
+  </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="text" class="form-control" formControlName="email">
+      <div *ngIf="form.hasError('email')" class="alert alert-danger">
+        {{form.getError('email')}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" class="form-control" formControlName="password">
+      <div *ngIf="form.hasError('password')" class="alert alert-danger">
+        {{form.getError('password')}}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>RE-Password</label>
+      <input type="repassword" class="form-control" formControlName="repassword">
+      <div *ngIf="form.hasError('repassword')" class="alert alert-danger">
+        {{form.getError('repassword')}}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success">Submit</button>
+</form> -->

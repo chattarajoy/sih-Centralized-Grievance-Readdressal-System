@@ -67,7 +67,7 @@ signUpFun(usercreds){
 
   headers.append('Content-type','application/x-www-form=urlencoded')
 
-console.log(usercreds);
+console.log('reached',usercreds);
  return new Promise ((resolve) => {
 
 
