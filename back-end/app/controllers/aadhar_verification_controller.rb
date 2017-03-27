@@ -3,12 +3,12 @@ class AadharVerificationController < ApplicationController
   before_action :check_user_logged_in
 
   def verify_aadhar_data
-    if params[:aadhar_number] && params[:contact] && params[:name]
+    if params[:aadhar_number] && params[:contact]
       aadhar = Aadhar.where(uid: params[:aadhar_number], phone: params[:contact]).first
       if aadhar
         otp = rand(10**6).to_s
         sms_otp = SmsOtp.new(user_id: get_logged_in_user_id, otp: otp)
-        if(sms_otp.save)
+        if sms_otp.save
           send_sms(aadhar.phone, otp + " is your otp for ASAR account verification")
           render json: {status: "success", message: "Otp sent"} and return
         else
