@@ -36,6 +36,8 @@ public class Verification extends AppCompatActivity {
     String URL_FOR_VERIFICATION_OTP = Constants.SERVER+"/aadhar_verification/verify_otp";
     ProgressDialog progressDialog;
     String otpSent;
+    EditText et_otp;
+    Button verifyOtp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,11 @@ public class Verification extends AppCompatActivity {
         secretKey = b.getString("secretKey");
         final EditText aadhar = (EditText)findViewById(R.id.editText6);
         final EditText phone = (EditText)findViewById(R.id.editText7);
+        et_otp = (EditText)findViewById(R.id.editText12);
+        verifyOtp = (Button)findViewById(R.id.button8);
         Button verify = (Button)findViewById(R.id.button7);
+        et_otp.setVisibility(View.INVISIBLE);
+        verifyOtp.setVisibility(View.INVISIBLE);
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,6 +69,13 @@ public class Verification extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Verification Failed :(", Toast.LENGTH_LONG).show();
                 }*/
+            }
+        });
+        verifyOtp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String x = et_otp.getText().toString();
+                verify_otp(x);
             }
         });
     }
@@ -87,13 +100,15 @@ public class Verification extends AppCompatActivity {
                     status = jObj.getString("status");
                     if (status != null && status.equals("success")) {
                         otpSent = jObj.getString("message");
+                        et_otp.setVisibility(View.VISIBLE);
+                        verifyOtp.setVisibility(View.VISIBLE);
                        /* String otpEntered = getInputFromPrompt();
                        /* boolean isVerified = verify_otp(otpSent,otpEntered);
                         if(isVerified)
                             test[0] = 1;*/
                      //   test[0] = 1;
-                        getInputFromPrompt();
-                        finish();
+
+                      //  finish();
                     }
 
                     else {
@@ -149,7 +164,7 @@ public class Verification extends AppCompatActivity {
             return true;
         return false;*/
     }
-    void verify_otp(String otpSent, final String otpEntered)
+    void verify_otp(final String otpEntered)
     {
         String cancel_req_tag = "verifying_phone";
         if (progressDialog != null) {
@@ -238,55 +253,5 @@ public class Verification extends AppCompatActivity {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
     }
-    void getInputFromPrompt()
-    {
-        otp="";
-        LayoutInflater li = LayoutInflater.from(this);
-        View promptsView = li.inflate(R.layout.otp_prompt, null);
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                this);
-
-        // set prompts.xml to alertdialog builder
-        alertDialogBuilder.setView(promptsView);
-
-        final EditText et_otp = (EditText) promptsView
-                .findViewById(R.id.editText8);
-        // set dialog message
-        alertDialogBuilder
-                .setCancelable(false)
-                .setPositiveButton("OK",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                otp = et_otp.getText().toString();
-                                verify_otp(otpSent,otp);
-                                /*boolean isVerified = verify_otp(otpSent,otp);
-                                if(isVerified) {
-                                    Intent intent = new Intent(Verification.this, Form.class);
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                }
-                                else
-                                {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Verification Failed :(", Toast.LENGTH_LONG).show();
-                                }*/
-                            }
-                        })
-                .setNegativeButton("Cancel",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-
-        // show it
-        alertDialog.show();
-
-
-       // return otp;
-    }
 }
