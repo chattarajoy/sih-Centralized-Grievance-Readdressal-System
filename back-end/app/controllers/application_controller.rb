@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::API
 
+  before_action :set_web_links
+
+  def set_web_links
+    @back_end_link = "54.169.134.133"
+    @front_end_link = ""
+  end
+
+
 private
 
     def check_user_logged_in
@@ -46,6 +54,7 @@ private
         :to => "+91" + to,
         :body => message_body,
       })
+
     end
 
 end

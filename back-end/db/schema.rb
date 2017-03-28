@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170328154412) do
+ActiveRecord::Schema.define(version: 20170328173740) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -50,7 +49,7 @@ ActiveRecord::Schema.define(version: 20170328154412) do
 
   create_table "complaint_updates", force: :cascade do |t|
     t.integer  "complaint_id"
-    t.integer  "assigned_to"
+    t.string   "assigned_to"
     t.text     "notes"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
