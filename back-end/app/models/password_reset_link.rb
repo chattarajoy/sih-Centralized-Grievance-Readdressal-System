@@ -1,0 +1,2 @@
+class PasswordResetLink < ApplicationRecord
+end
