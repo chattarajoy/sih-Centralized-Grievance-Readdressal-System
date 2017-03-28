@@ -1,0 +1,2 @@
+class WardOffice < ApplicationRecord
+end

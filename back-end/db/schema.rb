@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328140828) do
+ActiveRecord::Schema.define(version: 20170328141555) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -98,6 +98,13 @@ ActiveRecord::Schema.define(version: 20170328140828) do
     t.string   "contact"
     t.boolean  "email_verified"
     t.string   "aadhar_number"
+  end
+
+  create_table "ward_offices", force: :cascade do |t|
+    t.integer  "district_office_id"
+    t.string   "ward"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
 end
