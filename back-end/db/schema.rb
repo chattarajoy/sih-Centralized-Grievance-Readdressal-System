@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170328172443) do
 
   create_table "complaint_updates", force: :cascade do |t|
     t.integer  "complaint_id"
-    t.integer  "assigned_to"
+    t.string   "assigned_to"
     t.text     "notes"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false

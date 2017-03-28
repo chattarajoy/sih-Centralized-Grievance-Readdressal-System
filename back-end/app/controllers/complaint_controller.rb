@@ -16,6 +16,9 @@ class ComplaintController < ApplicationController
                                 priority: "new")
 
       if complaint.save
+        # assign new complaint to respective district office
+        create_new_complaint(complaint.id, complaint.state, complaint.district)
+
         render json: {status: "success", complaint: complaint}
       else
         render json: {status: "error", error_message: complaint.errors.full_messages}
@@ -32,6 +35,7 @@ class ComplaintController < ApplicationController
 
   end
 
+  # get complaint by complaint id
   def show_complaint_by_id
 
     complaint = Complaint.find(params[:id])
@@ -40,6 +44,17 @@ class ComplaintController < ApplicationController
     else
       render json: {status: "error", error_message: "complaint not found"}
     end
+
+  end
+
+private
+
+  # assign new complaint to respective district office
+  def create_new_complaint(complaint_id, state, district)
+
+    district_office = DistrictOffice.where(state: state, district: district).first
+
+    if district_office
 
   end
 
