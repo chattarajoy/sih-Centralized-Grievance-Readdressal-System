@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170328154412) do
+ActiveRecord::Schema.define(version: 20170328163340) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -95,7 +94,7 @@ ActiveRecord::Schema.define(version: 20170328154412) do
     t.datetime "updated_at",        null: false
   end
 
-  create_table "resolveds", force: :cascade do |t|
+  create_table "resolvedcomplaints", force: :cascade do |t|
     t.integer  "complaint_id"
     t.integer  "districtoffice_id"
     t.integer  "wardoffice_id"
