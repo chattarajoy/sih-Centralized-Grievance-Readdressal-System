@@ -1,0 +1,2 @@
+class ComplaintFeedback < ApplicationRecord
+end
