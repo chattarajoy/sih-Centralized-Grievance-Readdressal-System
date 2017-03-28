@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328131321) do
+ActiveRecord::Schema.define(version: 20170328140828) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -18,6 +18,13 @@ ActiveRecord::Schema.define(version: 20170328131321) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "active_complaints", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "complaint_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -71,13 +78,6 @@ ActiveRecord::Schema.define(version: 20170328131321) do
     t.string   "user_token"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-  end
-
-  create_table "municipal_offices", force: :cascade do |t|
-    t.string   "state"
-    t.string   "district"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "sms_otps", force: :cascade do |t|
