@@ -14,7 +14,7 @@ class UserController < ApplicationController
     if user.save
       email_verification = Email.new(user_id: user.id)
       if email_verification.save
-        #SignupMailer.confirmation_email(user, email_verification).deliver
+        #SignupMailer.confirmation_email(user, email_verification, @front_end_link).deliver
       else
         render json: {status: "success", message: "email not sent"}
       end
