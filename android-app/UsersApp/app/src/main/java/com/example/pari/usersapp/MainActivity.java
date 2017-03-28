@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     TextView tv_email,tv_pass;
     String email,pass;
     String resp,resp2,secretKey,accessToken,status;
-    private static final String URL_FOR_LOGIN = "http://54.169.134.133:80/auth/user_login";
+    private static final String URL_FOR_LOGIN = Constants.SERVER+"/auth/user_login";
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -229,6 +229,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         accessToken = jObj.getString("access_token");
                         secretKey = jObj.getString("secret_key");
                         String user = jObj.getString("user_name");
+                        boolean aadhaar_verified = jObj.getBoolean("aadhar_verified");
+                        boolean phone_no_verified = jObj.getBoolean("phone_no_verified");
                         Intent intent = new Intent(
                                             MainActivity.this,
                                             HomePage.class);
@@ -237,6 +239,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         b.putString("email", email);
                         b.putString("accessToken",accessToken);
                         b.putString("secretKey",secretKey);
+                        b.putString("password",password);
+                        b.putBoolean("aadhar_verified",aadhaar_verified);
+                        b.putBoolean("phone_no_verified",phone_no_verified);
                         intent.putExtras(b);
                         startActivity(intent);
                         finish();

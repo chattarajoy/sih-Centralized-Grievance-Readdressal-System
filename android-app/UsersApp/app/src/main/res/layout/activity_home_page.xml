@@ -48,4 +48,13 @@
         android:layout_below="@+id/button_complain"
         android:layout_alignLeft="@+id/button_complain"
         android:layout_alignStart="@+id/button_complain" />
+
+    <Button
+        android:text="Change Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_toLeftOf="@+id/button_track"
+        android:layout_toStartOf="@+id/button_track"
+        android:id="@+id/button_change_pass" />
 </RelativeLayout>

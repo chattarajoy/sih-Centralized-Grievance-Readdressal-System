@@ -1,5 +1,6 @@
 package com.example.pari.usersapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,7 +46,7 @@ public class SignUp extends AppCompatActivity {
     ProgressDialog progressDialog;
     String email,pass,name,confirm_pass,contact;
     private static final String TAG = "SignUp";
-    String URL_FOR_REGISTRATION = "http://54.169.134.133:80/user/signup";
+    String URL_FOR_REGISTRATION = Constants.SERVER+"/user/signup";
     int test = 0;
     EditText et_name,et_email,et_pass,et_confirm_pass,et_contact;
     @Override

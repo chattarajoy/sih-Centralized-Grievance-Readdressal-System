@@ -41,7 +41,7 @@ public class Track extends AppCompatActivity {
     Bundle b;
     String accessToken,secretKey;
     String id,subject,description,image,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,name,email;
-    String URL_FOR_TRACKING = "http://54.169.134.133:80/complaint/show_user_complaints";
+    String URL_FOR_TRACKING = Constants.SERVER+"/complaint/show_user_complaints";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
