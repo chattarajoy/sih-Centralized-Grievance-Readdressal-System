@@ -11,6 +11,7 @@ import { AdminComponent } from './admin/adminarea.component';
 import { HomeComponent } from './homearea/home.component';
 import { UserComplaintComponent } from './userarea/usercomplaints/usercomplaint.component';
 import { UserFormComponent } from './userarea/userform/userform.component';
+import { NavbarHomeComponent } from './navbar-home/navbar-home.component';
 //custom-components
 
 import { AppComponent } from './app.component';
@@ -32,7 +33,8 @@ import { EqualValidator } from './services/equal-validator';
     HomeComponent,
     UserFormComponent,
     UserComplaintComponent,
-    EqualValidator
+    EqualValidator,
+    NavbarHomeComponent
   ],
   imports: [
     BrowserModule,

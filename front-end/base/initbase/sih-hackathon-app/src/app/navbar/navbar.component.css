@@ -1,0 +1,4 @@
+.nav>li>a>img {
+    max-width: 40px;
+    margin: -10px;
+}

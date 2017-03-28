@@ -4,14 +4,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
-
+import { Status } from '../userarea/classes/complaints_class/complaints_status';
 
 
 @Injectable()
 export class AppService {
 
   isLoggedIn : boolean;
-
+  private status;
 
 
 
@@ -85,6 +85,7 @@ console.log('reached',usercreds);
     // this._http.get(`http://54.169.134.133:80/complaints/index`,{headers:headers})
     //
     //  .map( res => console.log('inside',res.json()));
+    resolve(res);
 
       }
     })
@@ -94,7 +95,7 @@ console.log('reached',usercreds);
 
 }
 
-getStatusX(){
+getStatusX():Observable<Status[]>{
      return this._http.get(`http://54.169.134.133:80/complaint/show_user_complaints`,{headers:this.getHeaders()})
       .map( res => res.json());
   }

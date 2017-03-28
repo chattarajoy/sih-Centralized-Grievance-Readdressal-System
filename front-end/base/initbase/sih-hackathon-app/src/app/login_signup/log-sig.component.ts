@@ -52,7 +52,7 @@ export class LogSigComponent implements OnInit {
 
     this.form = new ValidationManager({
       'name'        : 'required|minLength:4|maxLength:12|alphaSpace',
-      'contact'       : 'required',
+      'contact'       :'required|minLength:10|maxLength:10',
       'email'       : 'required|email',
       'password'    : 'required|rangeLength:8,50',
       'repassword'  : 'required|equalTo:password'
@@ -82,15 +82,17 @@ console.log('2 res',this.data);
 
   signUp(){
 
+    if(this.form.isValid()){
       console.log('ok');
     this._service.signUpFun(this.signUpUser).then((res)=>{
-      console.log('stuff',res);
-
+      console.log('ok done');
+     this._router.navigate(['']);
     })
+       }
 
 
   }
 
-  
+
 
 }
