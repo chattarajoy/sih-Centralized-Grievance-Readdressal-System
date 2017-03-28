@@ -1,0 +1,2 @@
+class Resolved < ApplicationRecord
+end

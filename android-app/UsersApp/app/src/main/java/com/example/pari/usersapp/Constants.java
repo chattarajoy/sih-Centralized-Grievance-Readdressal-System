@@ -1,5 +1,7 @@
 package com.example.pari.usersapp;
 
+import javax.xml.transform.sax.SAXResult;
+
 /**
  * Created by pari on 30-01-2017.
  */
@@ -17,4 +19,6 @@ public final class Constants {
     public static final String BUCKET_NAME = "asarcgrs";
     public static final String BUCKET_ACCESS_KEY_ID = "AKIAI4XWYQDCVLFHOW5Q";
     public static final String BUCKET_SECRET_KEY_ID = "Svcp3OnOvkxzXURE1/cg5Tdia6SwSaYa0DxzErH9";
+   // public static final String SERVER = "http://192.168.117.60:8000";
+   public static final String SERVER = "http://54.169.134.133:80";
 }

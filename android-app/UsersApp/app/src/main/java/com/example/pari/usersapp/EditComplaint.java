@@ -52,7 +52,7 @@ import com.squareup.picasso.Picasso;
 public class EditComplaint extends AppCompatActivity {
     Bundle b;
     String accessToken,secretKey,name,email;
-    String URL_FOR_COMPLAINT_BY_ID = "http://54.169.134.133:80/complaint/show_complaint_by_id";
+    String URL_FOR_COMPLAINT_BY_ID = Constants.SERVER+"/complaint/show_complaint_by_id";
     ProgressDialog progressDialog;
     ImageView tv_image;
     Button save_button;

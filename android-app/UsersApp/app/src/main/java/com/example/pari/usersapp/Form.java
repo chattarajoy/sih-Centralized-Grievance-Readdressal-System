@@ -103,7 +103,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
     Context context = this;
     String subject,description,image,latitude,longitude,city,state,pincode,accessToken,secretKey;
     Bundle b;
-    final private static String URL_FOR_COMPLAINT = "http://54.169.134.133:80/complaint/create";
+    final private static String URL_FOR_COMPLAINT = Constants.SERVER+"/complaint/create";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
