@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328162427) do
+ActiveRecord::Schema.define(version: 20170328162635) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170328162427) do
     t.text     "image"
     t.decimal  "latitude"
     t.decimal  "longitude"
-    t.string   "city"
+    t.string   "district"
     t.string   "state"
     t.integer  "pincode"
     t.datetime "created_at",  null: false

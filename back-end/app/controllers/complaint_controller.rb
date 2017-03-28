@@ -8,7 +8,7 @@ class ComplaintController < ApplicationController
                                 image: params[:image],
                                 latitude: params[:latitude],
                                 longitude: params[:longitude],
-                                city: params[:city],
+                                district: params[:city],
                                 state: params[:state],
                                 pincode: params[:pincode],
                                 user_id: get_logged_in_user_id,

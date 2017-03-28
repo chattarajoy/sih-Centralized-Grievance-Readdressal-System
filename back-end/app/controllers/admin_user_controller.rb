@@ -6,8 +6,8 @@ class AdminUserController < ApplicationController
     admin_user = AdminUser.new(name: params[:name],
                                 email: params[:email],
 		                            phone: params[:phone],
-                                access_level: params[:access_level],
-		                            municipality_id: params[:municipality_id],
+                                designation: params[:designation],
+		                            municipal_id: params[:municipal_id],
                                 password: params[:password])
 
     if admin_user.save
