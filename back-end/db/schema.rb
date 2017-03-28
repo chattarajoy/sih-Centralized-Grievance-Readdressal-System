@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328164444) do
+ActiveRecord::Schema.define(version: 20170328172443) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -93,6 +93,14 @@ ActiveRecord::Schema.define(version: 20170328164444) do
     t.integer  "districtoffice_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+  end
+
+  create_table "password_reset_links", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "access_token"
+    t.string   "secret_key"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "resolvedcomplaints", force: :cascade do |t|
