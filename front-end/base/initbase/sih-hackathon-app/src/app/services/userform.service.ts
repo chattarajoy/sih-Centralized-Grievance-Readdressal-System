@@ -27,4 +27,42 @@ console.log(headers);
  .map( res => console.log(res.json()));
   }
 
+
+   submitFormX(form){
+
+    var access = window.localStorage.getItem('access_token');
+    var secret = window.localStorage.getItem('secret_key');
+
+   console.log(form);
+    var headers = new Headers();
+    headers.append('Content-type','application/x-www-form=urlencoded');
+    headers.append('access_token',access);
+    headers.append('secret_key',secret);
+    console.log(headers);
+
+   return new Promise ((resolve) => {
+
+  //subject, description, image, latitude, longitude, city, state, pincode
+     console.log(headers);
+    this._http.post(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=abcd&latitude=12.45&longitude=21.54&city=`+form.city+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers})
+    .map( res => res.json())
+      .subscribe((res) =>{
+        console.log('from formsubmisson',res);
+
+        if(res){
+          console.log('successCheck');
+
+
+           resolve(res);
+
+        }
+      })
+
+
+    })
+
+
+  }
+
+
 }

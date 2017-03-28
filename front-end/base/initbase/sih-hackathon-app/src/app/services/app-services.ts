@@ -4,14 +4,14 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
-
+import { Status } from '../userarea/classes/complaints_class/complaints_status';
 
 
 @Injectable()
 export class AppService {
 
   isLoggedIn : boolean;
-
+  private status;
 
 
 
@@ -67,6 +67,7 @@ signUpFun(usercreds){
 
   headers.append('Content-type','application/x-www-form=urlencoded')
 
+console.log('reached',usercreds);
  return new Promise ((resolve) => {
 
 
@@ -84,6 +85,7 @@ signUpFun(usercreds){
     // this._http.get(`http://54.169.134.133:80/complaints/index`,{headers:headers})
     //
     //  .map( res => console.log('inside',res.json()));
+    resolve(res);
 
       }
     })
@@ -93,7 +95,7 @@ signUpFun(usercreds){
 
 }
 
-getStatusX(){
+getStatusX():Observable<Status[]>{
      return this._http.get(`http://54.169.134.133:80/complaint/show_user_complaints`,{headers:this.getHeaders()})
       .map( res => res.json());
   }
@@ -108,9 +110,7 @@ getStatusX(){
     return headers;
   }
 
- storeDetails(){
 
- }
 
 
 }

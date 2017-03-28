@@ -16,12 +16,11 @@ export class NavbarComponent {
  ){}
 
   logout(){
-    console.log('from logout function');
+
     window.localStorage.removeItem('access_token');
-    console.log('access token removed');
     window.localStorage.removeItem('secret_key');
-    console.log('secret_key removed');
-    console.log('returning to login');
-      this._router.navigate(['']);
+    window.localStorage.removeItem('a');
+    window.localStorage.removeItem('b');
+
   }
 }
