@@ -1,0 +1,2 @@
+class DistrictOffice < ApplicationRecord
+end
