@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  complaint_id: 1
+  districtoffice_id: 1
+  wardoffice_id: 1
+
+two:
+  complaint_id: 1
+  districtoffice_id: 1
+  wardoffice_id: 1
