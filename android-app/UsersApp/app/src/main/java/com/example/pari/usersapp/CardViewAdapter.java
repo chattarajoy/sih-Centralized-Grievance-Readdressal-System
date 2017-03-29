@@ -131,7 +131,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             imageView.setImageBitmap(bitmap);*/
             String Url = url.toURI().toString();
             Picasso.with(context.getApplicationContext())
-                    .load(Url)
+                    .load(Url).resize(200,200)
                     .into(imageView);
         } catch (URISyntaxException e) {
             e.printStackTrace();

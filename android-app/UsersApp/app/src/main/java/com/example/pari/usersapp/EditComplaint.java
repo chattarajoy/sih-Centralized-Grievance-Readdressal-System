@@ -134,7 +134,7 @@ public class EditComplaint extends AppCompatActivity {
             tv_image.setImageBitmap(bitmap);*/
             String Url = url.toURI().toString();
             Picasso.with(getApplicationContext())
-                    .load(Url)
+                    .load(Url).resize(200,200)
                     .into(tv_image);
         } catch (URISyntaxException e) {
             e.printStackTrace();

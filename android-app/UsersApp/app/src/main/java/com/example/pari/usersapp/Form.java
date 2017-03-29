@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.location.Address;
 import android.support.v4.app.ActivityCompat;
+import com.amazonaws.ClientConfiguration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -91,7 +92,7 @@ import android.provider.MediaStore.Images;
 
 public class Form extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String mAddressOutput;
-    int LOCATION_PERMISSION = 1;
+    final int LOCATION_PERMISSION = 1;
     protected Location mLastLocation;
     private AddressResultReceiver mResultReceiver;
     ImageView imageView;
@@ -101,7 +102,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
     Spinner sp_type;
     ProgressDialog progressDialog;
     Context context = this;
-    String subject,description,image,latitude,longitude,city,state,pincode,accessToken,secretKey;
+    String subject="",description="",image="",latitude="",longitude="",city="",state="",pincode="",accessToken,secretKey;
     Bundle b;
     final private static String URL_FOR_COMPLAINT = Constants.SERVER+"/complaint/create";
     /**
@@ -137,6 +138,18 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
             requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION);
+            /*String permission1 = Manifest.permission.ACCESS_COARSE_LOCATION;
+            String permission2 = Manifest.permission.ACCESS_FINE_LOCATION;
+            int res1 = context.checkCallingOrSelfPermission(permission1);
+            int res2 = context.checkCallingOrSelfPermission(permission2);
+            if(res1 != PackageManager.PERMISSION_GRANTED || res2 != PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(getApplicationContext(),"Can't file complaint without Location Access", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Form.this,Verification.class);
+                intent.putExtras(b);
+                startActivity(intent);
+            }*/
+
         }
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ll);
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, ll);
@@ -172,6 +185,33 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                 registerComplaint();
             }
         });
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case LOCATION_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    Toast.makeText(getApplicationContext(),"Can't file complaint without Location Access", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Form.this,Verification.class);
+                    intent.putExtras(b);
+                    startActivity(intent);
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
     }
     private void registerComplaint() {
         // Tag used to cancel the request
@@ -281,6 +321,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
+            imageBitmap = resize(imageBitmap);
             imageView.setImageBitmap(imageBitmap);
 
             final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/ "+imageBitmap.toString()+".jpeg";
@@ -298,6 +339,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
            /* s3client.putObject(new PutObjectRequest(bucketName, fileName,
                     new File("C:\\Users\\user\\Desktop\\testvideo.mp4"))
                     .withCannedAcl(CannedAccessControlList.PublicRead));*/
+
             Uri tempUri = getImageUri(getApplicationContext(), imageBitmap);
             final String filePath = getRealPathFromURI(tempUri);
           /*  TransferManager manager = new TransferManager(credentials);
@@ -348,6 +390,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
 
                 try {
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
+                    bitmap = resize(bitmap);
                     imageView.setImageBitmap(bitmap);
                     final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/ "+bitmap.toString()+".jpeg";
                     image = OBJECT_KEY;
@@ -544,6 +587,12 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
 
         }
 
+    }
+    private Bitmap resize(Bitmap bitmap)
+    {
+        Bitmap bitmapResized = Bitmap.createScaledBitmap(bitmap,
+                (int) (bitmap.getWidth() * 0.5), (int) (bitmap.getHeight() * 0.5), false);
+        return bitmapResized;
     }
 
 }
