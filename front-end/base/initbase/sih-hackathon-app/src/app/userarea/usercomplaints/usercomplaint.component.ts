@@ -13,26 +13,18 @@ export class UserComplaintComponent implements OnInit {
   //title = 'app works!';
 
   // status:Status[] ;
-  private status:Status[] = [];
+  public status:Observable<Status[]>;
 
   constructor(
     private _service:AppService
   ){}
 
   ngOnInit(){
-    this.getStatus().subscribe( status => {
-      this.status = status;
-    });
+    // this.status = this.todoService.todos;
+    this.status = this._service.status;
+
+    this._service.getStatusX();
   }
 
-  getStatus(){
-  return this._service.getStatusX()
-    //  .subscribe(res=>{
-    //    this.status = res;
-    //    console.log(res);
-    //    console.log(this.status.length);
-     //
-     //
-    //  })
-  }
+
 }

@@ -5,6 +5,7 @@ import { UserComponent } from '../userarea/userarea.component';
 import { AdminComponent } from '../admin/adminarea.component';
 import { AppComponent } from '../app.component';
 import { HomeComponent } from '../homearea/home.component';
+import { AfterSubComponent } from '../afterSubmission/afterSub.component';
 
 //services
 import { AuthManager } from '../services/authmanager.service';
@@ -17,6 +18,7 @@ export const routes: Routes = [
 
   { path : '' , component : HomeComponent},
   { path : 'user' , component : UserComponent , canActivate: [AuthManager]},
-  { path : 'admin' , component : AdminComponent}
+  { path : 'admin' , component : AdminComponent},
+  { path : 'sub' , component : AfterSubComponent}
 
 ]

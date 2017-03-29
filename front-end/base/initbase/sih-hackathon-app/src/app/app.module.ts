@@ -12,6 +12,7 @@ import { HomeComponent } from './homearea/home.component';
 import { UserComplaintComponent } from './userarea/usercomplaints/usercomplaint.component';
 import { UserFormComponent } from './userarea/userform/userform.component';
 import { NavbarHomeComponent } from './navbar-home/navbar-home.component';
+import { AfterSubComponent } from './afterSubmission/afterSub.component';
 //custom-components
 
 import { AppComponent } from './app.component';
@@ -34,7 +35,8 @@ import { EqualValidator } from './services/equal-validator';
     UserFormComponent,
     UserComplaintComponent,
     EqualValidator,
-    NavbarHomeComponent
+    NavbarHomeComponent,
+    AfterSubComponent
   ],
   imports: [
     BrowserModule,

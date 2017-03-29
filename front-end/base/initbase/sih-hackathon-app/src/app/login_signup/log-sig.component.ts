@@ -65,9 +65,8 @@ export class LogSigComponent implements OnInit {
   login(){
     this._service.loginFun(this.localuser).then((res)=>{
  this.data = res.error_message
-      console.log('1 data',this.data);
+
       if(res.status === 'success'){
-console.log('2 res',this.data);
         this._router.navigate(['user']);
       }
       else if(res.status === 'error'){

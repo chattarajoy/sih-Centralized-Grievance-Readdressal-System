@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
    ){}
 
   ngOnInit(){
-    this.getDetails();
+    // this.getDetails();
   }
 
   getDetails(){
