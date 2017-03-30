@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330142750) do
+ActiveRecord::Schema.define(version: 20170330180022) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 20170330142750) do
     t.text     "feedback"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "complaint_statuses", force: :cascade do |t|
+    t.integer "district_office_id"
+    t.integer "ward_office_id"
+    t.integer "complaint_id"
+    t.string  "status"
   end
 
   create_table "complaint_updates", force: :cascade do |t|
@@ -100,12 +107,6 @@ ActiveRecord::Schema.define(version: 20170330142750) do
     t.string   "otp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "table_complaint_statuses", force: :cascade do |t|
-    t.integer "district_office_id"
-    t.integer "ward_office_id"
-    t.integer "complaint_id"
   end
 
   create_table "users", force: :cascade do |t|
