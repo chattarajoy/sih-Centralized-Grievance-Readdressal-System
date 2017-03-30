@@ -1,0 +1,27 @@
+
+
+<form class="form-horizontal">
+  <fieldset>
+    <div class="form-group">
+      <label for="inputSubject" class="col-lg-2 control-label">E-mail Id</label>
+      <div class="col-lg-10">
+        <input  [(ngModel)]="model.emailId" type="email" class="form-control" id="inputSubject" placeholder="Subject" name="subject" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputSubject" class="col-lg-2 control-label">New Password</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="model.password" type="password" class="form-control" id="inputSubject" placeholder="Subject" name="subject" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-lg-10 col-lg-offset-2">
+        <button type="reset" class="btn btn-default">Cancel</button>
+        <button type="submit" class="btn btn-primary" (click)="formSubmit()">Submit</button>
+
+      </div>
+    </div>
+  </fieldset>
+</form>
+<simple-notifications [options]="options"></simple-notifications>

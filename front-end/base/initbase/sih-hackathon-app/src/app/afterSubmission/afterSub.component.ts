@@ -15,6 +15,6 @@ export class AfterSubComponent implements OnInit{
   ngOnInit(){
     setTimeout((_router) => {
         this._router.navigate(['user']);
-    }, 5000);
+    }, 2500);
   }
 }

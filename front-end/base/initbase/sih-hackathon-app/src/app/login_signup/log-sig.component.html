@@ -33,7 +33,7 @@
 									</div>
 
 								</form>
-								<form  id="register-form"  style="display: none;">
+								<form  id="register-form" href=javascript:undefined  style="display: none;">
 									<!-- <div class="form-group">
 										<input [(ngModel)]="signUpUser.name" type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
 									</div>
@@ -98,9 +98,9 @@
 										</div>
 									</div>
 								</form>
-                <div *ngIf="data === 'Invalid email or password'">
+                <!-- <div *ngIf="data === 'Invalid email or password'">
                    {{data}}
-                </div>
+                </div> -->
 
 							</div>
 						</div>
@@ -109,3 +109,4 @@
 			</div>
 		</div>
 	</div>
+<simple-notifications [options]="options"></simple-notifications>

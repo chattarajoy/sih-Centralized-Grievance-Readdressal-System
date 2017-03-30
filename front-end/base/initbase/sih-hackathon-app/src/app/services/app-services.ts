@@ -60,7 +60,7 @@ export class AppService {
 
  }
 //this._http.post(`http://54.169.134.133:80/user/signup?name=`+usercreds.name+`&contact=`+usercreds.contact+`&email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
-signUpFun(usercreds){
+signUpFun(usercreds):Promise<any>{
 
   var headers = new Headers();
 
@@ -76,7 +76,10 @@ console.log('reached',usercreds);
 
     resolve(res);
 
-      }
+  }else if(res.status === "error"){
+     console.log('error');
+     resolve(res);
+  }
     })
 
 

@@ -17,14 +17,14 @@ export class NavbarComponent {
 
   logout(){
 
-  
+
     window.localStorage.removeItem('access_token');
     window.localStorage.removeItem('secret_key');
     window.localStorage.removeItem('intercepted_access_token');
     window.localStorage.removeItem('intercepted_secret_key');
     window.localStorage.removeItem('a');
     window.localStorage.removeItem('b');
-
+    this._router.navigate(['']);
 
   }
 }

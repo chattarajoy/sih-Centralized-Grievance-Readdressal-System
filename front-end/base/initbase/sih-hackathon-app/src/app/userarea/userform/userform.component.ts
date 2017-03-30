@@ -3,6 +3,7 @@ import { newForm } from './userform';
 import { UserformService } from '../../services/userform.service';
 import { Router } from '@angular/router';
 import {AppService} from '../../services/app-services';
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'userform-component',
@@ -20,10 +21,18 @@ export class UserFormComponent {
   //
   // }
 
+  public options = {
+    position: ["bottom", "right"],
+    timeOut: 5000,
+    lastOnBottom: true,
+    
+}
+
   constructor(
     private _service:UserformService,
     private _router : Router,
-    private _serviceApp : AppService
+    private _serviceApp : AppService,
+    private _notify : NotificationsService
   ){}
 
   model = new newForm('','','','',1);
@@ -31,7 +40,12 @@ export class UserFormComponent {
   formSubmit(){
     console.log('Entering',this.model)
       this._service.submitFormX(this.model).subscribe((res)=>{
-          this._router.navigate(['sub']);
+        console.log('Submitted!')
+        this._notify.alert('Submitting...','Validating for Errors');
+        setTimeout((_router) => {
+            this._router.navigate(['sub']);
+        }, 6500);
+
       })
 
   }

@@ -45,5 +45,23 @@ console.log(headers);
       }
 
 
+    passwordChange(form):Observable<any>{
+      let headers = new Headers()
+      var access = window.localStorage.getItem('access_token')
+      var secret = window.localStorage.getItem('secret_key')
+       headers.append('access_token',access)
+       headers.append('secret_key',secret)
+       headers.append('Content-Type','application/json');
+
+      console.log('submit-form-headers',headers)
+      return this._http.get(`http://54.169.134.133:80/user/update_password?email=`+form.emailId+`&password=`+form.password,{headers:headers}) // ...using post request
+                       .map(res=> res.json()) // ...and calling .json() on the response to return data
+                       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    }
+
+
+
+
+
 
 }
