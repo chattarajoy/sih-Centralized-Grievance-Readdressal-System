@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(version: 20170330142750) do
     t.string   "user_type"
   end
 
+  create_table "complaint_feedbacks", force: :cascade do |t|
+    t.integer  "complaint_id"
+    t.text     "feedback"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "complaint_updates", force: :cascade do |t|
     t.integer  "complaint_id"
     t.string   "assigned_to"

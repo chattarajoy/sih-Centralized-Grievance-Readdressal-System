@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { StatusLog } from '../login_signup/classes/status';
 import { signUp } from '../login_signup/classes/signupuser';
 import {ValidationManager} from "ng2-validation-manager";
+import { NotificationsService } from 'angular2-notifications';
 
 @Component({
   selector: 'logsig-component',
@@ -29,6 +30,13 @@ export class LogSigComponent implements OnInit {
 
   }
 
+  public options = {
+    position: ["top", "right"],
+    timeOut: 1000,
+    lastOnBottom: true,
+    showProgressBar : false
+}
+
   //  public signUpUser: signUp;
 
   data : StatusLog[];
@@ -36,7 +44,8 @@ export class LogSigComponent implements OnInit {
 
   constructor(
     private _service : AppService,
-    private _router : Router
+    private _router : Router,
+    private _notify : NotificationsService
   ){}
 
 
@@ -65,12 +74,12 @@ export class LogSigComponent implements OnInit {
   login(){
     this._service.loginFun(this.localuser).then((res)=>{
  this.data = res.error_message
-      console.log('1 data',this.data);
+
       if(res.status === 'success'){
-console.log('2 res',this.data);
         this._router.navigate(['user']);
       }
       else if(res.status === 'error'){
+            this._notify.error('ERROR',res.error_message);
             console.log('error');
 
       }
@@ -85,8 +94,14 @@ console.log('2 res',this.data);
     if(this.form.isValid()){
       console.log('ok');
     this._service.signUpFun(this.signUpUser).then((res)=>{
-      console.log('ok done');
-     this._router.navigate(['']);
+      if(res.status === 'success'){
+        this._router.navigate(['user']);
+      }
+      else if(res.status === 'error'){
+            this._notify.error('ERROR',res.error_message);
+            console.log('error');
+
+      }
     })
        }
 

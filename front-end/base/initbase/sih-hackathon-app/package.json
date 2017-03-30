@@ -20,6 +20,7 @@
     "@angular/platform-browser": "^2.3.1",
     "@angular/platform-browser-dynamic": "^2.3.1",
     "@angular/router": "^3.3.1",
+    "angular2-notifications": "^0.4.53",
     "core-js": "^2.4.1",
     "ng2-validation-manager": "^0.2.8",
     "rxjs": "^5.0.1",

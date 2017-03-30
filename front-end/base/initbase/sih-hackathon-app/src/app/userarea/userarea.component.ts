@@ -5,6 +5,7 @@ import { AuthManager } from '../services/authmanager.service';
 import { StatusLog } from '../login_signup/classes/status';
 import { AppService } from '../services/app-services';
 import { UserDetailX } from './classes/userdetails/userdetail';
+import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'userarea-component',
   templateUrl: './userarea.component.html',
@@ -21,11 +22,12 @@ export class UserComponent implements OnInit {
    data : UserDetailX[];
 
    constructor(
-     private _service : AppService
+     private _service : AppService,
+     private _serviceNotify: NotificationsService
    ){}
 
   ngOnInit(){
-    this.getDetails();
+    // this.getDetails();
   }
 
   getDetails(){

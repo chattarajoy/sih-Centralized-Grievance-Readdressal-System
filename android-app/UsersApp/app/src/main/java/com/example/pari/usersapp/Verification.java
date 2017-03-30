@@ -1,9 +1,13 @@
 package com.example.pari.usersapp;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -38,6 +42,7 @@ public class Verification extends AppCompatActivity {
     String otpSent;
     EditText et_otp;
     Button verifyOtp;
+    Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -187,9 +192,8 @@ public class Verification extends AppCompatActivity {
                        // test[0] = 1;
                         Toast.makeText(getApplicationContext(),
                                 "Successfully Verified!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Verification.this, Form.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
+
+
                         finish();
                     }
 

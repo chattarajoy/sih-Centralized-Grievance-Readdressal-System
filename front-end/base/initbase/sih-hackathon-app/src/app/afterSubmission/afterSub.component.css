@@ -1,0 +1,48 @@
+
+body {
+  padding: 5rem;
+  background: #eee;
+}
+
+svg {
+  margin: 0 auto;
+  margin-top:400px;
+  left:50%;
+
+  display: block;
+}
+
+svg {
+  width: 10rem;
+}
+
+.path {
+  stroke-dasharray: 4550;
+  stroke-dashoffset: 4550;
+  animation: dash 0.56s linear, fill 0.28s ease-in-out 0.56s;
+  animation-fill-mode: forwards;
+  transform: rotate(180deg) scaleX(-1) translate(-96px, -12px);
+  transform-origin: 50% 50%;
+  stroke: #00e25e;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 4500;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fill {
+  0% {
+    fill: rgba(0, 226, 94, 0);
+  }
+  100% {
+    fill: #00e25e;
+  }
+}
+
+.ok{
+  text-align: center;
+}
