@@ -1,6 +1,6 @@
 class AdminUserController < ApplicationController
 
-  before_action :check_user_logged_in, only: [:update_password]
+  before_action :check_user_logged_in_as_admin, only: [:update_password]
 
   def signup
     admin_user = AdminUser.new(name: params[:name],

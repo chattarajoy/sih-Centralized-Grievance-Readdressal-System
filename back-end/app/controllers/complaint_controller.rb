@@ -1,6 +1,7 @@
 class ComplaintController < ApplicationController
 
   before_action :check_user_logged_in
+  before_action :check_user_logged_in_as_admin, only: [:assign_complaint]
 
   def create
     complaint = Complaint.new(subject: params[:subject],
@@ -48,6 +49,17 @@ class ComplaintController < ApplicationController
 
   end
 
+  def assign_complaint #assign complaint to ward officers or a contractor
+
+    user = AdminUser.find(get_logged_in_user_id)
+
+    if user.designation == "District Officer"
+    elsif user.designation == "Ward Officer"
+    else
+    end
+
+  end
+
 private
 
   # assign new complaint to respective district office
@@ -60,7 +72,8 @@ private
       complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
                                              assigned_to: "District Municipal Officer " + district,
                                              notes: "Auto Assignment by System")
-      new_complaint = NewComplaint.new(complaint_id: complaint_id,
+
+      new_complaint = ComplaintStatus.new(complaint_id: complaint_id,
                                        district_office_id: district_office.id)
 
       if complaint_update.save && new_complaint.save

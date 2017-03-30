@@ -56,7 +56,7 @@ class AuthController < ApplicationController
                             user_name: user.name,
                             email: user.email,
                             contact: user.phone,
-                            role: user.access_level}
+                            designation: user.designation}
           else
             error_message = "Invalid email or password"
           end

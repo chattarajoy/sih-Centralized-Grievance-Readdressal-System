@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328181545) do
+ActiveRecord::Schema.define(version: 20170330142750) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -18,14 +18,6 @@ ActiveRecord::Schema.define(version: 20170328181545) do
     t.string   "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "active_complaints", force: :cascade do |t|
-    t.integer  "ward_office_id"
-    t.integer  "complaint_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "district_office_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -88,13 +80,6 @@ ActiveRecord::Schema.define(version: 20170328181545) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "new_complaints", force: :cascade do |t|
-    t.integer  "complaint_id"
-    t.integer  "district_office_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
   create_table "password_reset_links", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "access_token"
@@ -103,19 +88,17 @@ ActiveRecord::Schema.define(version: 20170328181545) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "resolvedcomplaints", force: :cascade do |t|
-    t.integer  "complaint_id"
-    t.integer  "districtoffice_id"
-    t.integer  "wardoffice_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-  end
-
   create_table "sms_otps", force: :cascade do |t|
     t.string   "user_id"
     t.string   "otp"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "table_complaint_statuses", force: :cascade do |t|
+    t.integer "district_office_id"
+    t.integer "ward_office_id"
+    t.integer "complaint_id"
   end
 
   create_table "users", force: :cascade do |t|

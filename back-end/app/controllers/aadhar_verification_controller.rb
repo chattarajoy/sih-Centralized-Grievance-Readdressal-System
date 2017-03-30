@@ -30,6 +30,7 @@ class AadharVerificationController < ApplicationController
         user = User.find(get_logged_in_user_id)
         user.aadhar_verified = true
         user.phone_no_verified = true
+        sms_otp.delete
         if user.save
           render json: {status: "success", message: "otp verified"} and return
         else

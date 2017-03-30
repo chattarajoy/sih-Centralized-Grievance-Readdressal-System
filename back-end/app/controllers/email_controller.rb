@@ -13,6 +13,7 @@ class EmailController < ApplicationController
         user.email_verified = true
 
         if user.save
+          email_verification.delete
           redirect_to('/') and return
         else
           error_message = "Database couldn't be updated"
