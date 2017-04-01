@@ -55,8 +55,10 @@ console.log(headers);
        headers.append('Content-Type','application/json');
       console.log('old_password',form.oldpass);
       console.log('new_password',form.newpass);
+      //console.log('the',form);
+      var newP = form.newpass;
       console.log('submit-form-headers',headers)
-      return this._http.get(`http://54.169.134.133:80/user/update_password?old_password=`+form.oldpass+`&new_password=`+form.renewpass,{headers:headers}) // ...using post request
+      return this._http.get(`http://54.169.134.133:80/user/update_password?old_password=`+form.oldpass+`&new_password=`+newP,{headers:headers}) // ...using post request
                        .map(res=> res.json()) // ...and calling .json() on the response to return data
                        .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }
