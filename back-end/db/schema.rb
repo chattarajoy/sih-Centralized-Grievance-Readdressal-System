@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401160847) do
+ActiveRecord::Schema.define(version: 20170401085114) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -108,6 +108,13 @@ ActiveRecord::Schema.define(version: 20170401160847) do
     t.datetime "updated_at",   null: false
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "password_reset_links", force: :cascade do |t|
     t.integer  "user_id"
     t.string   "access_token"
@@ -119,8 +126,9 @@ ActiveRecord::Schema.define(version: 20170401160847) do
   create_table "slas", force: :cascade do |t|
     t.string   "category"
     t.integer  "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "subcategory"
   end
 
   create_table "sms_otps", force: :cascade do |t|
