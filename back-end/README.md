@@ -73,7 +73,7 @@ parameters: name, contact, email, password
 * Admin user : `url: /admin_user/signup`
 
 ```
-parameters: name, email, phone, access_level, municipal_id, department, password
+parameters: name, email, phone, designation, municipal_id, department, password
 
 ```
 
