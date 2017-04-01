@@ -55,8 +55,8 @@ class AadharVerificationController < ApplicationController
         else
           error_message = user.errors.full_messages
         end
+      else
         # Reduce an attempt_left or delete if only 1 attempt was left
-        error_message = "Invalid OTP"
         sms_otp = SmsOtp.where(user_id: get_logged_in_user_id).first
         if sms_otp
           if sms_otp.attempts_left == 1
@@ -66,7 +66,6 @@ class AadharVerificationController < ApplicationController
             sms_otp.save
           end
         end
-      else
         error_message = "Invalid OTP you can try 3 times only!"
       end
     else
