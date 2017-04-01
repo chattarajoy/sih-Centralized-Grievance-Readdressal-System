@@ -9,7 +9,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema.define(version: 20170401085114) do
+
+ActiveRecord::Schema.define(version: 20170401161208) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -63,11 +64,8 @@ ActiveRecord::Schema.define(version: 20170401085114) do
     t.string   "priority"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
-<<<<<<< HEAD
     t.string   "department"
-=======
     t.string   "category"
->>>>>>> 07dad677ce370f111675f227b27c3cbf4fa47ec9
   end
 
   create_table "complaint_updates", force: :cascade do |t|
