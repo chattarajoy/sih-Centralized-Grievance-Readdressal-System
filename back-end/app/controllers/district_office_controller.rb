@@ -7,7 +7,7 @@ class DistrictOfficeController < ApplicationController
         sla = Sla.where(category: t.department, subcategory: t.sub_category)
         time1 = sla.updated_at - sla.created_at
         time2 = t.updated_at - t.created_at
-        time1 = 0
+        timely = 0
         delayed = 0
         if time1 >= time2
           timely = timely + 1
