@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330180022) do
+ActiveRecord::Schema.define(version: 20170401040102) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -48,10 +48,13 @@ ActiveRecord::Schema.define(version: 20170330180022) do
   end
 
   create_table "complaint_statuses", force: :cascade do |t|
-    t.integer "district_office_id"
-    t.integer "ward_office_id"
-    t.integer "complaint_id"
-    t.string  "status"
+    t.string   "admin_user_id"
+    t.string   "district_office_id"
+    t.string   "ward_office_id"
+    t.string   "status"
+    t.string   "priority"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "complaint_updates", force: :cascade do |t|
