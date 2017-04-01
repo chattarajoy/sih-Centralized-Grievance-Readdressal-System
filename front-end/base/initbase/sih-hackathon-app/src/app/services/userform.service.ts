@@ -39,7 +39,7 @@ console.log(headers);
            headers.append('Content-Type','application/json');
 
           console.log('submit-form-headers',headers)
-          return this._http.get(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=abcd&latitude=12.45&longitude=21.54&city=`+form.city+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers}) // ...using post request
+          return this._http.get(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=`+form.image+`&latitude=12.45&longitude=21.54&city=`+form.city+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers}) // ...using post request
                            .map(res=> res.json()) // ...and calling .json() on the response to return data
                            .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
       }

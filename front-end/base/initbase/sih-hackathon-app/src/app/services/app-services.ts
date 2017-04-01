@@ -6,6 +6,8 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import { Status } from '../userarea/classes/complaints_class/complaints_status';
 import {BehaviorSubject} from 'rxjs/Rx';
+require('aws-sdk/dist/aws-sdk');
+
 
 @Injectable()
 export class AppService {
@@ -119,6 +121,8 @@ getStatusX(){
      console.log('headers',headers);
     return headers;
   }
+
+  google 
 
 
 }
