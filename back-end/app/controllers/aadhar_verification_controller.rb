@@ -49,7 +49,7 @@ class AadharVerificationController < ApplicationController
         user.aadhar_verified = true
         user.phone_no_verified = true
         sms_otp.delete
-        user.uid = sms_otp.aadhar_number
+        user.aadhar_number = sms_otp.uid
 
         if user.save
           render json: {status: "success", message: "otp verified"} and return
