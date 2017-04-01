@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -16,13 +17,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.location.Address;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
+
 import com.amazonaws.ClientConfiguration;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import android.support.v4.content.SharedPreferencesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.Manifest;
 import android.content.Context;
@@ -37,6 +42,7 @@ import android.support.v4.media.MediaBrowserCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,6 +50,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +62,7 @@ import android.os.ResultReceiver;
 import android.os.Handler;
 import android.location.Geocoder;
 import android.database.Cursor;
+
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
@@ -75,58 +84,61 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Locale;
+
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.mobileconnectors.s3.transferutility.*;
+
 import java.io.File;
 import java.io.OutputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.ByteArrayOutputStream;
+
 import android.provider.MediaStore.Images;
+
 /**
  * Created by pari on 23-03-2017.
  */
 
-public class Form extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class Form extends AppCompatActivity {
     String mAddressOutput;
     final int LOCATION_PERMISSION = 1;
     protected Location mLastLocation;
     private AddressResultReceiver mResultReceiver;
     ImageView imageView;
     TextView textLoc;
-    Button imageCaptureButton;
-    Button imageUploadButton;
-    Spinner sp_type;
+    String imagetype;
+    RadioButton rb;
     ProgressDialog progressDialog;
+    RadioGroup rg;
     Context context = this;
-    String subject="",description="",image="",latitude="",longitude="",city="",state="",pincode="",accessToken,secretKey;
     Bundle b;
-    final private static String URL_FOR_COMPLAINT = Constants.SERVER+"/complaint/create";
+    final private static String URL_FOR_COMPLAINT = Constants.SERVER + "/complaint/create";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    String address = "",subject = "", description = "", image = "", latitude = "", longitude = "", city = "", state = "", pincode = "", accessToken, secretKey;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
+
         b = getIntent().getExtras();
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         textLoc = (TextView) findViewById(R.id.textView7);
-        imageCaptureButton = (Button) findViewById(R.id.button3);
-        imageUploadButton = (Button) findViewById(R.id.button2);
-        sp_type = (Spinner) findViewById(R.id.spinner2);
-        imageView = (ImageView)findViewById(R.id.imageView2);
-        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        imageView = (ImageView) findViewById(R.id.imageView2);
+
+        final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener ll = new myLocationListener();
         mResultReceiver = new AddressResultReceiver(new Handler());
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -153,7 +165,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
         }
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, ll);
         lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, ll);
-        imageCaptureButton.setOnClickListener(new View.OnClickListener() {
+        /*imageCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dispatchTakePictureIntent();
@@ -166,23 +178,51 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                         MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 0);
             }
+        });*/
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogBox();
+
+            }
         });
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.type_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        sp_type.setAdapter(adapter);
-        sp_type.setOnItemSelectedListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-        Button submit = (Button)findViewById(R.id.button5);
+        Button submit = (Button) findViewById(R.id.button5);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                description = (((EditText)findViewById(R.id.textView6)).getText()).toString();
-                registerComplaint();
+                description = (((TextInputLayout) findViewById(R.id.textView6)).getEditText().getText()).toString();
+                subject = (((TextInputLayout) findViewById(R.id.textView9)).getEditText().getText()).toString();
+                city = (((TextInputLayout) findViewById(R.id.textView10)).getEditText().getText()).toString();
+                state = (((TextInputLayout) findViewById(R.id.textView11)).getEditText().getText()).toString();
+                pincode = (((TextInputLayout) findViewById(R.id.textView12)).getEditText().getText()).toString();
+                address = (((TextView)findViewById(R.id.textView7)).getText()).toString();
+             //  Location location = new Location();
+                /*List<Address> addresses;
+                try {
+                    Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
+                    addresses = gcd.getFromLocation(mLastLocation.getLatitude(),
+                            mLastLocation.getLongitude(), 1);
+                    city = addresses.get(0).getLocality();
+                    pincode = addresses.get(0).getPostalCode();
+                    state = addresses.get(0).getAdminArea();
+                    *//*if(pincode==null)
+                        pincode="";
+                    if(city==null)
+                        pincode="";
+                    if(state ==null)
+                        state="";*//*
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+*/
+                latitude = Double.valueOf(mLastLocation.getLatitude()).toString();
+                longitude = Double.valueOf(mLastLocation.getLongitude()).toString();
+                //  Toast.makeText(getApplicationContext(),"descripion:"+description+" subject:"+subject+" image:"+image+" city:"+city+" state:"+state+" pincode:"+pincode+" lat:"+latitude+" long:"+longitude, Toast.LENGTH_SHORT).show();
+                registerComplaint(subject,description,image,latitude,longitude,city,state,pincode,address);
             }
         });
     }
@@ -213,9 +253,10 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
             // permissions this app might request
         }
     }
-    private void registerComplaint() {
+    private void registerComplaint(final String subject,final String description,final String image,final String latitude,final String longitude,final String city,final String state,final String pincode,final String address) {
         // Tag used to cancel the request
         String cancel_req_tag = "register";
+       // Toast.makeText(getApplicationContext(),"descripion:"+description+" subject:"+subject+" image:"+image+" city:"+city+" state:"+state+" pincode:"+pincode+" lat:"+latitude+" long:"+longitude, Toast.LENGTH_SHORT).show();
 
         progressDialog.setMessage("Filing your Complaint");
         showDialog();
@@ -228,36 +269,38 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
 
             @Override
             public void onResponse(String response) {
-               // Log.d("Form", "Register Response: " + response.toString());
+                Log.d("Form", "Register Response: " + response.toString());
                 //Toast.makeText(getApplicationContext(),"Register Response: " + response.toString(), Toast.LENGTH_SHORT).show();
                 hideDialog();
-
-                try {
-                    JSONObject jObj = new JSONObject(response);
-                    //   boolean error = jObj.getBoolean("error");
-                    String status = jObj.getString("status");
-                    if (status.equals("success")) {
-                        Toast.makeText(getApplicationContext(),
-                                "Complaint Successfully Filed!", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(context, HomePage.class);
-                        intent.putExtras(b);
-                        startActivity(intent);
+                if(response!=null) {
+                    try {
+                        JSONObject jObj = new JSONObject(response);
+                        //   boolean error = jObj.getBoolean("error");
+                        String status = jObj.getString("status");
+                        if (status.equals("success")) {
+                            Toast.makeText(getApplicationContext(),
+                                    "Complaint Successfully Filed!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(context, HomePage.class);
+                            intent.putExtras(b);
+                            startActivity(intent);
                         /*// Launch login activity
                         Intent intent = new Intent(
                                 RegisterActivity.this,
                                 LoginActivity.class);
                         startActivity(intent);
                         finish();*/
-                    } else {
+                        } else {
 
-                        String errorMsg = jObj.getString("error_message");
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
+                            String errorMsg = jObj.getString("error_message");
+                            Toast.makeText(getApplicationContext(),
+                                    errorMsg, Toast.LENGTH_LONG).show();
+
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
 
@@ -276,13 +319,12 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                 params.put("subject", subject);
                 params.put("description",description);
                 params.put("image", image);
-                params.put("city", city);
+                params.put("district", city);
                 params.put("state", state);
                 params.put("pincode", pincode);
                 params.put("latitude", latitude);
                 params.put("longitude", longitude);
-                params.put("access_token",accessToken);
-                params.put("secret_key",secretKey);
+                params.put("address",address);
                 return params;
             }
             @Override
@@ -295,6 +337,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
         };
         // Adding request to request queue
         AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq, cancel_req_tag);
+
     }
 
     private void showDialog() {
@@ -476,15 +519,6 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
         t.show();
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        subject = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        subject = "";
-    }
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -530,19 +564,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                 longitude = Double.valueOf(location.getLongitude()).toString();
                 latitude = Double.valueOf(location.getLatitude()).toString();
                 mLastLocation = location;
-                List<Address> addresses;
-                try {
-                    Geocoder gcd = new Geocoder(getBaseContext(), Locale.getDefault());
-                    addresses = gcd.getFromLocation(location.getLatitude(),
-                            location.getLongitude(), 1);
-                    city = addresses.get(0).getLocality();
-                    pincode = addresses.get(0).getPostalCode();
-                    state = addresses.get(0).getAdminArea();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                if (!Geocoder.isPresent()) {
+                                if (!Geocoder.isPresent()) {
                     //  showToast(getString(R.string.no_geocoder_available));
                     textLoc.append(getString(R.string.no_geocoder_available));
                 } else
@@ -594,6 +616,47 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                 (int) (bitmap.getWidth() * 0.5), (int) (bitmap.getHeight() * 0.5), false);
         return bitmapResized;
     }
+    void showDialogBox()
+    {
+        LayoutInflater li = LayoutInflater.from(context);
+        final View promptsView = li.inflate(R.layout.image_prompt, null);
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                context);
+
+        // set prompts.xml to alertdialog builder
+        alertDialogBuilder.setView(promptsView);
+        // set dialog message
+        alertDialogBuilder
+                .setCancelable(false)
+                .setPositiveButton("Select",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // get user input and set it to result
+                                // edit text
+
+                                rg = (RadioGroup)promptsView.findViewById(R.id.radioImage);
+                                int selectedId = rg.getCheckedRadioButtonId();
+                                rb = (RadioButton) promptsView.findViewById(selectedId);
+                                imagetype = rb.getText().toString();
+                                if(imagetype.equals("Gallery"))
+                                {
+                                    Intent intent = new Intent(Intent.ACTION_PICK,
+                                            MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                    startActivityForResult(intent, 0);
+                                }
+                                else
+                                {
+                                    dispatchTakePictureIntent();
+                                }
+                            }
+                        });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // show it
+        alertDialog.show();
+    }
 }
 

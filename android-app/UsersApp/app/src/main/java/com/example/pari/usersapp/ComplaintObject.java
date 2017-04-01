@@ -5,7 +5,7 @@ package com.example.pari.usersapp;
  */
 
 public class ComplaintObject {
-    String id,subject,description,image,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,accessToken,secretKey;
+    String id,address,subject,description,image,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,accessToken,secretKey;
 
     public void setImage(String image) {
         this.image = image;
@@ -133,5 +133,13 @@ public class ComplaintObject {
 
     public String getSecretKey() {
         return secretKey;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

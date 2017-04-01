@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -31,7 +32,7 @@ import java.util.Map;
  * Created by pari on 26-03-2017.
  */
 
-public class Track extends AppCompatActivity {
+public class Track extends AppCompatActivity{
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -40,6 +41,7 @@ public class Track extends AppCompatActivity {
     Context context = this;
     Bundle b;
     String accessToken,secretKey;
+    Boolean aadhar_verified,phone_no_verified;
     String id,subject,description,image,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,name,email;
     String URL_FOR_TRACKING = Constants.SERVER+"/complaint/show_user_complaints";
     @Override
@@ -50,6 +52,8 @@ public class Track extends AppCompatActivity {
         b = i.getExtras();
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
+        aadhar_verified = b.getBoolean("aadhar_verified");
+        phone_no_verified = b.getBoolean("phone_no_verified");
         name = b.getString("name");
         email = b.getString("email");
         items = new ArrayList<ComplaintObject>();
@@ -93,7 +97,7 @@ public class Track extends AppCompatActivity {
                             co[i].setImage(jsonobject.getString("image"));
                             co[i].setLatitude(jsonobject.getString("latitude"));
                             co[i].setLongitude(jsonobject.getString("longitude"));
-                            co[i].setCity(jsonobject.getString("city"));
+                            co[i].setCity(jsonobject.getString("district"));
                             co[i].setState(jsonobject.getString("state"));
                             co[i].setPincode(jsonobject.getString("pincode"));
                             co[i].setCreated_at(jsonobject.getString("created_at"));
@@ -103,6 +107,7 @@ public class Track extends AppCompatActivity {
                             co[i].setPriority(jsonobject.getString("priority"));
                             co[i].setAccessToken(accessToken);
                             co[i].setSecretKey(secretKey);
+                            co[i].setAddress(jsonobject.getString("address"));
                             items.add(co[i]);
                         }
                     }
@@ -110,7 +115,7 @@ public class Track extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Log.e("Form", "items: " + items);
-                adapter = new CardViewAdapter(items,context,name,email);
+                adapter = new CardViewAdapter(items,context,name,email,aadhar_verified,phone_no_verified);
                 recyclerView.setAdapter(adapter);
             }
         }, new Response.ErrorListener() {

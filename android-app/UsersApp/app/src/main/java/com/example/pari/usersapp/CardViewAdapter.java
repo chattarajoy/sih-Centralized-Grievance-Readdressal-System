@@ -46,12 +46,15 @@ public class CardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     View view;
     Context context;
     String name,email;
-    public CardViewAdapter(ArrayList<ComplaintObject> items,Context context,String name,String email)
+    Boolean aadhar_verified,phone_no_verified;
+    public CardViewAdapter(ArrayList<ComplaintObject> items,Context context,String name,String email,Boolean aadhar_verified,Boolean phone_no_verified)
     {
         this.items=items;
         this.context = context;
         this.name = name;
         this.email = email;
+        this.aadhar_verified= aadhar_verified;
+        this.phone_no_verified=phone_no_verified;
     }
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,6 +86,8 @@ public class CardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 b.putString("secretKey",co.getSecretKey());
                 b.putString("name",name);
                 b.putString("email",email);
+                b.putBoolean("aadhar_verified",aadhar_verified);
+                b.putBoolean("phone_no_verified",phone_no_verified);
                 intent.putExtras(b);
                 context.startActivity(intent);
             }
@@ -97,6 +102,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
        // vh1.id.setText("Complaint ID : "+items.get(position).getId());
         vh1.subject.setText(items.get(position).getId()+". Subject : "+items.get(position).getSubject());
         vh1.description.setText("Description : "+items.get(position).getDescription());
+        vh1.status.setText("Status : "+items.get(position).getStatus());
       /*  vh1.latitude.setText("Latitude : "+items.get(position).getLatitude());
         vh1.longitude.setText("Longitude : "+items.get(position).getLongitude());
         vh1.city.setText("City : "+items.get(position).getCity());
@@ -107,35 +113,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         vh1.userid.setText("User ID : "+items.get(position).getUserid());
         vh1.priority.setText("Priority : "+items.get(position).getPriority());
         vh1.status.setText("Status : "+items.get(position).getState());*/
-        String key = items.get(position).getImage();
-        ImageView imageView = vh1.image ;
-        AWSCredentials credentials = new BasicAWSCredentials(
-                Constants.BUCKET_ACCESS_KEY_ID,
-                Constants.BUCKET_SECRET_KEY_ID);
 
-        // create a client connection based on credentials
-        AmazonS3 s3client = new AmazonS3Client(credentials);
-     //   s3client.setEndpoint("asar.cgrs.s3.ap-south-1.amazonaws.com");
-        // create bucket - name must be unique for all S3 users
-        String bucketName = Constants.BUCKET_NAME;
-        ResponseHeaderOverrides override = new ResponseHeaderOverrides();
-        override.setContentType( "image/jpeg" );
-        GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest( Constants.BUCKET_NAME, key );
-        urlRequest.setExpiration( new Date( System.currentTimeMillis() + 3600000 ) );  // Added an hour's worth of milliseconds to the current time.
-        urlRequest.setResponseHeaders( override );
-        URL url = s3client.generatePresignedUrl( urlRequest );
-        try {
-           // context.startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( url.toURI().toString() ) ) );
-            /*Uri uri = Uri.parse( url.toURI().toString() );
-            Bitmap bitmap = BitmapFactory.decodeStream(context.getContentResolver().openInputStream(uri));
-            imageView.setImageBitmap(bitmap);*/
-            String Url = url.toURI().toString();
-            Picasso.with(context.getApplicationContext())
-                    .load(Url).resize(200,200)
-                    .into(imageView);
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
     /*    AmazonS3 s3 = new AmazonS3Client(new BasicAWSCredentials(Constants.BUCKET_ACCESS_KEY_ID,
                 Constants.BUCKET_SECRET_KEY_ID));
         TransferUtility transferUtility = new TransferUtility(s3, context);

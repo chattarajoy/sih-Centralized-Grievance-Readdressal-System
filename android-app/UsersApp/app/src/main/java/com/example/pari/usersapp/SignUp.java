@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.content.Context;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.design.widget.TextInputLayout;
 import android.os.AsyncTask;
 
 import java.io.IOException;
@@ -48,16 +49,15 @@ public class SignUp extends AppCompatActivity {
     private static final String TAG = "SignUp";
     String URL_FOR_REGISTRATION = Constants.SERVER+"/user/signup";
     int test = 0;
-    EditText et_name,et_email,et_pass,et_confirm_pass,et_contact;
+    TextInputLayout et_name,et_email,et_pass,et_confirm_pass,et_contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        et_name = (EditText) findViewById(R.id.editText);
-        et_email = (EditText)findViewById(R.id.editText2);
-        et_pass = (EditText)findViewById(R.id.editText3);
-        et_confirm_pass = (EditText)findViewById(R.id.editText5);
-        et_contact = (EditText)findViewById(R.id.editText4);
+        et_name = (TextInputLayout) findViewById(R.id.editText);
+        et_email = (TextInputLayout) findViewById(R.id.editText2);
+        et_pass = (TextInputLayout) findViewById(R.id.editText3);
+        et_confirm_pass = (TextInputLayout) findViewById(R.id.editText5);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -67,11 +67,10 @@ public class SignUp extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                name = et_name.getText().toString();
-                email = et_email.getText().toString();
-                pass = et_pass.getText().toString();
-                confirm_pass = et_confirm_pass.getText().toString();
-                contact = et_contact.getText().toString();
+                name = et_name.getEditText().getText().toString();
+                email = et_email.getEditText().getText().toString();
+                pass = et_pass.getEditText().getText().toString();
+                confirm_pass = et_confirm_pass.getEditText().getText().toString();
                 if(pass.equals(confirm_pass)) {
                     parameters.putString("name", name);
                     parameters.putString("email", email);
@@ -85,7 +84,7 @@ public class SignUp extends AppCompatActivity {
                 }
             }
         });
-
+    contact="1234567890";
 
 
     }

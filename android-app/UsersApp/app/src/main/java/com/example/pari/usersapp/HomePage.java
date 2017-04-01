@@ -138,10 +138,10 @@ public class HomePage extends AppCompatActivity {
                                             } else if (!new_password.equals(confirm_new_pass)) {
                                                 Toast toast = Toast.makeText(context, "Passwords Don't Match", Toast.LENGTH_LONG);
                                                 toast.show();
-                                            }// else {
-                                             //   updatePassword(new_password);
-                                             //   break;
-                                          //  }
+                                            } else {
+                                                updatePassword(new_password);
+                                              //  break;
+                                            }
                                      //   }
                                     }
                                 })
@@ -179,7 +179,7 @@ public class HomePage extends AppCompatActivity {
                     if (status != null && status.equals("success")) {
                         Toast.makeText(getApplicationContext(),
                                 "Password Updated!", Toast.LENGTH_LONG).show();
-                        finish();
+                      //  finish();
                     }
 
                     else {

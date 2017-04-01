@@ -6,9 +6,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="23dp">
 
 
 
@@ -16,48 +17,85 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
+        <TextView
+            android:layout_marginTop="17dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Enter Subject"/>
 
-    <TextView
-        android:text="Type:"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:id="@+id/textView"
-        android:textSize="18sp"
-        android:layout_alignParentTop="true" />
 
-    <TextView
-        android:text="Description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="23dp"
-        android:id="@+id/textView2"
-        android:textSize="18sp" />
-
-    <EditText
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="17dp"
-        android:id="@+id/textView6"
-        android:hint="Enter description (if any)"
-        android:text=""/>
-
-    <TextView
-        android:text="Finding Location..."
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView6"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/textView7"
-        android:textSize="18sp" />
+        android:layout_below="@+id/textView9"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/textView6">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Description"/>
+    </android.support.design.widget.TextInputLayout>
+
+ <TextView
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content"
+     android:id="@+id/textView7"
+     android:text="Finding Location..."
+     android:layout_below="@id/textView6"
+     android:textSize="18sp"
+     android:layout_marginTop="20dp"
+     android:layout_marginLeft="20dp"
+     android:layout_marginRight="20dp"/>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/textView7"
+        android:id="@+id/textView10"
+
+        android:text="">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter City"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/textView10"
+        android:id="@+id/textView11"
+
+        android:text="">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter State"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/textView11"
+        android:id="@+id/textView12"
+
+        android:text="">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Pincode"
+            android:inputType="number"/>
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:text="Submit"
@@ -65,58 +103,30 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
         android:id="@+id/button5"
+        android:layout_marginTop="20dp"
         android:layout_alignRight="@+id/imageView2"
-        android:layout_alignEnd="@+id/imageView2" />
+        android:layout_alignEnd="@+id/imageView2"
+        android:layout_centerInParent="true"
+        android:background="@drawable/buynow_background" />
+
+
+    <ImageView
+        app:srcCompat="@drawable/com_facebook_button_background"
+        android:id="@+id/imageView2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textView12"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"/>
 
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner2"
-        android:layout_alignTop="@+id/textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toLeftOf="@+id/textView"
-        android:layout_marginLeft="100dp"/>
+        android:layout_above="@+id/textView6"
+        android:layout_marginLeft="200dp"
+        android:id="@+id/spinner" />
 
-    <ImageView
-        app:srcCompat="@drawable/com_facebook_button_background"
-        android:layout_marginLeft="34dp"
-        android:layout_marginStart="34dp"
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/button3"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
 
-    <Button
-        android:text="Click Picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:text="Upload from Gallery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/button2"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/textView8"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:hint="Enter Landmarks (if any)..."
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView8"
-        android:textSize="18sp"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 </RelativeLayout>
     </ScrollView>
 </RelativeLayout>
