@@ -70,10 +70,10 @@ parameters: name, contact, email, password
 *Please input password twice on front-end and ensure both are same*
 <br>*Contact refers to contact number or phone number*
 
-* Admin user : `url: /admin_user/signup`
+* Admin user : `url: /admin_user/create`
 
 ```
-parameters: name, email, phone, access_level, municipal_id, department, password
+parameters: name, email, phone, designation, municipal_id, department, password
 
 ```
 
