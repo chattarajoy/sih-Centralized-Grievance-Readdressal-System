@@ -2,12 +2,25 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12">
-    <h1 class="welcome">Welcome {{data}}</h1>
+    <h1 class="welcome">Welcome {{data.user_name}}</h1>
+    </div>
+    <div *ngIf="data.phone === true " class="col-xs-4 verified">
+      <p>Aadhar Verfication Status : Verified <i class="fa fa-check" aria-hidden="true"></i>
+ </p>
+    </div>
+    <div *ngIf="data.phone === false " class="col-xs-4 not-verified">
+      <p>Aadhar Verfication Status : <span>Not Verified <i class="fa fa-times" aria-hidden="true"></i></span> 
+ </p>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div *ngIf="data.aadhar_verified === true" class="col-xs-12 col-md-6">
       <userform-component></userform-component>
+    </div>
+    <div *ngIf="data.aadhar_verified === false" class="col-xs-12 col-md-6">
+      <h1>Form is Disabled , please Verify your aadhar</h1>
+      <span><i class="fa fa-exclamation-triangle fa-5x" aria-hidden="true"></i>
+</span>
     </div>
     <div class="col-xs-12 col-md-6">
       <usercomplaint-component></usercomplaint-component>

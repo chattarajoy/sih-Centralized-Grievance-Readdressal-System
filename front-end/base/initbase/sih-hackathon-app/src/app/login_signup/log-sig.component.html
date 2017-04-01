@@ -8,7 +8,7 @@
 								<a href="#" class="active" id="login-form-link">Login</a>
 							</div>
 							<div class="col-xs-6">
-								<a href="#" id="register-form-link">Register</a>
+								<a href="javascript:void(0)" id="register-form-link">Register</a>
 							</div>
 						</div>
 						<hr>
@@ -33,22 +33,8 @@
 									</div>
 
 								</form>
-								<form  id="register-form" href=javascript:undefined  style="display: none;">
-									<!-- <div class="form-group">
-										<input [(ngModel)]="signUpUser.name" type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-									</div>
-                  <div class="form-group">
-										<input [(ngModel)]="signUpUser.contact" type="text" name="contact" id="contact" tabindex="2" class="form-control" placeholder="contact">
-									</div>
-									<div class="form-group">
-										<input [(ngModel)]="signUpUser.emailId" type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-									</div>
-									<div class="form-group">
-										<input [(ngModel)]="signUpUser.password" type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input  type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div> -->
+								<form  id="register-form" style="display: none;">
+
                   <form [formGroup]="form.getForm()" (ngSubmit)="save()">
                   <div class="form-group">
                     <label>Name</label>
@@ -98,10 +84,6 @@
 										</div>
 									</div>
 								</form>
-                <!-- <div *ngIf="data === 'Invalid email or password'">
-                   {{data}}
-                </div> -->
-
 							</div>
 						</div>
 					</div>

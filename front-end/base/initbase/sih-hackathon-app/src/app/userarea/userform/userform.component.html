@@ -60,7 +60,7 @@
     <div class="form-group">
       <label class="col-lg-2 control-label">Description</label>
     <div class="col-lg-10">
-      <textarea [(ngModel)]="cForm.name" type="text" class="form-control" formControlName="description"></textarea>
+      <textarea [(ngModel)]="cForm.description" type="text" class="form-control" formControlName="description"></textarea>
       <div *ngIf="form.hasError('name')" class="alert alert-danger">
         <p>Error! Please Re-Check</p>
       </div>

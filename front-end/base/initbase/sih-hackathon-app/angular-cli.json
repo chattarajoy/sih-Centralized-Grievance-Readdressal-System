@@ -50,6 +50,7 @@
   },
   "defaults": {
     "styleExt": "css",
+    "serve" : { "host" : "0.0.0.0"} ,
     "prefixInterfaces": false,
     "inline": {
       "style": false,
