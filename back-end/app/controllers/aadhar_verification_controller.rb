@@ -72,3 +72,5 @@ class AadharVerificationController < ApplicationController
     render json: {status: "error", error_message: error_message}
   end
 end
+
+end
