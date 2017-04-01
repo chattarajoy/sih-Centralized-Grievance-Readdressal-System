@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401175720) do
+ActiveRecord::Schema.define(version: 20170401183542) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 20170401175720) do
     t.string   "priority"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "sub_category"
     t.string   "department"
-    t.string   "category"
   end
 
   create_table "complaint_updates", force: :cascade do |t|
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170401175720) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "address"
+    t.string   "subcategory"
   end
 
   create_table "district_offices", force: :cascade do |t|
