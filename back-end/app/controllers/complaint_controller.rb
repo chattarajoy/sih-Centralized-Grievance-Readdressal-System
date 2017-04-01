@@ -17,12 +17,12 @@ class ComplaintController < ApplicationController
                                 status: "new" ,
                                 priority: "new")
 
-    user_id=get_logged_in_user_id
-    user = User.where(user_id: user_id)
+    user = User.find(get_logged_in_user_id)
+
       if complaint.save
         # assign new complaint to respective district office
         assignment_result = register_new_complaint(complaint.id, complaint.state, complaint.district)
-        send_sms(user.contact,"Your complaint has been registered. Your complaint id is -" + complaint_id)
+        #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
         render json: {status: "error", error_message: complaint.errors.full_messages}
@@ -57,7 +57,7 @@ class ComplaintController < ApplicationController
     complaint = Complaint.find(params[:id])
     complaint_status = ComplaintUpdate.where(complaint_id: params[:id]).first
     if user.designation == "District Officer"
-      complaint_status.assigned_to = params[:ward_office_id] 
+      complaint_status.assigned_to = params[:ward_office_id]
       complaint_status.notes = params[:notes]
 
     elsif user.designation == "Ward Officer"

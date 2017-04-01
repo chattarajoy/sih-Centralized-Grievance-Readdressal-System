@@ -27,30 +27,38 @@ class UserController < ApplicationController
 
   def update_password
 
-    if params[:email] && params[:password]
+    if params[:old_password] && params[:new_password]
 
-        user = User.where(email: params[:email]).first
+        user = User.find(get_logged_in_user_id)
 
-          if user.id == get_logged_in_user_id
+        if user && user.authenticate(params[:old_password])
 
-            user.password = params[:password]
+          if user.authenticate(params[:new_password])
+            render json: { status: "error", error_message: "old password and new password can't be the same!"} and return
+          end
+
+            user = User.find(get_logged_in_user_id)
+            user.password = params[:new_password]
 
               if user.save
                 render json: {status: "success"}
               else
                 error_message = user.errors.full_messages
+                render json: {status: "error", error_message: error_message}
               end
 
-          else
-            error_message = "user not found"
-            render json: {status: "error", error_message: error_message}
-          end
+        else
+          error_message = "Old password is incorrect"
+          render json: {status: "error", error_message: error_message}
+        end
     else
       render json: {status: "error", error_message: "params missing"}
     end
+
   end
 
   def reset_password
+
     if params[:access_token ] && params[:secret_key] && params[:password]
       user_link = PasswordResetLink.where(access_token: params[:access_token] , secret_key: params[:secret_key]).first
       if user_link
@@ -85,7 +93,7 @@ class UserController < ApplicationController
       else
         error_message="User not found"
       end
-    else  
+    else
       error_message="Error invalid parameters"
     end
     render json:{status:"Error",error_message:error_message}
