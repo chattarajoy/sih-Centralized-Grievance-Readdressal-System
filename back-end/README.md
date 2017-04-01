@@ -231,3 +231,36 @@ sample return data
   "priority": "new"
 }
 ```
+
+## Aadhar Verification
+
+#### Requesting an OTP
+
+* 'url: /aadhar_verification/verify_aadhar_data'
+
+```
+headers: access_token, secret_key
+parameters: aadhar_number, contact
+```
+```
+RESPONSE
+
+json : {status: "error"/"success", 
+        error_message: "data not found"/ message: "OTP sent"}
+```
+
+#### Verifying an OTP
+
+* 'url: /aadhar_verification/verify_otp'
+```
+headers: access_token, secret_key
+parameters: otp
+```
+*User gets 3 attempts to verify otp, OTP is deleted thereafter*4
+
+```
+RESPONSE
+
+json : {status: "error"/"success", 
+        error_message: "Invalid OTP"/ message: "OTP verified"}
+```
