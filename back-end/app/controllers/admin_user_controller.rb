@@ -2,7 +2,7 @@ class AdminUserController < ApplicationController
 
   before_action :check_user_logged_in_as_admin, only: [:update_password]
 
-  def signup
+  def create
     admin_user = AdminUser.new(name: params[:name],
                                 email: params[:email],
 		                            phone: params[:phone],
@@ -43,7 +43,10 @@ class AdminUserController < ApplicationController
     end
   end
 
+  # Reset user password from link sent to email
+
   def reset_password
+
     if params[:access_token] && params[:secret_key] && params[:password]
       user_link = PasswordResetLink.where(access_token: params[:access_token],
                 secret_key: params[:secret_key]).first
@@ -63,6 +66,8 @@ class AdminUserController < ApplicationController
     end
     render json: {status: "error", error_message: error_message}
   end
+
+  # Request a password reset link on email\
 
   def request_password_reset
     if params[:email]
@@ -84,6 +89,8 @@ class AdminUserController < ApplicationController
     render json: {status: "error", error_message: error_message}
   end
 
+  # fetch stats for admin's dashboard
+
   def fetch_statistics
 
     user = AdminUser.find(get_logged_in_user_id)
@@ -93,7 +100,7 @@ class AdminUserController < ApplicationController
       pending_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "pending").count
       completed_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "completed").count
 
-    elsif user.designation == "ward_officer"
+    elsif user.designation == "ward officer"
 
       ward = WardOffice.find(user.municipal_id)
 
@@ -104,7 +111,8 @@ class AdminUserController < ApplicationController
       completed_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
                       category: user.designation, status: "completed").count
 
-      else
+      elsif user.designation == "district officer"
+
         new_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "new").count
         pending_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "pending").count
         completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
