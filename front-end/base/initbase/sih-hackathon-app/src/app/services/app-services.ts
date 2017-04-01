@@ -19,6 +19,8 @@ export class AppService {
     status: Status[]
   };
 
+
+
   constructor(
     private _http: Http
   ) {
@@ -133,12 +135,16 @@ awsService(file : any){
   AWSService.config.secretAccessKey = 'Svcp3OnOvkxzXURE1/cg5Tdia6SwSaYa0DxzErH9';
   var bucket = new AWSService.S3({params: {ACL :"public-read" ,Bucket: 'asarcgrs'}});
   var params = {Key: file.name, Body: file};
-  console.log(bucket);
 
-  return bucket.upload(params, function (err, data) {
-      console.log(err, data);
 
-  });
+  bucket.upload(params, function (err, data) {
+  console.log(data.Location);
+
+ })
+
+ function retrieve(why){
+   console.log(why);
+ }
 }
 
 

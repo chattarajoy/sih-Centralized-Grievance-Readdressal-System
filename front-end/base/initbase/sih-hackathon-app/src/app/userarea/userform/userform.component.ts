@@ -45,8 +45,10 @@ export class UserFormComponent {
 
   model = new newForm('','','','','',1);
 
-  formSubmit(){
+  formSubmit(fileInput : any){
 
+    var file = fileInput.target.files[0];
+   this._serviceApp.awsService(file)
     console.log('Entering',this.loc)
       this._service.submitFormX(this.model).subscribe((res)=>{
         console.log('Submitted!', res)
@@ -65,8 +67,7 @@ export class UserFormComponent {
   fileEvent(fileInput: any){
 
       var file = fileInput.target.files[0];
-      var x = this._serviceApp.awsService(file)
-      console.log(x);
+     this._serviceApp.awsService(file)
       // var AWSService = window.AWS;
       // var file = fileInput.target.files[0];
       // console.log(file);
@@ -91,7 +92,7 @@ export class UserFormComponent {
       //   console.log('locX',locX);
       //   // this._serviceApp.checkLoc(locX);
       //
-      // }
+
 
 
   }
