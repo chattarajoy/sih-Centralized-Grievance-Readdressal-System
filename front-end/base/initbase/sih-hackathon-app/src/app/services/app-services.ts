@@ -19,6 +19,8 @@ export class AppService {
     status: Status[]
   };
 
+
+
   constructor(
     private _http: Http
   ) {
@@ -122,7 +124,28 @@ getStatusX(){
     return headers;
   }
 
-  google 
+// checkLoc(location){
+//   console.log('please',location)
+// }
+
+awsService(file : any){
+  var file = file;
+  var AWSService = window.AWS;
+  AWSService.config.accessKeyId = 'AKIAI4XWYQDCVLFHOW5Q';
+  AWSService.config.secretAccessKey = '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';
+  var bucket = new AWSService.S3({params: {ACL :"public-read" ,Bucket: 'asarcgrs'}});
+  var params = {Key: file.name, Body: file};
+
+
+  bucket.upload(params, function (err, data) {
+  console.log(data.Location);
+
+ })
+
+ function retrieve(why){
+   console.log(why);
+ }
+}
 
 
 }

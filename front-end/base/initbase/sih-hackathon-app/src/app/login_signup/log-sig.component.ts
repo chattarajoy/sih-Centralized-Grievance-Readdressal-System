@@ -95,7 +95,7 @@ export class LogSigComponent implements OnInit {
       console.log('ok');
     this._service.signUpFun(this.signUpUser).then((res)=>{
       if(res.status === 'success'){
-        this._router.navigate(['user']);
+        alert('created account , login using credentials');
       }
       else if(res.status === 'error'){
             this._notify.error('ERROR',res.error_message);
