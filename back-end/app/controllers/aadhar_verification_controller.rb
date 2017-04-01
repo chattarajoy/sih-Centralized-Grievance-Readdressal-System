@@ -8,6 +8,13 @@ class AadharVerificationController < ApplicationController
     if params[:aadhar_number] && params[:contact]
       aadhar = Aadhar.where(uid: params[:aadhar_number], phone: params[:contact]).first
       if aadhar
+
+        # If other OTPs exist delete all of them
+        old_sms_otp = SmsOtp.where(user_id: get_logged_in_user_id)
+        if old_sms_otp
+          old_sms_otp.destroy_all
+        end
+
         otp = rand(10**6).to_s
         sms_otp = SmsOtp.new(user_id: get_logged_in_user_id,
                               otp: otp,
@@ -16,12 +23,6 @@ class AadharVerificationController < ApplicationController
                               attempts_left: 3)
         if sms_otp.save
           send_sms(aadhar.phone, otp + " is your otp for ASAR account verification")
-          # If other OTPs exist delete all of them
-          old_sms_otp = SmsOtp.where(user_id: get_logged_in_user_id)
-          if old_sms_otp
-            old_sms_otp.destroy_all
-          end
-
           render json: {status: "success", message: "Otp sent"} and return
         else
           error_message = sms_otp.errors.full_messages
