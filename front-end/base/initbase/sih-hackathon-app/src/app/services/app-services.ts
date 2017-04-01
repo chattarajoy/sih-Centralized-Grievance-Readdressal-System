@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import { Status } from '../userarea/classes/complaints_class/complaints_status';
 import {BehaviorSubject} from 'rxjs/Rx';
+import { locationX  } from '../userarea/userform/location'
 require('aws-sdk/dist/aws-sdk');
 
 
 @Injectable()
 export class AppService {
-
   isLoggedIn : boolean;
   status : Observable<Status[]>;
   private _status: BehaviorSubject<Status[]>;
@@ -20,13 +20,13 @@ export class AppService {
   };
 
 
-
   constructor(
     private _http: Http
   ) {
     this.dataStore = { status: [] };
     this._status = <BehaviorSubject<Status[]>>new BehaviorSubject([]);
     this.status = this._status.asObservable();
+
 
   }
 
@@ -138,14 +138,11 @@ awsService(file : any){
 
 
   bucket.upload(params, function (err, data) {
-  console.log(data.Location);
-
+    window.localStorage.setItem('imagefileurl',data.Location);
  })
 
- function retrieve(why){
-   console.log(why);
- }
 }
+
 
 
 }

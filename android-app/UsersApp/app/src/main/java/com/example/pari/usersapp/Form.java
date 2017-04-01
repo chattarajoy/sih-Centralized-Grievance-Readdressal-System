@@ -103,7 +103,7 @@ import android.provider.MediaStore.Images;
  * Created by pari on 23-03-2017.
  */
 
-public class Form extends AppCompatActivity {
+public class Form extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String mAddressOutput;
     final int LOCATION_PERMISSION = 1;
     protected Location mLastLocation;
@@ -116,20 +116,22 @@ public class Form extends AppCompatActivity {
     RadioGroup rg;
     Context context = this;
     Bundle b;
+    Spinner sp_subject;
+    TextInputLayout til_subject;
+    int temp;
     final private static String URL_FOR_COMPLAINT = Constants.SERVER + "/complaint/create";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    String address = "",subject = "", description = "", image = "", latitude = "", longitude = "", city = "", state = "", pincode = "", accessToken, secretKey;
+    String type = "",address = "",subject = "", description = "", image = "", latitude = "", longitude = "", city = "", state = "", pincode = "", accessToken, secretKey;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
-
         b = getIntent().getExtras();
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
@@ -137,7 +139,16 @@ public class Form extends AppCompatActivity {
         progressDialog.setCancelable(false);
         textLoc = (TextView) findViewById(R.id.textView7);
         imageView = (ImageView) findViewById(R.id.imageView2);
-
+        sp_subject = (Spinner)findViewById(R.id.spinner);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.subject_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        sp_subject.setAdapter(adapter);
+        sp_subject.setOnItemSelectedListener(this);
+        til_subject = (TextInputLayout)findViewById(R.id.textView13);
+        til_subject.setVisibility(View.INVISIBLE);
         final LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener ll = new myLocationListener();
         mResultReceiver = new AddressResultReceiver(new Handler());
@@ -194,7 +205,6 @@ public class Form extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 description = (((TextInputLayout) findViewById(R.id.textView6)).getEditText().getText()).toString();
-                subject = (((TextInputLayout) findViewById(R.id.textView9)).getEditText().getText()).toString();
                 city = (((TextInputLayout) findViewById(R.id.textView10)).getEditText().getText()).toString();
                 state = (((TextInputLayout) findViewById(R.id.textView11)).getEditText().getText()).toString();
                 pincode = (((TextInputLayout) findViewById(R.id.textView12)).getEditText().getText()).toString();
@@ -221,6 +231,10 @@ public class Form extends AppCompatActivity {
 */
                 latitude = Double.valueOf(mLastLocation.getLatitude()).toString();
                 longitude = Double.valueOf(mLastLocation.getLongitude()).toString();
+                if(temp == 1)
+                {
+                    subject = ((TextInputLayout) findViewById(R.id.textView13)).getEditText().getText().toString();
+                }
                 //  Toast.makeText(getApplicationContext(),"descripion:"+description+" subject:"+subject+" image:"+image+" city:"+city+" state:"+state+" pincode:"+pincode+" lat:"+latitude+" long:"+longitude, Toast.LENGTH_SHORT).show();
                 registerComplaint(subject,description,image,latitude,longitude,city,state,pincode,address);
             }
@@ -554,6 +568,28 @@ public class Form extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String type = parent.getItemAtPosition(position).toString();
+        if (!type.equals("Others"))
+        {
+            subject = type;
+            temp = 0;
+        }
+        else
+        {
+            til_subject.setVisibility(View.VISIBLE);
+            (findViewById(R.id.textView9)).setVisibility(View.INVISIBLE);
+            sp_subject.setVisibility(View.INVISIBLE);
+            temp = 1;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class myLocationListener implements LocationListener {

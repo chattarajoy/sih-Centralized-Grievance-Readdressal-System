@@ -73,7 +73,7 @@ parameters: name, contact, email, password
 * Admin user : `url: /admin_user/signup`
 
 ```
-parameters: name, email, phone, access_level, municipality_id, password
+parameters: name, email, phone, access_level, municipal_id, department, password
 
 ```
 
@@ -122,7 +122,7 @@ Returns json
 * `url: /complaint/create`
 ```
 headers: access_token, secret_key
-parameters: subject, description, image, latitude, longitude, city, state, pincode
+parameters: subject, description, image, latitude, longitude, address, district, state, pincode
 ```
 
 #### Return Structure - New Complaint

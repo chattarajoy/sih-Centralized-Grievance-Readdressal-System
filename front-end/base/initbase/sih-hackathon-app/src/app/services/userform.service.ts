@@ -32,6 +32,7 @@ console.log(headers);
   submitFormX (form): Observable<any> {
 
           let headers = new Headers()
+          var imageLink = window.localStorage.getItem('imagefileurl');
           var access = window.localStorage.getItem('access_token')
           var secret = window.localStorage.getItem('secret_key')
            headers.append('access_token',access)
@@ -39,7 +40,7 @@ console.log(headers);
            headers.append('Content-Type','application/json');
 
           console.log('submit-form-headers',headers)
-          return this._http.get(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=`+form.image+`&latitude=12.45&longitude=21.54&city=`+form.city+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers}) // ...using post request
+          return this._http.get(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=`+imageLink+`&latitude=12.45&longitude=21.54&address=`+form.address+`&district=`+form.district+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers}) // ...using post request
                            .map(res=> res.json()) // ...and calling .json() on the response to return data
                            .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
       }
@@ -52,9 +53,12 @@ console.log(headers);
        headers.append('access_token',access)
        headers.append('secret_key',secret)
        headers.append('Content-Type','application/json');
-
+      console.log('old_password',form.oldpass);
+      console.log('new_password',form.newpass);
+      //console.log('the',form);
+      var newP = form.newpass;
       console.log('submit-form-headers',headers)
-      return this._http.get(`http://54.169.134.133:80/user/update_password?email=`+form.emailId+`&password=`+form.password,{headers:headers}) // ...using post request
+      return this._http.get(`http://54.169.134.133:80/user/update_password?old_password=`+form.oldpass+`&new_password=`+newP,{headers:headers}) // ...using post request
                        .map(res=> res.json()) // ...and calling .json() on the response to return data
                        .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
     }

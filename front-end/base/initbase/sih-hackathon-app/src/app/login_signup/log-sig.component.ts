@@ -3,7 +3,7 @@ import { AppService } from '../services/app-services';
 import { Router } from '@angular/router';
 import { StatusLog } from '../login_signup/classes/status';
 import { signUp } from '../login_signup/classes/signupuser';
-import {ValidationManager} from "ng2-validation-manager";
+import { ValidationManager } from "ng2-validation-manager";
 import { NotificationsService } from 'angular2-notifications';
 
 @Component({
@@ -60,8 +60,8 @@ export class LogSigComponent implements OnInit {
     //     }
 
     this.form = new ValidationManager({
-      'name'        : 'required|minLength:4|maxLength:12|alphaSpace',
-      'contact'       :'required|minLength:10|maxLength:10',
+      'name'        : 'required|minLength:4|maxLength:20|alphaSpace',
+      'contact'     : 'required|minLength:10|maxLength:10',
       'email'       : 'required|email',
       'password'    : 'required|rangeLength:8,50',
       'repassword'  : 'required|equalTo:password'

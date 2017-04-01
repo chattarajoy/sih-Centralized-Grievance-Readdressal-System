@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { newPass } from './passwordNew';
 import { UserformService } from '../../../services/userform.service';
 import { Router } from '@angular/router';
 import {AppService} from '../../../services/app-services';
+import { ValidationManager } from "ng2-validation-manager";
 import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'passettings',
@@ -10,8 +11,15 @@ import { NotificationsService } from 'angular2-notifications';
   styleUrls: ['./tings.component.css'],
   providers: [UserformService,AppService]
 })
-export class PasSettingComponent {
-  model = new newPass('','');
+export class PasSettingComponent implements OnInit{
+  // model = new newPass('','');
+ form;
+
+  updPass = {
+    oldpass : '',
+    newpass : '',
+    renewpass : ''
+  }
 
   public options = {
     position: ["bottom", "right"],
@@ -27,10 +35,20 @@ export class PasSettingComponent {
     private _notify : NotificationsService
   ){}
 
+ngOnInit(){
+  this.form = new ValidationManager({
+     'oldpass' : 'required',
+     'newpass' : 'required',
+     'renewpass' : 'required|equalTo:newpass'
 
-  formSubmit(){
-    console.log('Entering',this.model)
-      this._service.passwordChange(this.model).subscribe((res)=>{
+  });
+
+   this.form.setValue('name', 'Default');
+}
+  passSubmit(){
+    console.log('Entering now')
+      this._service.passwordChange(this.updPass).subscribe((res)=>{
+        console.log(res);
         if(res.status === "success"){
           this._notify.success('Ok','done');
         }else if(res.status === "error"){

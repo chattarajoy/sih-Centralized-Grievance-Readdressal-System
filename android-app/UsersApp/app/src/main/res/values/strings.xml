@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UsersApp</string>
+    <string name="app_name">Asar - CGRS</string>
     <string name="facebook_app_id">347301902334087</string>
     <string name="no_geocoder_available">No Geocode Available! :(</string>
     <string name="service_not_available">Service Not Available! :(</string>

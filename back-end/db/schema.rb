@@ -64,7 +64,11 @@ ActiveRecord::Schema.define(version: 20170401085114) do
     t.string   "priority"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+<<<<<<< HEAD
     t.string   "department"
+=======
+    t.string   "category"
+>>>>>>> 07dad677ce370f111675f227b27c3cbf4fa47ec9
   end
 
   create_table "complaint_updates", force: :cascade do |t|
