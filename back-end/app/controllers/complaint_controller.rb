@@ -22,7 +22,7 @@ class ComplaintController < ApplicationController
       if complaint.save
         # assign new complaint to respective district office
         if params[:ward]
-          assignment_result = assign_complaint(complaint.id,
+          assignment_result = auto_assign_complaint(complaint.id,
                                                 complaint.state,
                                                 complaint.district,
                                                 complaint.subject,
@@ -62,14 +62,6 @@ class ComplaintController < ApplicationController
 
   end
 
-  #assign complaint to superviser if ward is present in complaint
-
-  def assign_complaint
-
-
-  end
-
-
   def create_alert
 
 
@@ -87,7 +79,7 @@ private
 
       complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
                                              assigned_to: "District Municipal Officer " + district,
-                                             notes: "Auto Assignment by System")
+                                             notes: "Auto Assignment by System to concerned district office")
 
       complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
                                        district_office_id: district_office.id,
@@ -104,5 +96,55 @@ private
     end
 
   end
+
+  #assign complaint to superviser if ward is present in complaint
+  # else call district office assignment if district office is present
+  # else return no data present for district
+
+  '''def auto_assign_complaint(complaint_id, state, district, subject, ward)
+
+    district_office = DistrictOffice.where(state: state,
+                                                district: district).first
+    if district_office
+      ward_office = WardOffice.where(district_office_id: district_office.id
+                                      ward: ward)
+      if ward_office
+          # finding superviser with least active complaints
+          all_ward_supervisers = AdminUser.where(designation: "superviser",
+                                                municipal_id: ward_office.id,
+                                                department: subject)
+          least_complaints = 9999
+
+          all_ward_supervisers.each do |superviser|
+            total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
+                                                      status: "active")
+            if total_complaints < least_complaints
+              least_complaints = total_complaints
+              least_complaints_user_id = superviser.id
+            end
+
+          final_superviser = AdminUser.find(least_complaints_user_id)
+
+          complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                 assigned_to: "superviser: " + final_superviser.name,
+                                                 notes: "Auto Assignment by System to concerned district office")
+
+          complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+                                                  district_office_id: district_office.id,
+                                                  ward_office_id: ward_office.id,
+                                                  department: subject,
+                                                  status: "new")
+
+
+      else
+        register_new_complaint(complaint_id, state, district, subject)
+      end
+
+    else
+      return "No data for district office complaint can't be forwarded at the moment"
+    end
+
+  end
+  '''
 
 end
