@@ -15,7 +15,10 @@ import { NavbarHomeComponent } from './navbar-home/navbar-home.component';
 import { AfterSubComponent } from './afterSubmission/afterSub.component';
 import { UserSettingComponent } from './userarea/settingsarea/usersettings.component';
 import { PasSettingComponent } from './userarea/settingsarea/passwordsettings/tings.component';
+import { MainPageComponent } from './mainpage/mainpage.component';
 import { SettingsNavComponent } from './userarea/settingsarea/settingsnav/settingsnav.component';
+import { AdminLoginComponent } from './login_signup/adminlogarea/admin-login.component';
+import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 //custom-components
 
 import { AppComponent } from './app.component';
@@ -26,10 +29,11 @@ import { RouterModule,Routes } from '@angular/router';
 import {AuthManager} from './services/authmanager.service';
 import { AppService } from './services/app-services';
 import { EqualValidator } from './services/equal-validator';
+import { AdminAuthManager } from './services/auth_admin_man';
+
 
 //externalServices
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { ImageUploadModule } from 'angular2-image-upload';
 //angular2-notifications
 @NgModule({
   declarations: [
@@ -46,7 +50,10 @@ import { ImageUploadModule } from 'angular2-image-upload';
     AfterSubComponent,
     UserSettingComponent,
     PasSettingComponent,
-    SettingsNavComponent
+    SettingsNavComponent,
+    MainPageComponent,
+    AdminLoginComponent,
+    NavbarAdminComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +62,8 @@ import { ImageUploadModule } from 'angular2-image-upload';
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
-    ImageUploadModule.forRoot()
   ],
-  providers: [AuthManager],
+  providers: [AuthManager,AdminAuthManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,43 @@
+u=Sla.create(category:"public health",time:72,subcategory:"birth/death certificate issues")
+u=Sla.create(category:"public health",time:24,subcategory:"cleanliness of public toilets")
+u=Sla.create(category:"public health",time:24,subcategory:"clearing of garbage bins")
+u=Sla.create(category:"public health",time:6,subcategory:"death of stray animals")
+u=Sla.create(category:"public health",time:24,subcategory:"dog menace")
+u=Sla.create(category:"public health",time:24,subcategory:"door to door collection of garbage")
+u=Sla.create(category:"public health",time:24,subcategory:"drains cleaning/overflow")
+u=Sla.create(category:"public health",time:24,subcategory:"mosquito menace")
+u=Sla.create(category:"public health",time:48,subcategory:"food adulteration")
+u=Sla.create(category:"public health",time:24,subcategory:"garbage littering")
+u=Sla.create(category:"public health",time:168,subcategory:"illegal slaughtering")
+u=Sla.create(category:"public health",time:48,subcategory:"improper sweeping")
+u=Sla.create(category:"public health",time:24,subcategory:"lifting of garbage")
+u=Sla.create(category:"public health",time:48,subcategory:"provide or remove grabage bins")
+u=Sla.create(category:"public health",time:168,subcategory:"quality of food in hotels")
+u=Sla.create(category:"public health",time:168,subcategory:"stray animals")
+
+
+
+u=Sla.create(category:"water supply",time:24,subcategory:"contamination of water")
+u=Sla.create(category:"water supply",time:720,subcategory:"formation of new borewell")
+u=Sla.create(category:"water supply",time:24,subcategory:"drinking water supply")
+u=Sla.create(category:"water supply",time:48,subcategory:"issues related to public taps")
+u=Sla.create(category:"water supply",time:168,subcategory:"repair bore wells")
+u=Sla.create(category:"water supply",time:24,subcategory:"water pipe leakage")
+
+
+u=Sla.create(category:"town planning",time:168,subcategory:"illegal construction")
+u=Sla.create(category:"town planning",time:72,subcategory:"parking issues")
+u=Sla.create(category:"town planning",time:168,subcategory:"removal of encroachments")
+u=Sla.create(category:"town planning",time:72,subcategory:"issues realted to advertisements board")
+
+u=Sla.create(category:"street lighting",time:72,subcategory:"non-working street lights")
+u=Sla.create(category:"street lighting",time:168,subcategory:"provide new electric pole")
+u=Sla.create(category:"street lighting",time:168,subcategory:"provide new street light")
+u=Sla.create(category:"street lighting",time:48,subcategory:"removal of electric pole")
+
+
+u=Sla.create(category:"engineering",time:1440,subcategory:"formation of new drain")
+u=Sla.create(category:"engineering",time:1440,subcategory:"formation of new road")
+u=Sla.create(category:"engineering",time:168,subcategory:"repair of drain")
+u=Sla.create(category:"engineering",time:168,subcategory:"repair of road")
+u=Sla.create(category:"engineering",time:720,subcategory:"public parks maintenance")

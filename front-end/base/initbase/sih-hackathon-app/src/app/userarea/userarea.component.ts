@@ -6,6 +6,7 @@ import { StatusLog } from '../login_signup/classes/status';
 import { AppService } from '../services/app-services';
 import { UserDetailX } from './classes/userdetails/userdetail';
 import { NotificationsService } from 'angular2-notifications';
+import { Router } from '@angular/router';
 @Component({
   selector: 'userarea-component',
   templateUrl: './userarea.component.html',
@@ -19,21 +20,35 @@ export class UserComponent implements OnInit {
     password:window.localStorage.getItem('b')
   }
 
-   data : UserDetailX[];
+   data =  {
+     user_name : '',
+     phone : '',
+     aadhar_verified : ''
+   }
 
    constructor(
      private _service : AppService,
-     private _serviceNotify: NotificationsService
+     private _serviceNotify: NotificationsService,
+     private _router : Router
    ){}
 
   ngOnInit(){
-    // this.getDetails();
+   this.getDetails();
   }
 
   getDetails(){
     this._service.loginFun(this.localuser).then((res)=>{
-    this.data = res.user_name;
-    console.log('get',this.data);
+    this.data.user_name = res.user_name;
+    this.data.phone = res.phone_no_verified;
+    this.data.aadhar_verified = res.aadhar_verified;
+
+    if(res.aadhar_verified === false){
+        //alert('Aadhar is not Verified!');
+        alert('Aadhar is not verified');
+        // this._router.navigate(['home']);
+    }else if(res.aadhar_verified === true){
+      console.log('verified');
+    }
     //  window.localStorage.removeItem('a');
     //  window.localStorage.removeItem('b');
     })
