@@ -11,7 +11,7 @@ class AadharVerificationController < ApplicationController
         otp = rand(10**6).to_s
         sms_otp = SmsOtp.new(user_id: get_logged_in_user_id,
                               otp: otp,
-                              aadhar_number: aadhar_number,
+                              aadhar_number: params[aadhar_number],
                               contact: params[:contact],
                               attempts_left: 3)
         if sms_otp.save
