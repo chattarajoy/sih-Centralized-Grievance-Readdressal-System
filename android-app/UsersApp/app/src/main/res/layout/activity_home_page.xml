@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
         android:id="@+id/textView_name"
         android:textSize="24sp" />
 
@@ -15,46 +15,62 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView_name"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_centerInParent="true"
         android:layout_marginTop="12dp"
         android:id="@+id/textView_email" />
 
-    <Button
-        android:text="File a Complaint"
+    <android.support.design.widget.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="89dp"
-        android:id="@+id/button_complain"
-        android:layout_below="@+id/textView_email"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:text="sign out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="normal"
+        app:srcCompat="@android:drawable/ic_lock_power_off"
+        android:id="@+id/floatingActionButton"
+        android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="12dp"
-        android:id="@+id/button4" />
+        android:layout_marginBottom="10dp" />
 
-    <Button
-        android:text="Track your complaints"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="65dp"
-        android:id="@+id/button_track"
-        android:layout_below="@+id/button_complain"
-        android:layout_alignLeft="@+id/button_complain"
-        android:layout_alignStart="@+id/button_complain" />
+        android:layout_marginTop="18dp"
+        android:weightSum="1"
+        android:layout_below="@+id/textView_email"
+        android:layout_centerHorizontal="true">
+        <Button
+            android:layout_centerInParent="true"
+            android:text="Track complaints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/button_track"
+            android:layout_below="@+id/button_complain"
+            android:background="@drawable/button_back" />
 
-    <Button
-        android:text="Change Password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/button4"
-        android:layout_toLeftOf="@+id/button_track"
-        android:layout_toStartOf="@+id/button_track"
-        android:id="@+id/button_change_pass" />
+        <Button
+            android:text="Change Password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_change_pass"
+            android:layout_marginTop="24dp"
+            android:layout_below="@+id/button_track"
+            android:layout_alignLeft="@+id/button_track"
+            android:layout_alignStart="@+id/button_track"
+            android:background="@drawable/button_back" />
+
+
+        <Button
+            android:text="File a Complaint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:id="@+id/button_complain"
+            android:layout_below="@+id/textView_email"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_back"
+            android:layout_weight="0.54" />
+    </LinearLayout>
 </RelativeLayout>

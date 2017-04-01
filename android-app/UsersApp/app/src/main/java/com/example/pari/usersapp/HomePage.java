@@ -6,10 +6,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -40,10 +44,13 @@ public class HomePage extends AppCompatActivity {
     String accessToken,secretKey;
     String name,email,status;
     ProgressDialog progressDialog;
+    FloatingActionButton sign_out;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+
         Intent intent = getIntent();
         String loginType = intent.getStringExtra("loginType");
         progressDialog = new ProgressDialog(this);
@@ -60,6 +67,9 @@ public class HomePage extends AppCompatActivity {
         final String password = b.getString("password");
         textView_name.setText(name);
         textView_email.setText(email);
+
+
+
         Button button_complain = (Button)findViewById(R.id.button_complain);
         button_complain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,8 +94,8 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
-        Button button_sign_out = (Button)findViewById(R.id.button4);
-        button_sign_out.setOnClickListener(new View.OnClickListener() {
+        sign_out = (FloatingActionButton) findViewById(R.id.floatingActionButton);
+        sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,MainActivity.class);
@@ -139,7 +149,7 @@ public class HomePage extends AppCompatActivity {
                                                 Toast toast = Toast.makeText(context, "Passwords Don't Match", Toast.LENGTH_LONG);
                                                 toast.show();
                                             } else {
-                                                updatePassword(new_password);
+                                                updatePassword(password,new_password);
                                               //  break;
                                             }
                                      //   }
@@ -160,8 +170,16 @@ public class HomePage extends AppCompatActivity {
 
             }
         });
+        Animation animation_complain = AnimationUtils.loadAnimation(this,R.anim.complain);
+        Animation animation_track = AnimationUtils.loadAnimation(this,R.anim.track);
+        Animation animation_updatepass = AnimationUtils.loadAnimation(this,R.anim.updatepass);
+
+        button_change_pass.startAnimation(animation_updatepass);
+        button_complain.startAnimation(animation_complain);
+        button_track.startAnimation(animation_track);
+
     }
-    void updatePassword(final String new_pass)
+    void updatePassword(final String old_pass,final String new_pass)
     {
         String cancel_req_tag = "update_password";
         progressDialog.setMessage("Updating Password");
@@ -215,8 +233,8 @@ public class HomePage extends AppCompatActivity {
             protected Map<String, String> getParams() {
                 // Posting params to login url
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", new_pass);
+                params.put("old_password", old_pass);
+                params.put("new_password", new_pass);
                 return params;
             }
             @Override
