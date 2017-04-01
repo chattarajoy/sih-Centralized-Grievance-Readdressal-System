@@ -8,6 +8,7 @@ class AdminUserController < ApplicationController
 		                            phone: params[:phone],
                                 designation: params[:designation],
 		                            municipal_id: params[:municipal_id],
+                                department: params[:department],
                                 password: params[:password])
 
     if admin_user.save
