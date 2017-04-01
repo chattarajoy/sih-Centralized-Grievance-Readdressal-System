@@ -55,6 +55,10 @@ export class UserFormComponent implements OnInit{
   //model = new newForm('','','','','','',null);
 
   ngOnInit(){
+
+  var x = this.getLocation();
+  console.log('ok',x);
+
     this.form = new ValidationManager({
     'subject' : 'required',
     'description' : 'required',
@@ -69,22 +73,25 @@ export class UserFormComponent implements OnInit{
 
   formSubmit(){
 
+    this._service.getLocation(this.cForm).subscribe((res)=>{
+      console.log('response',res);
+    })
 
-    console.log('Entering',this.store)
-      this._service.submitFormX(this.cForm).subscribe((res)=>{
-        if(res.status === 'success'){
-        console.log('Submitted!', res)
-        this._notify.alert('Submitting...','Validating for Errors');
-        setTimeout((_router) => {
-            this._router.navigate(['sub']);
-        }, 6500);
-      }
-      else if (res.status === 'error'){
-        this._notify.error('Errors','Please Check Your Form',{
-          showProgressBar : false
-        });
-      }
-      })
+    // console.log('Entering',this.store)
+    //   this._service.submitFormX(this.cForm).subscribe((res)=>{
+    //     if(res.status === 'success'){
+    //     console.log('Submitted!', res)
+    //     this._notify.alert('Submitting...','Validating for Errors');
+    //     setTimeout((_router) => {
+    //         this._router.navigate(['sub']);
+    //     }, 6500);
+    //   }
+    //   else if (res.status === 'error'){
+    //     this._notify.error('Errors','Please Check Your Form',{
+    //       showProgressBar : false
+    //     });
+    //   }
+    //   })
 
   }
 
@@ -98,11 +105,20 @@ export class UserFormComponent implements OnInit{
      this._serviceApp.awsService(file)
 
 
-
-
-
   }
 
+getLocation() {
+    console.log('are were checking');
+      if (navigator.geolocation) {
+        return  navigator.geolocation.getCurrentPosition(this.showPosition);
+      } else {
+          alert('please allow location access');
+      }
+  }
+
+  showPosition(position) {
+ return position;
+ }
 
 
 
