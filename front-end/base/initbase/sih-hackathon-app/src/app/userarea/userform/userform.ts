@@ -7,6 +7,7 @@ export class newForm {
 
     public subject : string,
     public description : string,
+    public image : string,
     public city : string,
     public state : string,
     public pincode : number

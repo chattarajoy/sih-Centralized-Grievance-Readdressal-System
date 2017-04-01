@@ -29,6 +29,7 @@ import { EqualValidator } from './services/equal-validator';
 
 //externalServices
 import { SimpleNotificationsModule } from 'angular2-notifications';
+import { ImageUploadModule } from 'angular2-image-upload';
 //angular2-notifications
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     HttpModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
-    SimpleNotificationsModule.forRoot()
+    SimpleNotificationsModule.forRoot(),
+    ImageUploadModule.forRoot()
   ],
   providers: [AuthManager],
   bootstrap: [AppComponent]
