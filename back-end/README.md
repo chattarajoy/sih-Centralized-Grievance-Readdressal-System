@@ -236,7 +236,7 @@ sample return data
 
 #### Requesting an OTP
 
-* GET/POST 'url: /aadhar_verification/verify_aadhar_data'
+* GET/POST `url: /aadhar_verification/verify_aadhar_data`
 
 ```
 headers: access_token, secret_key
@@ -251,7 +251,7 @@ json : {status: "error"/"success",
 
 #### Verifying an OTP
 
-* GET/POST 'url: /aadhar_verification/verify_otp'
+* GET/POST `url: /aadhar_verification/verify_otp`
 ```
 headers: access_token, secret_key
 parameters: otp
