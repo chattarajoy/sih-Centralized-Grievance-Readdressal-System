@@ -67,7 +67,7 @@ class AadharVerificationController < ApplicationController
           end
         end
       else
-        error_message = "Invalid OTP " + sms_otp.attempts_left + " attempts left!"
+        error_message = "Invalid OTP you can try 3 times only!"
       end
     else
       error_message = "Params Missing"
