@@ -64,29 +64,39 @@ export class UserFormComponent {
 
   fileEvent(fileInput: any){
 
-      var AWSService = window.AWS;
       var file = fileInput.target.files[0];
-      console.log(file);
-        this._notify.alert('Submitting...','Uploading the Image');
-      AWSService.config.accessKeyId = 'AKIAI4XWYQDCVLFHOW5Q';
-      AWSService.config.secretAccessKey = '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';
-      var bucket = new AWSService.S3({params: {ACL :"public-read" ,Bucket: 'asarcgrs'}});
-      var params = {Key: file.name, Body: file};
-      console.log(bucket);
+      var x = this._serviceApp.awsService(file)
+      console.log(x);
+      // var AWSService = window.AWS;
+      // var file = fileInput.target.files[0];
+      // console.log(file);
+      //   this._notify.alert('Submitting...','Uploading the Image');
+      // AWSService.config.accessKeyId = 'AKIAI4XWYQDCVLFHOW5Q';
+      // AWSService.config.secretAccessKey = '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';
+      // var bucket = new AWSService.S3({params: {ACL :"public-read" ,Bucket: 'asarcgrs'}});
+      // var params = {Key: file.name, Body: file};
+      // console.log(bucket);
+      //
+      // bucket.upload(params, function (err, data) {
+      //     console.log(err, data);
+      //     // console.log('location',data.Location);
+      //     // retrieve(data.Location);
+      //     this.location = data.Location;
+      //     this.loc = this.location;
+      //     var stuff = this.loc;
+      //
+      // });
 
-      bucket.upload(params, function (err, data) {
-          console.log(err, data);
-          // console.log('location',data.Location);
-          // retrieve(data.Location);
-          this.location = data.Location;
-          this.loc = this.location;
-
-
-      });
-
+      // function retrieve(locX){
+      //   console.log('locX',locX);
+      //   // this._serviceApp.checkLoc(locX);
+      //
+      // }
 
 
   }
+
+
 
 
 

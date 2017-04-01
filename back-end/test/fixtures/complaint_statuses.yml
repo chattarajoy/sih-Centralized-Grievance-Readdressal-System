@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  admin_user_id: MyString
+  district_office_id: MyString
+  ward_office_id: MyString
+  status: MyString
+  priority: MyString
+
+two:
+  admin_user_id: MyString
+  district_office_id: MyString
+  ward_office_id: MyString
+  status: MyString
+  priority: MyString
