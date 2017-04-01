@@ -2,23 +2,17 @@
 <form class="form-horizontal">
   <fieldset>
     <h3>Register Complaint</h3>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="inputSubject" class="col-lg-2 control-label">Subject</label>
       <div class="col-lg-10">
         <input [(ngModel)]="model.subject" type="text" class="form-control" id="inputSubject" placeholder="Subject" name="subject" required>
       </div>
     </div>
-    <!-- <div class="form-group">
-      <label for="inputDescription" class="col-lg-2 control-label">Password</label>
-      <div class="col-lg-10">
-        <input type="text" class="form-control" id="inputDescription" placeholder="Description">
-      </div>
-    </div> -->
+
     <div class="form-group">
       <label for="textArea" class="col-lg-2 control-label">Description</label>
       <div class="col-lg-10">
         <textarea [(ngModel)]="model.description" class="form-control" rows="3" id="textArea"  name="description" required></textarea>
-        <!-- <span class="help-block">A longer block of help text that breaks onto a new line and may extend beyond one line.</span> -->
       </div>
     </div>
     <div class="form-group">
@@ -29,9 +23,15 @@
     </div>
 
     <div class="form-group">
-      <label for="inputCity" class="col-lg-2 control-label">City</label>
+      <label for="inputCity" class="col-lg-2 control-label">Address</label>
       <div class="col-lg-10">
-        <input [(ngModel)]="model.city" type="text" class="form-control" id="inputCity" placeholder="City"  name="city" required>
+        <input [(ngModel)]="model.address" type="text" class="form-control" id="inputCity" placeholder="City"  name="city" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputState" class="col-lg-2 control-label">District</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="model.district" type="text" class="form-control" id="inputState" placeholder="State" name="state" required>
       </div>
     </div>
     <div class="form-group">
@@ -45,24 +45,78 @@
       <div class="col-lg-10">
         <input [(ngModel)]="model.pincode" type="text" class="form-control" id="inputPincode" placeholder="Pincode"  name="pincode" required>
       </div>
-    </div>
-    <!-- <div class="form-group">
-      <label class="col-lg-2 control-label">Radios</label>
+    </div> -->
+    <form [formGroup]="form.getForm()" (ngSubmit)="save()">
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Subject</label>
       <div class="col-lg-10">
-        <div class="radio">
-          <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-            Option one is this
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-            Option two can be something else
-          </label>
+        <input [(ngModel)]="cForm.subject" type="text" class="form-control" formControlName="subject" required>
+        <div *ngIf="form.hasError('subject')" class="alert alert-danger">
+          <p>Error! Please Re-Check</p>
         </div>
       </div>
-    </div> -->
+
+    </div>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Description</label>
+    <div class="col-lg-10">
+      <textarea [(ngModel)]="cForm.name" type="text" class="form-control" formControlName="description"></textarea>
+      <div *ngIf="form.hasError('name')" class="alert alert-danger">
+        <p>Error! Please Re-Check</p>
+      </div>
+    </div>
+    </div>
+    <div class="form-group">
+      <label for="textArea" class="col-lg-2 control-label">Photo Upload</label>
+      <div class="col-lg-10">
+        <input type="file" (change)="fileEvent($event)" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Address</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="cForm.address" type="text" class="form-control" formControlName="address">
+        <div *ngIf="form.hasError('address')" class="alert alert-danger">
+          <p>Error! Please Re-Check</p>
+        </div>
+      </div>
+
+    </div><div class="form-group">
+      <label class="col-lg-2 control-label">District</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="cForm.district" type="text" class="form-control" formControlName="district">
+        <div *ngIf="form.hasError('district')" class="alert alert-danger">
+          <p>Error! Please Re-Check</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">State</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="cForm.state" type="text" class="form-control" formControlName="state">
+        <div *ngIf="form.hasError('state')" class="alert alert-danger">
+        <p>Error! Please Re-Check</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="form-group">
+      <label class="col-lg-2 control-label">Pincode</label>
+      <div class="col-lg-10">
+        <input [(ngModel)]="cForm.pincode" type="text" class="form-control" formControlName="pincode">
+        <div *ngIf="form.hasError('pincode')" class="alert alert-danger">
+          <p>Error! Please Re-Check</p>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </form>
+
 
     <div class="form-group">
       <div class="col-lg-10 col-lg-offset-2">

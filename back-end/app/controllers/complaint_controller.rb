@@ -21,7 +21,7 @@ class ComplaintController < ApplicationController
 
       if complaint.save
         # assign new complaint to respective district office
-        assignment_result = register_new_complaint(complaint.id, complaint.state, complaint.district)
+        assignment_result = register_new_complaint(complaint.id, complaint.state, complaint.district, complaint.subject)
         #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
@@ -54,11 +54,21 @@ class ComplaintController < ApplicationController
   def assign_complaint #assign complaint to ward officers or a contractor
 
     user = AdminUser.find(get_logged_in_user_id)
-    complaint = Complaint.find(params[:id])
-    complaint_status = ComplaintUpdate.where(complaint_id: params[:id]).first
-    if user.designation == "District Officer"
-      complaint_status.assigned_to = params[:ward_office_id]
-      complaint_status.notes = params[:notes]
+
+    complaint = Complaint.find(params[:complaint_id])
+
+    complaint_status = ComplaintStatus.where(complaint_id: params[:id]).first
+    if complaint_update
+
+      if user.designation == "District Officer" && params[:complaint_id] && params[] && params[]
+        complaint_update = ComplaintUpdate.new(complaint_id: params[:id],
+                                                assigned_to: find_ward_officer(params[:complaint_id],
+                                                                                user.municipal_id, ),
+                                                notes: params[:notes])
+
+        complaint_status.ward_office_id = params[:ward_office_id]
+        complaint_status.notes = params[:notes]
+
 
     elsif user.designation == "Ward Officer"
       ward_officer=ComplaintStatus.where(ward_office_id: params[:id]).first
@@ -69,10 +79,16 @@ class ComplaintController < ApplicationController
 
   end
 
+
+def create_alert
+
+
+end
+
 private
 
   # assign new complaint to respective district office
-  def register_new_complaint(complaint_id, state, district)
+  def register_new_complaint(complaint_id, state, district, subject_of_complaint)
 
     district_office = DistrictOffice.where(state: state, district: district).first
 
@@ -83,7 +99,8 @@ private
                                              notes: "Auto Assignment by System")
 
       complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
-                                       district_office_id: district_office.id)
+                                       district_office_id: district_office.id,
+                                       department: subject_of_complaint)
 
       if complaint_update.save && new_complaint.save
         return "Complaint forwarded to concerned officer"

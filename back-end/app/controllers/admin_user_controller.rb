@@ -8,6 +8,7 @@ class AdminUserController < ApplicationController
 		                            phone: params[:phone],
                                 designation: params[:designation],
 		                            municipal_id: params[:municipal_id],
+                                department: params[:department],
                                 password: params[:password])
 
     if admin_user.save
@@ -81,6 +82,36 @@ class AdminUserController < ApplicationController
       error_message = "Invalid parameters"
     end
     render json: {status: "error", error_message: error_message}
+  end
+
+  def fetch_statistics
+
+    user = AdminUser.find(get_logged_in_user_id)
+
+    if user.designation == "superviser"
+      new_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "new").count
+      assigned_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "assigned").count
+      completed_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "completed").count
+
+    elsif user.designation == "ward_officer"
+
+      ward = WardOffice.find(user.municipal_id)
+
+      new_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                      category: user.designation, status: "new").count
+      assigned_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                      category: user.designation, status: "new").count
+      completed_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                      category: user.designation, status: "new").count
+
+      else
+        new_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "new").count
+        assigned_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "assigned").count
+        completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
+    end
+
+    render json: {new_complaint: new_complaint, assigned_complaint: assigned_complaint, completed_complaint: completed_complaint}
+
   end
 
 end

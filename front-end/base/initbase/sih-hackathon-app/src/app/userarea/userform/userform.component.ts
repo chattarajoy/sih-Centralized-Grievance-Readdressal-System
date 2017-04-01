@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component ,OnInit } from '@angular/core';
 import { newForm } from './userform';
 import { UserformService } from '../../services/userform.service';
 import { Router } from '@angular/router';
 import {AppService} from '../../services/app-services';
 import { NotificationsService } from 'angular2-notifications';
 import { locationX } from './location';
+import { ValidationManager } from "ng2-validation-manager";
 
 require('aws-sdk/dist/aws-sdk');
 
@@ -14,7 +15,7 @@ require('aws-sdk/dist/aws-sdk');
   styleUrls: ['./userform.component.css'],
   providers : [UserformService,AppService]
 })
-export class UserFormComponent {
+export class UserFormComponent implements OnInit{
   // formInput = {
   //   subject : '',
   //   description : '',
@@ -23,10 +24,18 @@ export class UserFormComponent {
   //   pincode : ''
   //
   // }
+  form;
+  cForm = {
+    subject : '',
+    description : '',
+    image : '',
+    address : '',
+    district : '',
+    state : '',
+    pincode : ''
 
-  public location = '';
+  }
 
- public loc : locationX[];
 //  public imageSub : string;
 
   public options = {
@@ -43,54 +52,52 @@ export class UserFormComponent {
     private _notify : NotificationsService
   ){}
 
-  model = new newForm('','','','','',1);
+  //model = new newForm('','','','','','',null);
+
+  ngOnInit(){
+    this.form = new ValidationManager({
+    'subject' : 'required',
+    'description' : 'required',
+    'address' : 'required',
+    'district' : 'required',
+    'state' : 'required',
+    'pincode' :'required'
+    });
+
+     this.form.setValue('name', 'Default');
+  }
 
   formSubmit(){
 
 
-    console.log('Entering',this.loc)
-      this._service.submitFormX(this.model).subscribe((res)=>{
+    console.log('Entering',this.store)
+      this._service.submitFormX(this.cForm).subscribe((res)=>{
+        if(res.status === 'success'){
         console.log('Submitted!', res)
         this._notify.alert('Submitting...','Validating for Errors');
         setTimeout((_router) => {
             this._router.navigate(['sub']);
         }, 6500);
-
+      }
+      else if (res.status === 'error'){
+        this._notify.error('Errors','Please Check Your Form',{
+          showProgressBar : false
+        });
+      }
       })
 
   }
 
   //file-upload
 
+ store = [''];
 
   fileEvent(fileInput: any){
-
+     //
      var file = fileInput.target.files[0];
      this._serviceApp.awsService(file)
-      // var AWSService = window.AWS;
-      // var file = fileInput.target.files[0];
-      // console.log(file);
-      //   this._notify.alert('Submitting...','Uploading the Image');
-      // AWSService.config.accessKeyId = 'AKIAI4XWYQDCVLFHOW5Q';
-      // AWSService.config.secretAccessKey = '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';
-      // var bucket = new AWSService.S3({params: {ACL :"public-read" ,Bucket: 'asarcgrs'}});
-      // var params = {Key: file.name, Body: file};
-      // console.log(bucket);
-      //
-      // bucket.upload(params, function (err, data) {
-      //     console.log(err, data);
-      //     // console.log('location',data.Location);
-      //     // retrieve(data.Location);
-      //     this.location = data.Location;
-      //     this.loc = this.location;
-      //     var stuff = this.loc;
-      //
-      // });
 
-      // function retrieve(locX){
-      //   console.log('locX',locX);
-      //   // this._serviceApp.checkLoc(locX);
-      //
+
 
 
 

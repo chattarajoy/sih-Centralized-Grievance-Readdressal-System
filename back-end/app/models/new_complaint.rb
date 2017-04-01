@@ -1,2 +1,0 @@
-class NewComplaint < ApplicationRecord
-end
