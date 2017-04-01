@@ -3,6 +3,7 @@ package com.example.pari.usersapp;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.design.widget.TextInputLayout;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -40,7 +41,7 @@ public class Verification extends AppCompatActivity {
     String URL_FOR_VERIFICATION_OTP = Constants.SERVER+"/aadhar_verification/verify_otp";
     ProgressDialog progressDialog;
     String otpSent;
-    EditText et_otp;
+    TextInputLayout et_otp;
     Button verifyOtp;
     Context context = this;
     @Override
@@ -52,9 +53,9 @@ public class Verification extends AppCompatActivity {
         b = getIntent().getExtras();
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
-        final EditText aadhar = (EditText)findViewById(R.id.editText6);
-        final EditText phone = (EditText)findViewById(R.id.editText7);
-        et_otp = (EditText)findViewById(R.id.editText12);
+        final TextInputLayout aadhar = (TextInputLayout)findViewById(R.id.editText6);
+        final TextInputLayout phone = (TextInputLayout)findViewById(R.id.editText7);
+        et_otp = (TextInputLayout)findViewById(R.id.editText12);
         verifyOtp = (Button)findViewById(R.id.button8);
         Button verify = (Button)findViewById(R.id.button7);
         et_otp.setVisibility(View.INVISIBLE);
@@ -62,8 +63,8 @@ public class Verification extends AppCompatActivity {
         verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String aadhar_card_no = aadhar.getText().toString();
-                String phone_no = phone.getText().toString();
+                String aadhar_card_no = aadhar.getEditText().getText().toString();
+                String phone_no = phone.getEditText().getText().toString();
                 verify_aadhar(aadhar_card_no,phone_no);
                /* boolean isVerified = verify_aadhar(aadhar_card_no,phone_no);
                 if(isVerified) {
@@ -79,7 +80,7 @@ public class Verification extends AppCompatActivity {
         verifyOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String x = et_otp.getText().toString();
+                String x = et_otp.getEditText().getText().toString();
                 verify_otp(x);
             }
         });

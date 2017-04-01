@@ -21,4 +21,5 @@ public final class Constants {
     public static final String BUCKET_SECRET_KEY_ID = "Svcp3OnOvkxzXURE1/cg5Tdia6SwSaYa0DxzErH9";
    // public static final String SERVER = "http://192.168.117.60:8000";
    public static final String SERVER = "http://54.169.134.133:80";
+  //  public static final String SERVER = "http://192.168.43.93:8000";
 }

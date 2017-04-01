@@ -11,13 +11,12 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class ComplaintObjectHolder extends RecyclerView.ViewHolder {
-    ImageView image;
-    TextView subject,description;
+    TextView subject,description,status;
     public ComplaintObjectHolder(View itemView) {
         super(itemView);
         description = (TextView)itemView.findViewById(R.id.textView11);
         subject = (TextView)itemView.findViewById(R.id.textView10);
-        image = (ImageView)itemView.findViewById(R.id.imageView3);
+        status = (TextView)itemView.findViewById(R.id.textView);
     }
 
 }

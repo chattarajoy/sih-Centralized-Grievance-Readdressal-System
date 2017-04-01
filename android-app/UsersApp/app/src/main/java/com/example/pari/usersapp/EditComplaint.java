@@ -55,9 +55,9 @@ public class EditComplaint extends AppCompatActivity {
     String URL_FOR_COMPLAINT_BY_ID = Constants.SERVER+"/complaint/show_complaint_by_id";
     ProgressDialog progressDialog;
     ImageView tv_image;
-    Button save_button;
+    Button save_button,alert;
   //  String id,subject,description,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,image;
-    TextView tv_id,tv_subject,tv_description,tv_latitude,tv_longitude,tv_city,tv_state,tv_pincode,tv_created_at,tv_updated_at,tv_userid,tv_status,tv_priority;
+    TextView tv_address,tv_id,tv_subject,tv_description,tv_latitude,tv_longitude,tv_city,tv_state,tv_pincode,tv_created_at,tv_updated_at,tv_userid,tv_status,tv_priority;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +78,7 @@ public class EditComplaint extends AppCompatActivity {
         tv_city = (TextView)findViewById(R.id.textView20);
         tv_state = (TextView)findViewById(R.id.textView21);
         tv_pincode = (TextView)findViewById(R.id.textView22);
+        tv_address = (TextView)findViewById(R.id.textView28);
         tv_created_at = (TextView)findViewById(R.id.textView23);
         tv_updated_at = (TextView)findViewById(R.id.textView24);
         tv_userid = (TextView)findViewById(R.id.textView25);
@@ -97,6 +98,7 @@ public class EditComplaint extends AppCompatActivity {
         tv_userid.setText("User ID : "+b.getString("user_id"));
         tv_status.setText("Status : "+b.getString("status"));
         tv_priority.setText("Priority : "+b.getString("priority"));
+        tv_address.setText("Address : "+b.get("address"));
         save_button = (Button)findViewById(R.id.save_button);
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +113,13 @@ public class EditComplaint extends AppCompatActivity {
                 startActivity(i);
             }
         });
+        alert = (Button)findViewById(R.id.alert);
+        alert.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //send request to api
+            }
+        });
         String key = b.getString("image");
         AWSCredentials credentials = new BasicAWSCredentials(
                 Constants.BUCKET_ACCESS_KEY_ID,
@@ -120,7 +129,6 @@ public class EditComplaint extends AppCompatActivity {
         AmazonS3 s3client = new AmazonS3Client(credentials);
        // s3client.setEndpoint("asarcgrs.s3.ap-south-1.amazonaws.com");
         // create bucket - name must be unique for all S3 users
-        String bucketName = Constants.BUCKET_NAME;
         ResponseHeaderOverrides override = new ResponseHeaderOverrides();
         override.setContentType( "image/jpeg" );
         GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest( Constants.BUCKET_NAME, key );
