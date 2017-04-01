@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401202216) do
+ActiveRecord::Schema.define(version: 20170401215247) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20170401202216) do
     t.datetime "updated_at",         null: false
     t.string   "department"
     t.string   "sub_category"
+    t.integer  "complaint_id"
   end
 
   create_table "complaint_updates", force: :cascade do |t|

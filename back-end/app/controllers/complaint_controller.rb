@@ -47,7 +47,16 @@ class ComplaintController < ApplicationController
 
     complaints = Complaint.where(user_id: user_id)
 
-    render json: complaints
+    complaints.each do |complaint|
+      complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
+      if complaint_status
+        complaint.status = complaint_status.status
+      else
+        complaint.status = "New"
+      end
+    end
+
+    render json: complaints, methods: [:status]
 
   end
 
@@ -56,7 +65,13 @@ class ComplaintController < ApplicationController
 
     complaint = Complaint.find(params[:id])
     if complaint
-      render json: complaint
+      complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
+      if complaint_status
+        complaint.status = complaint_status.status
+      else
+        complaint.status = "New"
+      end
+      render json: complaint, methods: [:status]
     else
       render json: {status: "error", error_message: "complaint not found"}
     end
@@ -78,20 +93,26 @@ private
 
     if district_office
 
-      complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
-                                             assigned_to: "District Municipal Officer " + district,
-                                             notes: "Auto Assignment by System to concerned district office")
+      district_admin = AdminUser.where(designation: "district officer",
+                                        municipal_id: district_office.id)
+      if district_admin
 
-      complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
-                                       district_office_id: district_office.id,
-                                       department: subject_of_complaint)
+        complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                               assigned_to: "District Municipal Officer: " + district_admin.name,
+                                               notes: "Auto Assignment by System to concerned district office")
 
-      if complaint_update.save && new_complaint.save
-        return "Complaint forwarded to concerned officer"
+        complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+                                         district_office_id: district_office.id,
+                                         department: subject_of_complaint)
+
+        if complaint_update.save && new_complaint.save
+          return "Complaint forwarded to concerned officer"
+        else
+          return "Update to complaint failed"
+        end
       else
-        return "Update to complaint failed"
+        return "Data for concerned Municipal officer doesn't exist"
       end
-
     else
       return "Data for concerned Municipal office doesn't exist"
     end
@@ -114,36 +135,41 @@ private
           all_ward_supervisers = AdminUser.where(designation: "superviser",
                                                 municipal_id: ward_office.id,
                                                 department: subject)
-          least_complaints = 9999
+          if all_ward_supervisers
+            least_complaints = 9999
 
-          all_ward_supervisers.each do |superviser|
-            total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
-                                                      status: "active")
-            if total_complaints < least_complaints
-              least_complaints = total_complaints
-              least_complaints_user_id = superviser.id
+            all_ward_supervisers.each do |superviser|
+              total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
+                                                        status: "active")
+              if total_complaints < least_complaints
+                least_complaints = total_complaints
+                least_complaints_user_id = superviser.id
+              end
             end
+
+            final_superviser = AdminUser.find(least_complaints_user_id)
+
+            complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                   assigned_to: "superviser: " + final_superviser.name,
+                                                   notes: "Auto Assignment by System to concerned district office")
+
+            complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+                                                    district_office_id: district_office.id,
+                                                    ward_office_id: ward_office.id,
+                                                    department: subject,
+                                                    sub_category: sub_category,
+                                                    status: "new")
+
+          if complaint_status.save && complaint_update.save
+            return "Auto Assignment Complete!"
+          else
+            register_new_complaint(complaint_id, state, district, subject)
+            return "Databse couldn't be updated"
           end
-
-          final_superviser = AdminUser.find(least_complaints_user_id)
-
-          complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
-                                                 assigned_to: "superviser: " + final_superviser.name,
-                                                 notes: "Auto Assignment by System to concerned district office")
-
-          complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
-                                                  district_office_id: district_office.id,
-                                                  ward_office_id: ward_office.id,
-                                                  department: subject,
-                                                  sub_category: sub_category,
-                                                  status: "new")
-
-        if complaint_status.save && complaint_update.save
-          return "Auto Assignment Complete!"
         else
-          return "Databse couldn't be updated"
+          register_new_complaint(complaint_id, state, district, subject)
+          return "No employees registered for the ward"
         end
-
       else
         register_new_complaint(complaint_id, state, district, subject)
     end

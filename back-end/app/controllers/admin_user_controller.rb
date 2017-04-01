@@ -1,6 +1,6 @@
 class AdminUserController < ApplicationController
 
-  before_action :check_user_logged_in_as_admin, only: [:update_password]
+  before_action :check_user_logged_in_as_admin, only: [:update_password, :fetch_statistics, :fetch_complaints]
 
   def create
     admin_user = AdminUser.new(name: params[:name],
@@ -118,8 +118,38 @@ class AdminUserController < ApplicationController
         completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
     end
 
-    render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
+    render json: {stats: [new_complaint, pending_complaint, completed_complaint] }
 
   end
 
+ # fetch complaints assigned to users
+ def fetch_complaints
+
+  user = AdminUser.find(get_logged_in_user_id)
+
+  if user.designation == "superviser"
+    new_complainst = ComplaintStatus.where(admin_user_id: user.id, status: "new")
+    pending_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "active")
+    completed_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "completed")
+
+  elsif user.designation == "ward officer"
+
+    ward = WardOffice.find(user.municipal_id)
+
+    new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "new")
+    pending_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                    category: user.designation, status: "pending")
+    completed_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                    category: user.designation, status: "completed")
+
+    elsif user.designation == "district officer"
+
+      new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "new")
+      pending_complaints = ComplaintStatus.where(district_office_id: user.municipal_id, status: "pending")
+      completed_complaints = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed")
+    end
+
+  render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
+
+ end
 end
