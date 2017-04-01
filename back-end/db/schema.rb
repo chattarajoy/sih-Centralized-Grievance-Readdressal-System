@@ -134,8 +134,11 @@ ActiveRecord::Schema.define(version: 20170401161208) do
   create_table "sms_otps", force: :cascade do |t|
     t.string   "user_id"
     t.string   "otp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "aadhar_number"
+    t.string   "contact"
+    t.integer  "attempts_left"
   end
 
   create_table "users", force: :cascade do |t|

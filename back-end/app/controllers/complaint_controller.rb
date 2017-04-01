@@ -21,7 +21,18 @@ class ComplaintController < ApplicationController
 
       if complaint.save
         # assign new complaint to respective district office
-        assignment_result = register_new_complaint(complaint.id, complaint.state, complaint.district, complaint.subject)
+        if params[:ward]
+          assignment_result = assign_complaint(complaint.id,
+                                                complaint.state,
+                                                complaint.district,
+                                                complaint.subject,
+                                                params[:ward])
+        else
+          assignment_result = register_new_complaint(complaint.id,
+                                                      complaint.state,
+                                                      complaint.district,
+                                                      complaint.subject)
+        end
         #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
@@ -51,39 +62,19 @@ class ComplaintController < ApplicationController
 
   end
 
-  def assign_complaint #assign complaint to ward officers or a contractor
+  #assign complaint to superviser if ward is present in complaint
 
-    user = AdminUser.find(get_logged_in_user_id)
+  def assign_complaint
 
-    complaint = Complaint.find(params[:complaint_id])
-
-    complaint_status = ComplaintStatus.where(complaint_id: params[:id]).first
-    if complaint_update
-
-      if user.designation == "District Officer" && params[:complaint_id] && params[] && params[]
-        complaint_update = ComplaintUpdate.new(complaint_id: params[:id],
-                                                assigned_to: find_ward_officer(params[:complaint_id],
-                                                                                user.municipal_id, ),
-                                                notes: params[:notes])
-
-        complaint_status.ward_office_id = params[:ward_office_id]
-        complaint_status.notes = params[:notes]
-
-
-    elsif user.designation == "Ward Officer"
-      ward_officer=ComplaintStatus.where(ward_office_id: params[:id]).first
-
-    else
-
-    end
 
   end
 
 
-def create_alert
+  def create_alert
 
 
-end
+
+  end
 
 private
 

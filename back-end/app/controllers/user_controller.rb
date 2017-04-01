@@ -79,6 +79,7 @@ class UserController < ApplicationController
   end
 
 
+ # Request a password reset link on email
   def request_password_reset
     if params[:email]
       user = User.where(email: params[:email]).first

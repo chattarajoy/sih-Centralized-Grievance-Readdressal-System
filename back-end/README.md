@@ -70,10 +70,10 @@ parameters: name, contact, email, password
 *Please input password twice on front-end and ensure both are same*
 <br>*Contact refers to contact number or phone number*
 
-* Admin user : `url: /admin_user/signup`
+* Admin user : `url: /admin_user/create`
 
 ```
-parameters: name, email, phone, access_level, municipal_id, department, password
+parameters: name, email, phone, designation, municipal_id, department, password
 
 ```
 
@@ -230,4 +230,37 @@ sample return data
   "status": "new",
   "priority": "new"
 }
+```
+
+## Aadhar Verification
+
+#### Requesting an OTP
+
+* GET/POST `url: /aadhar_verification/verify_aadhar_data`
+
+```
+headers: access_token, secret_key
+parameters: aadhar_number, contact
+```
+```
+RESPONSE
+
+json : {status: "error"/"success", 
+        error_message: "data not found"/ message: "OTP sent"}
+```
+
+#### Verifying an OTP
+
+* GET/POST `url: /aadhar_verification/verify_otp`
+```
+headers: access_token, secret_key
+parameters: otp
+```
+*User gets 3 attempts to verify otp, OTP is deleted thereafter*4
+
+```
+RESPONSE
+
+json : {status: "error"/"success", 
+        error_message: "Invalid OTP"/ message: "OTP verified"}
 ```
