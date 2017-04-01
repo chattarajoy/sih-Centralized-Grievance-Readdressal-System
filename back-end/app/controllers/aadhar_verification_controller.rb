@@ -66,11 +66,13 @@ class AadharVerificationController < ApplicationController
             sms_otp.save
           end
         end
+      else
+        error_message = "Invalid OTP"
+      end
     else
-      error_message = "OTP missing"
+      error_message = "Params Missing"
     end
-    render json: {status: "error", error_message: error_message}
+      render json: {status: "error", error_message: error_message}
   end
-end
 
 end
