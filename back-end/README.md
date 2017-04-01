@@ -1,6 +1,6 @@
 # README
 
-*API Server running on : 192.168.117.60:8000 and 54.169.134.133*
+*API Server running on :  54.169.134.133*
 
 ## Authentication
 
@@ -95,7 +95,7 @@ Returns json
 
 ```
 headers: access_token, secret_key
-parameters: email, password
+parameters: old_password, new_password
 ```
 
 * Admin User: 'url: /admin_user/update_password'
