@@ -90,7 +90,7 @@ class AdminUserController < ApplicationController
 
     if user.designation == "superviser"
       new_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "new").count
-      assigned_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "assigned").count
+      pending_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "pending").count
       completed_complaint = ComplaintStatus.where(admin_user_id: user.id, status: "completed").count
 
     elsif user.designation == "ward_officer"
@@ -99,18 +99,18 @@ class AdminUserController < ApplicationController
 
       new_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
                       category: user.designation, status: "new").count
-      assigned_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                      category: user.designation, status: "new").count
+      pending_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
+                      category: user.designation, status: "pending").count
       completed_complaint = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                      category: user.designation, status: "new").count
+                      category: user.designation, status: "completed").count
 
       else
         new_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "new").count
-        assigned_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "assigned").count
+        pending_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "pending").count
         completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
     end
 
-    render json: {new_complaint: new_complaint, assigned_complaint: assigned_complaint, completed_complaint: completed_complaint}
+    render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
 
   end
 
