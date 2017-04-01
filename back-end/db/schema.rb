@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401040102) do
+ActiveRecord::Schema.define(version: 20170401080818) do
 
   create_table "aadhars", force: :cascade do |t|
     t.string   "uid"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 20170401040102) do
     t.string   "phone"
     t.string   "designation"
     t.string   "municipal_id"
+    t.string   "department"
+  end
+
+  create_table "alerts", force: :cascade do |t|
+    t.integer  "complaint_id"
+    t.integer  "admin_user_id"
+    t.text     "message"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "api_keys", force: :cascade do |t|
@@ -103,6 +112,13 @@ ActiveRecord::Schema.define(version: 20170401040102) do
     t.string   "secret_key"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "slas", force: :cascade do |t|
+    t.string   "category"
+    t.integer  "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sms_otps", force: :cascade do |t|
