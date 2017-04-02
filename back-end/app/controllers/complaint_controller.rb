@@ -20,6 +20,14 @@ class ComplaintController < ApplicationController
 
       if complaint.save
         # assign new complaint to respective district office
+        f params[:ward]
+          assignment_result = auto_assign_complaint(complaint.id,
+                                                complaint.state,
+                                                complaint.district,
+                                                complaint.subject,
+                                                params[:ward],
+                                                complaint.sub_category)
+        else
           assignment_result = register_new_complaint(complaint.id,
                                                       complaint.state,
                                                       complaint.district,
