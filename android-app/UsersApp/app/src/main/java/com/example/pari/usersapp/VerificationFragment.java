@@ -1,20 +1,15 @@
 package com.example.pari.usersapp;
 
-import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.support.design.widget.TextInputLayout;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -29,11 +24,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by pari on 27-03-2017.
+ * Created by pari on 01-04-2017.
  */
 
-public class Verification extends AppCompatActivity {
-  //  String aadhar_card_no,phone_no;
+public class VerificationFragment extends Fragment {
     String status,accessToken,secretKey;
     String otp;
     Bundle b;
@@ -43,21 +37,32 @@ public class Verification extends AppCompatActivity {
     String otpSent;
     TextInputLayout et_otp;
     Button verifyOtp;
-    Context context = this;
+    Context context;
+    public VerificationFragment() {
+        // Required empty public constructor
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verifiaction);
-        progressDialog = new ProgressDialog(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View v = inflater.inflate(R.layout.activity_verifiaction, container, false);
+        context = getContext();
+        progressDialog = new ProgressDialog(context);
         progressDialog.setCancelable(false);
-        b = getIntent().getExtras();
+        b = getActivity().getIntent().getExtras();
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
-        final TextInputLayout aadhar = (TextInputLayout)findViewById(R.id.editText6);
-        final TextInputLayout phone = (TextInputLayout)findViewById(R.id.editText7);
-        et_otp = (TextInputLayout)findViewById(R.id.editText12);
-        verifyOtp = (Button)findViewById(R.id.button8);
-        Button verify = (Button)findViewById(R.id.button7);
+        final TextInputLayout aadhar = (TextInputLayout)v.findViewById(R.id.editText6);
+        final TextInputLayout phone = (TextInputLayout)v.findViewById(R.id.editText7);
+        et_otp = (TextInputLayout)v.findViewById(R.id.editText12);
+        verifyOtp = (Button)v.findViewById(R.id.button8);
+        Button verify = (Button)v.findViewById(R.id.button7);
         et_otp.setVisibility(View.INVISIBLE);
         verifyOtp.setVisibility(View.INVISIBLE);
         verify.setOnClickListener(new View.OnClickListener() {
@@ -84,6 +89,7 @@ public class Verification extends AppCompatActivity {
                 verify_otp(x);
             }
         });
+        return v;
     }
     void verify_aadhar(final String aadhar_card_no, final String phone_no)
     {
@@ -93,7 +99,7 @@ public class Verification extends AppCompatActivity {
         }
         progressDialog.setMessage("Sending OTP");
         showDialog();
-     //   final int[] test = {0};
+        //   final int[] test = {0};
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 URL_FOR_VERIFICATION_AADHAR, new Response.Listener<String>() {
 
@@ -112,9 +118,9 @@ public class Verification extends AppCompatActivity {
                        /* boolean isVerified = verify_otp(otpSent,otpEntered);
                         if(isVerified)
                             test[0] = 1;*/
-                     //   test[0] = 1;
+                        //   test[0] = 1;
 
-                      //  finish();
+                        //  finish();
                     }
 
                     else {
@@ -125,7 +131,7 @@ public class Verification extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(context,
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
 
@@ -141,7 +147,7 @@ public class Verification extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //  Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(context,
                         "Please Check your Internet Connection!", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -164,8 +170,8 @@ public class Verification extends AppCompatActivity {
             }
         };
         // Adding request to request queue
-       // if(test[0] == 0)
-            AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq,cancel_req_tag);
+        // if(test[0] == 0)
+        AppSingleton.getInstance(context).addToRequestQueue(strReq,cancel_req_tag);
         /*if(test[0] == 1)
             return true;
         return false;*/
@@ -178,7 +184,7 @@ public class Verification extends AppCompatActivity {
         }
         progressDialog.setMessage("Verifying OTP");
         showDialog();
-     //   final int[] test = {0};
+        //   final int[] test = {0};
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 URL_FOR_VERIFICATION_OTP, new Response.Listener<String>() {
 
@@ -190,12 +196,15 @@ public class Verification extends AppCompatActivity {
                     jObj = new JSONObject(response);
                     status = jObj.getString("status");
                     if (status != null && status.equals("success")) {
-                       // test[0] = 1;
-                        Toast.makeText(getApplicationContext(),
+                        // test[0] = 1;
+                        Toast.makeText(context,
                                 "Successfully Verified!", Toast.LENGTH_LONG).show();
 
-
-                        finish();
+                        Intent intent = new Intent(getActivity(), HomePage.class);
+                        b.remove("aadhar_verified");
+                        b.putBoolean("aadhar_verified",true);
+                        intent.putExtras(b);
+                        startActivity(intent);
                     }
 
                     else {
@@ -206,7 +215,7 @@ public class Verification extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(context,
                                 errorMsg, Toast.LENGTH_LONG).show();
                     }
 
@@ -222,7 +231,7 @@ public class Verification extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 //  Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
+                Toast.makeText(context,
                         "Please Check your Internet Connection!", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
@@ -245,7 +254,7 @@ public class Verification extends AppCompatActivity {
 
         };
         // Adding request to request queue
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq,cancel_req_tag);
+        AppSingleton.getInstance(context).addToRequestQueue(strReq,cancel_req_tag);
         /*if(test[0] == 1)
             return true;
         return false;*/
@@ -258,5 +267,4 @@ public class Verification extends AppCompatActivity {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
     }
-
 }

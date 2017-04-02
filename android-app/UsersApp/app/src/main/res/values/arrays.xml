@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="subject_array" >
-    <item>Waste Disposal</item>
-    <item>Drainage Problem</item>
-    <item>Potholes</item>
-    <item>Water Supply</item>
-    <item>Health and Hygiene</item>
-    <item>Stray Dogs</item>
-    <item>Unauthorised Construction</item>
-    <item>Construction Related Mess</item>
-    <item>Haphazard Parking</item>
-    <item>Illegal Occupation Of Land</item>
-    <item>Uncovered Sewage Manhole</item>
-    <item>Others</item>
+        <item>Public Health</item>
+        <item>Water Supply</item>
+        <item>Town Planning</item>
+        <item>Street Lighting</item>
+        <item>Engineering</item>
+        <item>Others</item>
+    </string-array>
+    <string-array name="public_health" >
+        <item>birth/death certificate issues</item>
+        <item>cleanliness of public toilets</item>
+        <item>clearing of garbage bins</item>
+        <item>death of stray animals</item>
+        <item>dog menace</item>
+        <item>door to door collection of garbage</item>
+        <item>drains cleaning/overflow</item>
+        <item>mosquito menace</item>
+        <item>food adulteration</item>
+        <item>garbage littering</item>
+        <item>illegal slaughtering</item>
+        <item>improper sweeping</item>
+        <item>lifting of garbage</item>
+        <item>provide or remove grabage bins</item>
+    </string-array>
+    <string-array name="water_supply" >
+        <item>contamination of water</item>
+        <item>formation of new borewell</item>
+        <item>drinking water supply</item>
+        <item>issues related to public taps</item>
+        <item>repair bore wells</item>
+        <item>water pipe leakage</item>
+    </string-array>
+    <string-array name="town_planning" >
+        <item>illegal construction</item>
+        <item>parking issues</item>
+        <item>removal of encroachments</item>
+        <item>issues realted to advertisements board</item>
+    </string-array>
+    <string-array name="street_lighting" >
+        <item>non-working street lights</item>
+        <item>provide new electric pole</item>
+        <item>provide new street light</item>
+        <item>removal of electric pole</item>
+    </string-array>
+    <string-array name="engineering" >
+        <item>formation of new drain</item>
+        <item>formation of new road</item>
+        <item>repair of drain</item>
+        <item>repair of road</item>
+        <item>public parks maintenance</item>
+
     </string-array>
 </resources>

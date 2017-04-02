@@ -6,6 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.graphics.Paint;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.graphics.Color;
 import android.widget.Toast;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -58,6 +62,7 @@ public class EditComplaint extends AppCompatActivity {
     Button save_button,alert;
   //  String id,subject,description,latitude,longitude,city,state,pincode,created_at,updated_at,userid,status,priority,image;
     TextView tv_address,tv_id,tv_subject,tv_description,tv_latitude,tv_longitude,tv_city,tv_state,tv_pincode,tv_created_at,tv_updated_at,tv_userid,tv_status,tv_priority;
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,32 +78,57 @@ public class EditComplaint extends AppCompatActivity {
         tv_id = (TextView)findViewById(R.id.textView15);
         tv_subject = (TextView)findViewById(R.id.textView16);
         tv_description = (TextView)findViewById(R.id.textView17);
-        tv_latitude = (TextView)findViewById(R.id.textView18);
-        tv_longitude = (TextView)findViewById(R.id.textView19);
+    //    tv_latitude = (TextView)findViewById(R.id.textView18);
+    //    tv_longitude = (TextView)findViewById(R.id.textView19);
         tv_city = (TextView)findViewById(R.id.textView20);
         tv_state = (TextView)findViewById(R.id.textView21);
         tv_pincode = (TextView)findViewById(R.id.textView22);
         tv_address = (TextView)findViewById(R.id.textView28);
-        tv_created_at = (TextView)findViewById(R.id.textView23);
-        tv_updated_at = (TextView)findViewById(R.id.textView24);
+      //  tv_created_at = (TextView)findViewById(R.id.textView23);
+      //  tv_updated_at = (TextView)findViewById(R.id.textView24);
         tv_userid = (TextView)findViewById(R.id.textView25);
         tv_status = (TextView)findViewById(R.id.textView26);
-        tv_priority = (TextView)findViewById(R.id.textView27);
+      //  tv_priority = (TextView)findViewById(R.id.textView27);
         tv_image = (ImageView)findViewById(R.id.imageView4);
-        tv_id.setText("Complaint ID : "+b.getString("id"));
+  //      tv_id.setText("Complaint ID : "+b.getString("id"));
         tv_subject.setText("Subject : "+b.getString("subject"));
         tv_description.setText("Description : "+b.getString("description"));
-        tv_latitude.setText("Latitude : "+b.getString("latitude"));
-        tv_longitude.setText("Longitude: "+b.getString("longitude"));
+      //  tv_latitude.setText("Latitude : "+b.getString("latitude"));
+       // tv_longitude.setText("Longitude: "+b.getString("longitude"));
         tv_city.setText("City : "+b.getString("city"));
         tv_state.setText("State : "+b.getString("state"));
         tv_pincode.setText("Pincode : "+b.getString("pincode"));
-        tv_created_at.setText("Created At : "+b.getString("created_at"));
-        tv_updated_at.setText("Updated At : "+b.getString("updated_at"));
+     //   tv_created_at.setText("Created At : "+b.getString("created_at"));
+       // tv_updated_at.setText("Updated At : "+b.getString("updated_at"));
         tv_userid.setText("User ID : "+b.getString("user_id"));
         tv_status.setText("Status : "+b.getString("status"));
-        tv_priority.setText("Priority : "+b.getString("priority"));
+     //  tv_priority.setText("Priority : "+b.getString("priority"));
         tv_address.setText("Address : "+b.get("address"));
+
+        tv_subject.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_description.setShadowLayer(30, 0, 0, Color.DKGRAY);
+     //   tv_latitude.setShadowLayer(30, 0, 0, Color.DKGRAY);
+       // tv_longitude.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_city.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_state.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_pincode.setShadowLayer(30, 0, 0, Color.DKGRAY);
+     //   tv_created_at.setShadowLayer(30, 0, 0, Color.DKGRAY);
+       // tv_updated_at.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_userid.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_status.setShadowLayer(30, 0, 0, Color.DKGRAY);
+      //  tv_priority.setShadowLayer(30, 0, 0, Color.DKGRAY);
+        tv_address.setShadowLayer(30, 0, 0, Color.DKGRAY);
+
+        /*Paint paint = new Paint();
+        paint.setAntiAlias(true);
+
+
+
+
+        tv_image.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+        paint.setShadowLayer(30, 0, 30, Color.argb(255, 255, 0, 0));
+        tv_image.setLayerPaint(paint);*/
+
         save_button = (Button)findViewById(R.id.save_button);
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +172,7 @@ public class EditComplaint extends AppCompatActivity {
             tv_image.setImageBitmap(bitmap);*/
             String Url = url.toURI().toString();
             Picasso.with(getApplicationContext())
-                    .load(Url).resize(200,200)
+                    .load(Url).resize(400,300)
                     .into(tv_image);
         } catch (URISyntaxException e) {
             e.printStackTrace();
@@ -169,7 +199,7 @@ public class EditComplaint extends AppCompatActivity {
         //(int) (bitmap.getHeight() * 0.125)
         Bitmap bitmap = ((BitmapDrawable) image).getBitmap();
         Bitmap bitmapResized = Bitmap.createScaledBitmap(bitmap,
-                120, 120, false);
+                50, 50, false);
         return new BitmapDrawable(getResources(), bitmapResized);
     }
 }

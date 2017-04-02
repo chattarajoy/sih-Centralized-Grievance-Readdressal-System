@@ -8,7 +8,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="number"
+
         android:ems="10"
         android:id="@+id/editText7"
 
@@ -18,7 +18,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Phone No." />
+            android:hint="Enter Phone No."
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -46,7 +47,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Aadhar No." />
+            android:hint="Enter Aadhar No."
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -62,7 +64,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter OTP" />
+            android:hint="Enter OTP"
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button

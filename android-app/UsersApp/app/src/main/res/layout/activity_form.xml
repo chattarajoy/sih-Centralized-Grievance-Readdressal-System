@@ -18,14 +18,24 @@
     android:layout_width="match_parent">
 
         <TextView
-            android:layout_marginTop="17dp"
-            android:layout_marginLeft="23dp"
-            android:layout_marginRight="20dp"
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Select Subject"
-            android:textSize="18sp" />
+    android:layout_marginTop="17dp"
+    android:layout_marginLeft="23dp"
+    android:layout_marginRight="20dp"
+    android:id="@+id/textView9"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:hint="Select Subject"
+    android:textSize="18sp" />
+    <TextView
+        android:layout_marginTop="17dp"
+        android:layout_marginLeft="23dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Select Sub-Category"
+        android:textSize="18sp" />
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,12 +144,21 @@
         android:layout_centerInParent="true"/>
 
     <Spinner
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_marginTop="20dp"
+    android:layout_marginLeft="200dp"
+    android:id="@+id/spinner"
+    android:layout_alignParentRight="true" />
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="200dp"
-        android:id="@+id/spinner"
+        android:id="@+id/spinner2"
+        android:layout_below="@+id/spinner"
         android:layout_alignParentRight="true" />
 
 
