@@ -118,7 +118,7 @@ class AdminUserController < ApplicationController
         completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
     end
 
-    render json: {stats: [new_complaint, pending_complaint, completed_complaint] }
+    render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
 
   end
 

@@ -169,6 +169,17 @@ class ComplaintController < ApplicationController
       end
   end
 
+  def get_updates
+
+    if params[:complaint_id]
+      updates = ComplaintUpdate.where(complaint_id: params[:complaint_id])
+      render json: {status: "success", updates: updates}
+
+    else
+      render json: {status: "error", error_message: "params missing"}
+    end
+  end
+
 #  def assign_complaint_to_ward
 #
 #
