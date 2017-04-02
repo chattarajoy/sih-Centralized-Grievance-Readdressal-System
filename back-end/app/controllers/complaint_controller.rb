@@ -145,23 +145,25 @@ class ComplaintController < ApplicationController
           time_gap_needed = Sla.where(category: complaint.subject,
                                       subcategory: complaint.sub_category).first
 
-          if time_gap_needed.time <= time_elapsed
+          if time_gap_needed
+            if time_gap_needed.time <= time_elapsed
 
-              complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
-              person_to_alert = AdminUser.find(complaint_status.admin_user_id)
+                complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
+                person_to_alert = AdminUser.find(complaint_status.admin_user_id)
 
-              new_alert = Alert.new(complaint_id: params[:complaint_id],
-                                    admin_user_id: person_to_alert.id,
-                                    message: params[:message])
+                new_alert = Alert.new(complaint_id: params[:complaint_id],
+                                      admin_user_id: person_to_alert.id,
+                                      message: params[:message])
 
-              complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
-                                                     assigned_to:  person_to_alert.name,
-                                                     notes: "Alert raised to concerned superviser")
-              if new_alert.save && complaint_update.save
-                render json: {status: "success", message: "alert created succesfully!"}
+                complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                       assigned_to:  person_to_alert.name,
+                                                       notes: "Alert raised to concerned superviser")
+                if new_alert.save && complaint_update.save
+                  render json: {status: "success", message: "alert created succesfully!"}
+                end
+              else
+                render json: {status: "error", error_message: "you need to wait before you can raise an alert"}
               end
-            else
-              render json: {status: "error", error_message: "you need to wait before you can raise an alert"}
             end
         end
       else
