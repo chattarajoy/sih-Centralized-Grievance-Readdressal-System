@@ -33,6 +33,7 @@ class ComplaintController < ApplicationController
                                                       complaint.district,
                                                       complaint.subject,
                                                       complaint.sub_category)
+       end
         #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
