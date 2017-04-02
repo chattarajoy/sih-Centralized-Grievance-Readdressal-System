@@ -1,22 +1,34 @@
 class DistrictOfficeController < ApplicationController
 
-   def find_rating
-     solved_complaints = ComplaintStatus.where(district_office_id: district_office_id, status: "completed")
-     pending_complaints = ComplaintStatus.where(district_office_id: district_office_id, status: "pending").count
-     solved_complaints.each do |t|
-        sla = Sla.where(category: t.department, subcategory: t.sub_category)
-        time1 = sla.updated_at - sla.created_at
-        time2 = t.updated_at - t.created_at
-        time1 = 0
-        delayed = 0
-        if time1 >= time2
-          timely = timely + 1
-        else
-          delayed = delayed + 1
-        end
-     end
-   end
-   render json: {timely: timely, delayed: delayed, pending: pending_complaints,
-                solved_complaints: solved_complaints.count}
+   def show_rating
+
+     district_office_id = DistrictOffice.where(state: params[:state], district: params[:district]).first
+
+     if district_office_id
+       solved_complaints = ComplaintStatus.where(district_office_id: district_office_id, status: "completed")
+       pending_complaints = ComplaintStatus.where(district_office_id: district_office_id, status: "pending").count
+       total_complaints = ComplaintStatus.where(district_office_id: district_office_id)
+
+       timely_count = 0
+       delayed_count = 0
+
+       solved_complaints.each do |complaint|
+          sla = Sla.where(category: complaint.department, subcategory: complaint.sub_category)
+          actual_time = (complaint.updated_at - complaint.created_at)/3600
+          expected_time = sla.time
+
+          if expected_time >= actual_time
+            timely_count = timely_count + 1
+          else
+            delayed_count = delayed_count + 1
+          end
+       end
+
+       render json: {timely_solutions: timely_count, delayed_solutions: delayed_count, active_complaints: pending_complaints,
+                  total_complaints: solved_complaints.count}
+      else
+        render json: {status: "error", error_message: "No data for given district"}
+      end
+    end
 
 end

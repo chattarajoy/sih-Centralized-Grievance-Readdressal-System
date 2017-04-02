@@ -80,8 +80,96 @@ class ComplaintController < ApplicationController
 
   def create_alert
 
+    if params[:complaint_id] && params[:message]
 
+      complaint = Complaint.find(params[:complaint_id])
+      previous_alert = Alert.where(complaint_id: params[:complaint_id])
 
+      if previous_alert
+
+          time_elapsed = (Time.now() - previous_alert.created_at)/3600
+          time_gap_needed = Sla.where(category: complaint.subject,
+                                      sub_category: complaint.sub_category)
+
+          if time_gap_needed
+
+              if time_gap_needed.time <= time_elapsed
+
+                alerted_user = AdminUser.find(previous_alert.admin_user_id)
+
+                if alerted_user.designation == "district officer"
+                  render json: {status: "error", error_message: "We have already alerted the highest reachable Authority! Please contact regional Municipal head"}
+                elsif alerted_user.designation == "ward officer"
+
+                  district_office = DistrictOffice.where(state: complaint.state,
+                                                          district: complaint.district).first
+                  person_to_alert = AdminUser.where(designation: "district officer", municipal_id: district_office.id).first
+
+                  new_alert = Alert.new(complaint_id: params[:complaint_id],
+                                        admin_user_id: person_to_alert.id,
+                                        message: params[:message])
+
+                  complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                         assigned_to:  person_to_alert.name,
+                                                         notes: "Escalated to district officer")
+                  if new_alert.save && complaint_update.save
+                    render json: {status: "success", message: "alert created succesfully!"}
+                  end
+               elsif alerted_user.designation == "superviser"
+
+                district_office = DistrictOffice.where(state: complaint.state,
+                                                        district: complaint.district).first
+
+                ward_office = WardOffice.where(district_office_id: district_office.id,
+                                               ward: complaint.ward)
+
+                person_to_alert = AdminUser.where(designation: "ward officer", municipal_id: ward_office.id).first
+
+                new_alert = Alert.new(complaint_id: params[:complaint_id],
+                                      admin_user_id: person_to_alert.id,
+                                      message: params[:message])
+
+                complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                       assigned_to:  person_to_alert.name,
+                                                       notes: "Escalated to ward officer")
+              end
+            else
+              render json: {status: "error", error_message: "You need to wait longer before you can register and alert"}
+            end
+          else
+            render json: {status: "error", error_message: "SLA Data not available for this field"}
+          end
+        else
+
+          time_elapsed = (Time.now() - complaint.created_at)/3600
+          time_gap_needed = Sla.where(category: complaint.subject,
+                                      sub_category: complaint.sub_category)
+
+          if time_gap_needed.time <= time_elapsed
+
+              complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
+              person_to_alert = AdminUser.find(complaint_status.admin_user_id)
+
+              new_alert = Alert.new(complaint_id: params[:complaint_id],
+                                    admin_user_id: person_to_alert.id,
+                                    message: params[:message])
+
+              complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+                                                     assigned_to:  person_to_alert.name,
+                                                     notes: "Alert raised to concerned superviser")
+              if new_alert.save && complaint_update.save
+                render json: {status: "success", message: "alert created succesfully!"}
+              end
+            else
+              render json: {status: "error", error_message: "you need to wait before you can raise an alert"}
+            end
+        end
+      else
+        render json: {status: "error", error_message: "Message or Complaint Id can't be blank"}
+      end
+  end
+
+  def assign_complaint
   end
 
 private

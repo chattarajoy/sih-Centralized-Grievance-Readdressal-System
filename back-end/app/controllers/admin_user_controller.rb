@@ -152,4 +152,11 @@ class AdminUserController < ApplicationController
   render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
 
  end
+
+ def fetch_alerts
+
+   alerts = Alert.where(admin_user_id: get_logged_in_user_id)
+   render json: {status: "success", alerts: alerts}
+ end
+ 
 end
