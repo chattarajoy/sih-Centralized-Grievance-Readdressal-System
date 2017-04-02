@@ -50,6 +50,7 @@ export class AppAdminService {
          console.log('successCheck');
          window.localStorage.setItem('admin_access_token',res.access_token);
          window.localStorage.setItem('admin_secret_key',res.secret_key);
+         window.localStorage.setItem('level',res.designation);
          resolve(res);
        }
        else if(res.status === "error"){

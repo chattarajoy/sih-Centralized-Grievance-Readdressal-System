@@ -27,6 +27,9 @@ export class AppService {
   };
 
 
+   fetchUrl = '';
+
+
   constructor(
     private _http: Http
   ) {
@@ -179,6 +182,12 @@ return this._http.get(`http://54.169.134.133:80/admin_user/fetch_complaints`,{he
           .map(res=>res.json())
   }
 
+
+  getDetailsComp(param){
+    this.fetchUrl = 'http://54.169.134.133:80/complaint/show_complaint_by_id?id='+param
+    return this._http.get(this.fetchUrl,{headers:this.getAdminHeaders()})
+      .map(res => res.json())
+  }
 
 
 }
