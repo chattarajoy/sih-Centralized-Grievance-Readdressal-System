@@ -229,6 +229,9 @@ class ComplaintController < ApplicationController
         else
           render json: {status: "error", error_message: "database not reachable"}
         end
+      else
+        render json: {status: "error", error_message: "params missing"}
+      end
     end
 
 private
