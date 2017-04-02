@@ -77,10 +77,8 @@ export class UserFormComponent implements OnInit{
     //   console.log('response',res);
     // })
 
-    console.log('Entering',this.store)
       this._service.submitFormX(this.cForm).subscribe((res)=>{
         if(res.status === 'success'){
-        console.log('Submitted!', res)
         this._notify.alert('Submitting...','Validating for Errors');
         setTimeout((_router) => {
             this._router.navigate(['sub']);

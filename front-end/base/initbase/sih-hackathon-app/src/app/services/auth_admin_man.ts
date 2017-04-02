@@ -14,7 +14,6 @@ export class AdminAuthManager implements CanActivate {
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(next.url[0].path == 'login'){
             if(window.localStorage.getItem('admin_access_token') && window.localStorage.getItem('admin_secret_key')){
-                console.log('You are already logged in');
                 return false;
             }
             else {

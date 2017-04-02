@@ -16,18 +16,15 @@ export class UserformService {
 
   getLocation(parameters):Observable<any>{
 
-    console.log(parameters);
     var headers = new Headers();
     var address = parameters.address;
     var newAddress = address.replace(/([,])/g,"+");
-    console.log('modified address',newAddress);
     var key = 'AIzaSyBJSQWoYevjqqNZQmTrkNCUnZkDW656cbs';
     headers.append('Access-Control-Allow-Origin', '*');
     headers.append('Access-Control-Allow-Credentials', 'true');
     headers.append('Access-Control-Allow-Headers', 'Content-Type,Accept');
     headers.append('Access-Control-Allow-Methods', 'POST');
     headers.append('Authorization', null);
-console.log(headers);
     return this._jsonP.get(`https://maps.googleapis.com/maps/api/geocode/json?address=`+newAddress+`+`+parameters.district+`+`+parameters.state+`+`+parameters.pincode+`&key=`+key+`&format=jsonP&prefix=JSONP_CALLBACK`
 ,{headers:headers})
 
@@ -48,7 +45,6 @@ console.log(headers);
            headers.append('secret_key',secret)
            headers.append('Content-Type','application/json');
 
-          console.log('submit-form-headers',headers)
           return this._http.get(`http://54.169.134.133:80/complaint/create?subject=`+form.subject+`&description=`+form.description+`&image=`+imageLink+`&latitude=12.45&longitude=21.54&address=`+form.address+`&district=`+form.district+`&state=`+form.state+`&pincode=`+form.pincode,{headers:headers}) // ...using post request
                            .map(res=> res.json()) // ...and calling .json() on the response to return data
                            .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
@@ -62,8 +58,6 @@ console.log(headers);
        headers.append('access_token',access)
        headers.append('secret_key',secret)
        headers.append('Content-Type','application/json');
-      console.log('old_password',form.oldpass);
-      console.log('new_password',form.newpass);
       //console.log('the',form);
       var newP = form.newpass;
       console.log('submit-form-headers',headers)
@@ -81,7 +75,6 @@ console.log(headers);
        headers.append('access_token',access)
        headers.append('secret_key',secret)
        headers.append('Content-Type','application/json');
-      console.log('submit-form-headers',headers)
       return this._http.get(`http://54.169.134.133:80/aadhar_verification/verify_aadhar_data?aadhar_number=`+form.aadhar_number+`&contact=`+form.contact,{headers:headers}) // ...using post request
                        .map(res=> res.json()) // ...and calling .json() on the response to return data
                        .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
@@ -96,7 +89,6 @@ console.log(headers);
       headers.append('access_token',access)
       headers.append('secret_key',secret)
       headers.append('Content-Type','application/json');
-     console.log('submit-form-headers',headers)
      return this._http.get(`http://54.169.134.133:80/aadhar_verification/verify_otp?otp=`+form._otp,{headers:headers}) // ...using post request
                       .map(res=> res.json()) // ...and calling .json() on the response to return data
                       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any

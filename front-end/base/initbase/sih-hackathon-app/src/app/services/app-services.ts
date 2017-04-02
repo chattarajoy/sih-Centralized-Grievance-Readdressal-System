@@ -52,15 +52,10 @@ export class AppService {
    window.localStorage.setItem('b',usercreds.password);
   return new Promise ((resolve) => {
 
-  console.log(usercreds.emailId);
-  console.log(usercreds.password);
-
    this._http.post(`http://54.169.134.133:80/auth/user_login?email=`+usercreds.emailId+`&password=`+usercreds.password,{headers:headers})
    .map( res => res.json())
      .subscribe((res) =>{
-       console.log('from auth-service',res);
        if(res.status === "success"){
-         console.log('successCheck');
          window.localStorage.setItem('access_token',res.access_token);
          window.localStorage.setItem('secret_key',res.secret_key);
          resolve(res);
