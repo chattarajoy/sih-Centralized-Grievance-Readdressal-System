@@ -118,7 +118,7 @@ class AdminUserController < ApplicationController
         completed_complaint = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed").count
     end
 
-    render json: {stats: [new_complaint, pending_complaint, completed_complaint] }
+    render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
 
   end
 
@@ -128,7 +128,7 @@ class AdminUserController < ApplicationController
   user = AdminUser.find(get_logged_in_user_id)
 
   if user.designation == "superviser"
-    new_complainst = ComplaintStatus.where(admin_user_id: user.id, status: "new")
+    new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "pending")
     pending_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "active")
     completed_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "completed")
 
@@ -149,7 +149,7 @@ class AdminUserController < ApplicationController
       completed_complaints = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed")
     end
 
-  render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
+  render json: {new_complaint: new_complaints, pending_complaint: pending_complaints, completed_complaint: completed_complaints}
 
  end
 
@@ -158,5 +158,5 @@ class AdminUserController < ApplicationController
    alerts = Alert.where(admin_user_id: get_logged_in_user_id)
    render json: {status: "success", alerts: alerts}
  end
- 
+
 end

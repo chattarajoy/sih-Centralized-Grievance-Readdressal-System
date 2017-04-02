@@ -33,7 +33,7 @@ class ComplaintController < ApplicationController
                                                       complaint.district,
                                                       complaint.subject,
                                                       complaint.sub_category)
-        end
+       end
         #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
@@ -169,8 +169,41 @@ class ComplaintController < ApplicationController
       end
   end
 
-  def assign_complaint
+  def get_updates
+
+    if params[:complaint_id]
+      updates = ComplaintUpdate.where(complaint_id: params[:complaint_id])
+      render json: {status: "success", updates: updates}
+
+    else
+      render json: {status: "error", error_message: "params missing"}
+    end
   end
+
+#  def assign_complaint_to_ward
+#
+#
+#    district_office = DistrictOffice.where(state: complaint.state,
+#                                                district: complaint.district).first
+#    if district_office
+#      ward_office = WardOffice.where(district_office_id: district_office.id,
+#                                      ward: params[:ward])
+#
+#            complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+#                                                   assigned_to: "superviser: " + final_superviser.name,
+#                                                   notes: "Auto Assignment by System to concerned district office")
+#
+#            complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+#                                                    district_office_id: district_office.id,
+#                                                    ward_office_id: ward_office.id,
+#                                                    department: subject,
+#                                                    sub_category: sub_category,
+#                                                    status: "new")
+#
+#          if complaint_status.save && complaint_update.save
+#            render json: {status: "success", }
+#          end
+#  end
 
 private
 
@@ -182,7 +215,7 @@ private
     if district_office
 
       district_admin = AdminUser.where(designation: "district officer",
-                                        municipal_id: district_office.id)
+                                        municipal_id: district_office.id).first
       if district_admin
 
         complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
@@ -190,10 +223,12 @@ private
                                                notes: "Auto Assignment by System to concerned district office")
 
         complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+                                         admin_user_id: district_admin.id,
                                          district_office_id: district_office.id,
-                                         department: subject_of_complaint)
+                                         department: subject_of_complaint,
+                                         status: "new")
 
-        if complaint_update.save && new_complaint.save
+        if complaint_update.save && complaint_status.save
           return "Complaint forwarded to concerned officer"
         else
           return "Update to complaint failed"
@@ -217,7 +252,7 @@ private
                                                 district: district).first
     if district_office
       ward_office = WardOffice.where(district_office_id: district_office.id,
-                                      ward: ward)
+                                      ward: ward).first
       if ward_office
           # finding superviser with least active complaints
           all_ward_supervisers = AdminUser.where(designation: "superviser",
@@ -225,6 +260,7 @@ private
                                                 department: subject)
           if all_ward_supervisers
             least_complaints = 9999
+            least_complaints_user_id = 13
 
             all_ward_supervisers.each do |superviser|
               total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
@@ -239,14 +275,14 @@ private
 
             complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
                                                    assigned_to: "superviser: " + final_superviser.name,
-                                                   notes: "Auto Assignment by System to concerned district office")
+                                                   notes: "Auto Assignment by System to concerned office")
 
             complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
                                                     district_office_id: district_office.id,
                                                     ward_office_id: ward_office.id,
                                                     department: subject,
                                                     sub_category: sub_category,
-                                                    status: "new")
+                                                    status: "pending")
 
           if complaint_status.save && complaint_update.save
             return "Auto Assignment Complete!"

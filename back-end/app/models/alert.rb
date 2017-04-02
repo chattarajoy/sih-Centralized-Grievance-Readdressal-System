@@ -1,2 +1,3 @@
 class Alert < ApplicationRecord
+
 end

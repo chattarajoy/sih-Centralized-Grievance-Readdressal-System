@@ -20,6 +20,7 @@ import { MainPageComponent } from './mainpage/mainpage.component';
 import { SettingsNavComponent } from './userarea/settingsarea/settingsnav/settingsnav.component';
 import { AdminLoginComponent } from './login_signup/adminlogarea/admin-login.component';
 import { AdminPieComponent } from './admin-dashboard/admin-piechart/admin-pie.component';
+import { AdminCounterComponent } from './admin-dashboard/admin-counter/admin-counter.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 //custom-components
 
@@ -57,7 +58,8 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     MainPageComponent,
     AdminLoginComponent,
     NavbarAdminComponent,
-    AdminPieComponent
+    AdminPieComponent,
+    AdminCounterComponent
   ],
   imports: [
     JsonpModule,

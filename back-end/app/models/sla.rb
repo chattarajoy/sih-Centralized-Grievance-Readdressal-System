@@ -1,2 +1,3 @@
 class Sla < ApplicationRecord
+
 end

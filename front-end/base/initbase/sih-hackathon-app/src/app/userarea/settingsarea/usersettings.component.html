@@ -3,10 +3,17 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-lg-6">
+      <!-- <settings-nav></settings-nav> -->
+      <div *ngIf="unlock.status === 'true'">
+        <h3>Aadhar has Already been verified</h3>
+        <span>Aadhar Status :Verified <i class="fa fa-check" aria-hidden="true"></i> </span>
+      </div>
+      <div *ngIf="unlock.status === 'false'">
       <settings-nav></settings-nav>
+      </div>
     </div>
-    <div class="col-xs-12 col-md-6">
+    <div class="col-xs-12 col-lg-6">
       <passettings></passettings>
     </div>
   </div>
