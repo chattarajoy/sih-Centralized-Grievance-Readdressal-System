@@ -241,7 +241,7 @@ private
                                                 district: district).first
     if district_office
       ward_office = WardOffice.where(district_office_id: district_office.id,
-                                      ward: ward)
+                                      ward: ward).first
       if ward_office
           # finding superviser with least active complaints
           all_ward_supervisers = AdminUser.where(designation: "superviser",
