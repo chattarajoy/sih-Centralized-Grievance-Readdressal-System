@@ -215,7 +215,7 @@ private
                                          district_office_id: district_office.id,
                                          department: subject_of_complaint)
 
-        if complaint_update.save && new_complaint.save
+        if complaint_update.save && complaint_status.save
           return "Complaint forwarded to concerned officer"
         else
           return "Update to complaint failed"
