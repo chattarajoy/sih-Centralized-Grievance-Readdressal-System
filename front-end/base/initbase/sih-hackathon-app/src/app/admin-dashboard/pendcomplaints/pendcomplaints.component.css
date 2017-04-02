@@ -1,0 +1,112 @@
+.stuff{
+  color:black;
+}
+#container1{
+  width: 750px;
+  margin: 15px 10px 0 100px;
+  padding-top: 60px;
+}
+
+
+/* THIS IS THE BOX STUFF BELOW */
+
+.box {
+  padding: 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border: 2px solid #ffffff;
+  overflow: visible;
+
+  background: #f5f5f5;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.14);
+  border-radius: 3px;
+  margin-top: 9px;
+  float: left;
+  width: 600px;
+  height: auto;
+  -webkit-transition: all 200ms ease-out;
+  -moz-transition: all 200ms ease-out;
+  -ms-transition: all 200ms ease-out;
+  -o-transition: all 200ms ease-out;
+  transition: all 200ms ease-out;
+}
+
+.box:hover {
+  cursor:pointer;
+  -moz-transform: scale(1) rotate(0deg) translateX(-2px) translateY(-2px) skewX(0deg) skewY(0deg);
+  -webkit-transform: scale(1) rotate(0deg) translateX(-2px) translateY(-2px) skewX(0deg) skewY(0deg);
+  -o-transform: scale(1) rotate(0deg) translateX(-2px) translateY(-2px) skewX(0deg) skewY(0deg);
+  -ms-transform: scale(1) rotate(0deg) translateX(-2px) translateY(-2px) skewX(0deg) skewY(0deg);
+  transform: scale(1) rotate(0deg) translateX(-2px) translateY(-2px) skewX(0deg) skewY(0deg);
+  box-shadow: 5px 15px 15px 0px rgba(0, 0, 0, 0.10);
+  -webkit-transition: all 200ms ease-in;
+  -moz-transition: all 200ms ease-in;
+  -ms-transition: all 200ms ease-in;
+  -o-transition: all 200ms ease-in;
+  transition: all 200ms ease-in;
+}
+box:active{
+  border:none !important;
+}
+.box:focus {
+  outline:none !important;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.14);
+  bordeR:none;
+  border-left:5px solid;
+  border-color:#44D0F4;
+  border-radius: 3px;
+  -moz-transform: scale(1) rotate(0deg) translateX(-2px) translateY(0px) skewX(0deg) skewY(0deg);
+  -webkit-transform: scale(1) rotate(0deg) translateX(-2px) translateY(0px) skewX(0deg) skewY(0deg);
+  -o-transform: scale(1) rotate(0deg) translateX(-2px) translateY(0px) skewX(0deg) skewY(0deg);
+  -ms-transform: scale(1) rotate(0deg) translateX(-2px) translateY(0px) skewX(0deg) skewY(0deg);
+  transform: scale(1) rotate(0deg) translateX(-2px) translateY(0px) skewX(0deg) skewY(0deg);
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  -ms-transition: all 100ms ease-in;
+  -o-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
+}
+
+.img-box{
+  border: 1px solid black;
+  width: 130px;
+  height: 130px;
+  margin-right: 10px;
+  float: left;
+
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.content-box{
+  float: left;
+}
+
+.status{
+  padding-left: 380px;
+  padding-bottom: -100px;
+}
+
+.below_nav{
+  width: 100%;
+  height: 20px;
+  background-color: #f5f5f5;
+  margin-top: 50px;
+}
+.exist{
+  margin-left: 250px;
+  color: #5c7bbb;
+}
+.file_com{
+  color: #5c7bbb
+}
+.date{
+  font-size: 10px;
+  font-style: italic;
+  float: right;
+}
