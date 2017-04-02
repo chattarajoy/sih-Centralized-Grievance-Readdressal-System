@@ -149,7 +149,7 @@ class AdminUserController < ApplicationController
       completed_complaints = ComplaintStatus.where(district_office_id: user.municipal_id, status: "completed")
     end
 
-  render json: {new_complaint: new_complaint, pending_complaint: pending_complaint, completed_complaint: completed_complaint}
+  render json: {new_complaint: new_complaints, pending_complaint: pending_complaints, completed_complaint: completed_complaints}
 
  end
 
@@ -158,5 +158,5 @@ class AdminUserController < ApplicationController
    alerts = Alert.where(admin_user_id: get_logged_in_user_id)
    render json: {status: "success", alerts: alerts}
  end
- 
+
 end

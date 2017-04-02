@@ -169,8 +169,30 @@ class ComplaintController < ApplicationController
       end
   end
 
-  def assign_complaint
-  end
+#  def assign_complaint_to_ward
+#
+#
+#    district_office = DistrictOffice.where(state: complaint.state,
+#                                                district: complaint.district).first
+#    if district_office
+#      ward_office = WardOffice.where(district_office_id: district_office.id,
+#                                      ward: params[:ward])
+#
+#            complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
+#                                                   assigned_to: "superviser: " + final_superviser.name,
+#                                                   notes: "Auto Assignment by System to concerned district office")
+#
+#            complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+#                                                    district_office_id: district_office.id,
+#                                                    ward_office_id: ward_office.id,
+#                                                    department: subject,
+#                                                    sub_category: sub_category,
+#                                                    status: "new")
+#
+#          if complaint_status.save && complaint_update.save
+#            render json: {status: "success", }
+#          end
+#  end
 
 private
 
