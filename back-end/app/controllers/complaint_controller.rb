@@ -203,6 +203,7 @@ class ComplaintController < ApplicationController
       elsif params[:supervisor_id]
         complaint.admin_user_id = 13
       end
+      complaint_status.status = "pending"
 
       if complaint_status.save && complaint_update.save
         render json: {status: "success", message: "transfer succesfull" }
