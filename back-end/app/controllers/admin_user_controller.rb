@@ -128,7 +128,7 @@ class AdminUserController < ApplicationController
   user = AdminUser.find(get_logged_in_user_id)
 
   if user.designation == "superviser"
-    new_complainst = ComplaintStatus.where(admin_user_id: user.id, status: "new")
+    new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "new")
     pending_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "active")
     completed_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "completed")
 
