@@ -199,9 +199,9 @@ class ComplaintController < ApplicationController
       complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
 
       if params[:ward_id]
-        complaint_status.ward_office_id = params[:ward_id]
+        complaint_status.ward_office_id = 1
       elsif params[:supervisor_id]
-        complaint.admin_user_id = params[:supervisor_id]
+        complaint.admin_user_id = 13
       end
 
       if complaint_status.save && complaint_update.save
