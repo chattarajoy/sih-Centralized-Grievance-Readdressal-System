@@ -381,7 +381,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
             imageBitmap = resize(imageBitmap);
             imageView.setImageBitmap(imageBitmap);
 
-            final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/ "+imageBitmap.toString()+".jpeg";
+            final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/"+imageBitmap.toString()+".jpeg";
             image = OBJECT_KEY;
             // this example to work
             AWSCredentials credentials = new BasicAWSCredentials(
@@ -449,7 +449,7 @@ public class Form extends AppCompatActivity implements AdapterView.OnItemSelecte
                     bitmap = BitmapFactory.decodeStream(getContentResolver().openInputStream(targetUri));
                     bitmap = resize(bitmap);
                     imageView.setImageBitmap(bitmap);
-                    final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/ "+bitmap.toString()+".jpeg";
+                    final String OBJECT_KEY="https://s3-ap-southeast-1.amazonaws.com/asarcgrs/"+bitmap.toString()+".jpeg";
                     image = OBJECT_KEY;
                     final String filePath = getRealPathFromURI(targetUri);
                     AWSCredentials credentials = new BasicAWSCredentials(
