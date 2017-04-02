@@ -57,6 +57,7 @@ public class EditComplaint extends AppCompatActivity {
     Bundle b;
     String accessToken,secretKey,name,email;
     String URL_FOR_COMPLAINT_BY_ID = Constants.SERVER+"/complaint/show_complaint_by_id";
+    String URL_FOR_ALERT = Constants.SERVER+"/complaint/create_alert";
     ProgressDialog progressDialog;
     ImageView tv_image;
     Button save_button,alert;
@@ -143,13 +144,14 @@ public class EditComplaint extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        alert = (Button)findViewById(R.id.alert);
+        /*alert = (Button)findViewById(R.id.alert);
         alert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //send request to api
+
+            Toast.makeText(getApplicationContext(),"An alert will be sent when the allotted time has passed",Toast.LENGTH_LONG);
             }
-        });
+        });*/
         String key = b.getString("image");
         AWSCredentials credentials = new BasicAWSCredentials(
                 Constants.BUCKET_ACCESS_KEY_ID,
@@ -202,4 +204,8 @@ public class EditComplaint extends AppCompatActivity {
                 50, 50, false);
         return new BitmapDrawable(getResources(), bitmapResized);
     }
+
+
+
 }
+

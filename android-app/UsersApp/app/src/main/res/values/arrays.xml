@@ -36,7 +36,7 @@
         <item>illegal construction</item>
         <item>parking issues</item>
         <item>removal of encroachments</item>
-        <item>issues realted to advertisements board</item>
+        <item>issues related to advertisements board</item>
     </string-array>
     <string-array name="street_lighting" >
         <item>non-working street lights</item>
