@@ -195,7 +195,7 @@ private
     if district_office
 
       district_admin = AdminUser.where(designation: "district officer",
-                                        municipal_id: district_office.id)
+                                        municipal_id: district_office.id).first
       if district_admin
 
         complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
