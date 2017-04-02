@@ -234,7 +234,26 @@ sample return data
   "priority": "new"
 }
 ```
+#### Get complaint updates
 
+* URL: `/complaint/get_updates`
+```
+PARAMETERS: complaint_id
+HEADERS: access_token, secrrt_key
+
+RESPONSE
+
+json: {status: "success",
+       updates: updates}
+       
+Structure of updates
+
+{"complaint_id":"",
+ "assigned_to":"",
+ "notes":"",
+}
+
+```
 ## Aadhar Verification
 
 #### Requesting an OTP
