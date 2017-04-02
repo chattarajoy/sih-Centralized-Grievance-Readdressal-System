@@ -271,7 +271,7 @@ private
                                                     ward_office_id: ward_office.id,
                                                     department: subject,
                                                     sub_category: sub_category,
-                                                    status: "new")
+                                                    status: "pending")
 
           if complaint_status.save && complaint_update.save
             return "Auto Assignment Complete!"
