@@ -1,0 +1,54 @@
+<navbar-admin></navbar-admin>
+<div class="col-lg-12">
+  <h1><u>Admin Dashboard</u></h1>
+</div>
+
+<div class="container stuff">
+  <div class="row">
+    <div class="col-lg-6">
+     <h3 >New Complaint by ID {{status.id}}</h3>
+     <div class="card" style="width: 20rem;">
+     <img class="card-img-top" src="{{status.image}}" alt="Card image cap">
+     <div class="card-block">
+       <h4 class="card-title">{{status.subject}}</h4>
+       <p class="card-text">{{status.description}}</p>
+       <div *ngIf="level === 'district officer'">
+         <div class="dropdown">
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+    </ul>
+  </div>
+       </div>
+       <div *ngIf="level === 'ward officer'">
+         <div class="dropdown">
+       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+
+    </ul>
+  </div>
+       </div>
+       <div *ngIf="level === 'supervisor'">
+         <div class="checkbox">
+  <label><input type="checkbox" value="">Mark as Completed</label>
+</div>
+       </div>
+
+     </div>
+     <iframe width="550" height="200" frameborder="0" style="border:0; margin-top:5px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJQxnYp6LwNToRuJTfZY_XpYs&key=AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 " allowfullscreen></iframe>
+   </div>
+    </div>
+
+    <div class="col-lg-6">
+      <admin-counter></admin-counter>
+    </div>
+  </div>
+</div>
+<!--AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 -->

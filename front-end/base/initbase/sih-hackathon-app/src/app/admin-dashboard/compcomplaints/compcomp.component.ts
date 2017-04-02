@@ -30,9 +30,7 @@ export class CompCompComponent implements OnInit  {
 
    getService(){
      this._service.adminFetchComp().subscribe( res =>{
-        console.log('reach',res);
         this.rec = res;
-        console.log(this.rec);
      })
    }
 

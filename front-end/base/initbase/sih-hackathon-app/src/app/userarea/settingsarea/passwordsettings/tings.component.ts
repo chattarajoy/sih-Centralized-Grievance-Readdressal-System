@@ -46,9 +46,7 @@ ngOnInit(){
    this.form.setValue('name', 'Default');
 }
   passSubmit(){
-    console.log('Entering now')
       this._service.passwordChange(this.updPass).subscribe((res)=>{
-        console.log(res);
         if(res.status === "success"){
           this._notify.success('Ok','done');
         }else if(res.status === "error"){

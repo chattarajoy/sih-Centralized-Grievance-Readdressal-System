@@ -96,7 +96,7 @@ class AdminUserController < ApplicationController
     user = AdminUser.find(get_logged_in_user_id)
 
     if user.designation == "supervisor"
-      new_complaints = ComplaintStatus.where(admin_user_id: user.id).count
+      new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "pending").count
       pending_complaints = 0
       completed_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "completed").count
 
@@ -127,7 +127,7 @@ class AdminUserController < ApplicationController
   user = AdminUser.find(get_logged_in_user_id)
 
   if user.designation == "supervisor"
-    new_complaints = ComplaintStatus.where(admin_user_id: user.id)
+    new_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "pending")
     pending_complaints = {}
     completed_complaints = ComplaintStatus.where(admin_user_id: user.id, status: "completed")
 
@@ -137,9 +137,9 @@ class AdminUserController < ApplicationController
 
     new_complaints = ComplaintStatus.where(admin_user_id: user.id)
     pending_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                    category: user.designation, status: "pending")
+                          status: "pending")
     completed_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                    category: user.designation, status: "completed")
+                          status: "completed")
 
     elsif user.designation == "district officer"
 

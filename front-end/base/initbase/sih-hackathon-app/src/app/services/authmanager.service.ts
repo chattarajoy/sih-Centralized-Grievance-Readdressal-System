@@ -14,7 +14,6 @@ export class AuthManager implements CanActivate {
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         if(next.url[0].path == 'login'){
             if(window.localStorage.getItem('access_token') && window.localStorage.getItem('secret_key')){
-                console.log('You are already logged in');
                 return false;
             }
             else {

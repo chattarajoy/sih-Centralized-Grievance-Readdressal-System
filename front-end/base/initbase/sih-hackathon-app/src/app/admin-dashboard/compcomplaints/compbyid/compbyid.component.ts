@@ -5,12 +5,12 @@ import 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'pendbyid-component',
-  templateUrl: './pendbyid.component.html',
-  styleUrls: ['./pendbyid.component.css'],
+  selector: 'compbyid-component',
+  templateUrl: './compbyid.component.html',
+  styleUrls: ['./compbyid.component.css'],
   providers : [AppService]
 })
-export class PendByIdComponent implements OnInit  {
+export class CompByIdComponent implements OnInit  {
 
  id: string;
   status = {

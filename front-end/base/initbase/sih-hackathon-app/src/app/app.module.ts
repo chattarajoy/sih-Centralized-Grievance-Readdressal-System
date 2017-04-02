@@ -25,7 +25,10 @@ import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 import { PendCompComponent } from './admin-dashboard/pendcomplaints/pendcomplaints.component';
 import { NewCompComponent } from './admin-dashboard/newcomplaints/newcomp.component';
 import { CompCompComponent } from './admin-dashboard/compcomplaints/compcomp.component';
-
+import { PendByIdComponent } from './admin-dashboard/pendcomplaints/pendingbyid/pendbyid.component';
+import  { NewByIdComponent } from './admin-dashboard/newcomplaints/newbyid/newbyid.component';
+import { CompByIdComponent } from './admin-dashboard/compcomplaints/compbyid/compbyid.component';
+import { AdminSettingsComponent } from './admin/adminsettings/adminsettings.component';
 //custom-components
 
 import { AppComponent } from './app.component';
@@ -66,7 +69,11 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     AdminCounterComponent,
     PendCompComponent,
     NewCompComponent,
-    CompCompComponent
+    CompCompComponent,
+    PendByIdComponent,
+    NewByIdComponent,
+    CompByIdComponent,
+    AdminSettingsComponent
   ],
   imports: [
     JsonpModule,
