@@ -200,6 +200,7 @@ class ComplaintController < ApplicationController
 
       if params[:ward_id]
         complaint_status.ward_office_id = 1
+        complaint_status.admin_user_id = 7
       elsif params[:supervisor_id]
         complaint_status.admin_user_id = 13
       end

@@ -137,9 +137,9 @@ class AdminUserController < ApplicationController
 
     new_complaints = ComplaintStatus.where(admin_user_id: user.id)
     pending_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                    category: user.designation, status: "pending")
+                          status: "pending")
     completed_complaints = ComplaintStatus.where(district_office_id: ward.district_office_id, ward_office_id: user.municipal_id,
-                    category: user.designation, status: "completed")
+                          status: "completed")
 
     elsif user.designation == "district officer"
 
