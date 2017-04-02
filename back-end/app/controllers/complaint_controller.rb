@@ -203,6 +203,7 @@ private
                                                notes: "Auto Assignment by System to concerned district office")
 
         complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
+                                         admin_user_id: district_admin.id,
                                          district_office_id: district_office.id,
                                          department: subject_of_complaint)
 
