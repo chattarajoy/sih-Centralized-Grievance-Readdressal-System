@@ -1,7 +1,7 @@
 class ComplaintController < ApplicationController
 
   before_action :check_user_logged_in
-  before_action :check_user_logged_in_as_admin, only: [:assign_complaint]
+  before_action :check_user_logged_in_as_admin, only: [:assign_complaint, :mark_finished, :transfer_complaint]
 
   def create
     complaint = Complaint.new(subject: params[:subject],
@@ -182,31 +182,54 @@ class ComplaintController < ApplicationController
     end
   end
 
-  def assign_complaint_to_ward
+  def transfer_complaint
 
+      complaint = Complaint.find(params[:complaint_id])
 
-    district_office = DistrictOffice.where(state: complaint.state,
-                                                district: complaint.district).first
-    if district_office
+      district_office = DistrictOffice.where(state: complaint.state,
+                                                  district: complaint.district).first
+
       ward_office = WardOffice.where(district_office_id: district_office.id,
-                                      ward: params[:ward])
+                                        ward: params[:ward]).first
 
-            complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
-                                                   assigned_to: "superviser: " + final_superviser.name,
-                                                   notes: "Auto Assignment by System to concerned district office")
+      complaint_update = ComplaintUpdate.new(complaint_id: complaint.id,
+                                                assigned_to: "Assignment by Higher Authority",
+                                                notes: "Auto Assignment by System to concerned district office")
 
-            complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
-                                                    district_office_id: district_office.id,
-                                                    ward_office_id: ward_office.id,
-                                                    department: subject,
-                                                    sub_category: sub_category,
-                                                    status: "new")
+      complaint_status = ComplaintStatus.where(complaint_id: complaint.id).first
 
-          if complaint_status.save && complaint_update.save
-            render json: {status: "success", }
-          end
-        end
+      if params[:ward_id]
+        complaint_status.ward_office_id = params[:ward_id]
+      elsif params[:supervisor_id]
+        complaint.admin_user_id = params[:supervisor_id]
       end
+
+      if complaint_status.save && complaint_update.save
+        render json: {status: "success", message: "transfer succesfull" }
+      else
+        render json: {status: "error", error_message: "database not reachable"}
+      end
+
+    end
+
+    def mark_finished
+
+      if params[:complaint_id]
+
+        complaint_update = ComplaintUpdate.new(complaint_id: params[:complaint_id],
+                                                  assigned_to: "Completed!",
+                                                  notes: "Please raise an alert if anything goes wrong")
+
+        complaint_status = ComplaintStatus.where(complaint_id: params[:complaint_id]).first
+
+        complaint_status.status = "completed"
+
+        if complaint_status.save && complaint_update.save
+          render json: {status: "success", message: "Update succesfull" }
+        else
+          render json: {status: "error", error_message: "database not reachable"}
+        end
+    end
 
 private
 
