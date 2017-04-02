@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
 import { Status } from '../userarea/classes/complaints_class/complaints_status';
+import { StatusX } from '../admin-dashboard/pendcomplaints/pendingStats';
 import {BehaviorSubject} from 'rxjs/Rx';
 import { locationX  } from '../userarea/userform/location'
 require('aws-sdk/dist/aws-sdk');
@@ -19,6 +20,12 @@ export class AppService {
     status: Status[]
   };
 
+  statusX : Observable<StatusX[]>;
+  private _statusX: BehaviorSubject<StatusX[]>;
+  private dataStoreX: {
+    statusX: StatusX[]
+  };
+
 
   constructor(
     private _http: Http
@@ -27,6 +34,9 @@ export class AppService {
     this._status = <BehaviorSubject<Status[]>>new BehaviorSubject([]);
     this.status = this._status.asObservable();
 
+    this.dataStoreX = { statusX: [] };
+    this._statusX = <BehaviorSubject<StatusX[]>>new BehaviorSubject([]);
+    this.statusX = this._statusX.asObservable();
 
   }
 
@@ -142,6 +152,32 @@ awsService(file : any){
  })
 
 }
+
+
+adminFetchComp(){
+return this._http.get(`http://54.169.134.133:80/admin_user/fetch_complaints`,{headers:this.getAdminHeaders()})
+       .map( res => res.json())
+}
+
+
+  private getAdminHeaders(){
+    let headers = new Headers();
+
+     //headers.append('Access-Control-Allow-Methods','GET, POST, OPTIONS');
+     headers.append('Content-type','form-data');
+     headers.append('access_token',window.localStorage.getItem('admin_access_token'));
+     headers.append('secret_key',window.localStorage.getItem('admin_secret_key'));
+     //window.localStorage.setItem('intercepted_access_token',window.localStorage.getItem('access_token'));
+      //window.localStorage.setItem('intercepted_secret_key',window.localStorage.getItem('secret_key'));
+     console.log('headers',headers);
+    return headers;
+  }
+
+
+  getStats(){
+    return this._http.get(`http://54.169.134.133:80/admin_user/fetch_statistics`,{headers:this.getAdminHeaders()})
+          .map(res=>res.json())
+  }
 
 
 

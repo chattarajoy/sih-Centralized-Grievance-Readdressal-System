@@ -1,5 +1,5 @@
 <div class="pie" style="display: block">
-  <canvas baseChart
+  <canvas baseChart *ngIf="pieChartData && pieChartData.length > 0"
           [data]="pieChartData"
           [labels]="pieChartLabels"
           [chartType]="pieChartType"

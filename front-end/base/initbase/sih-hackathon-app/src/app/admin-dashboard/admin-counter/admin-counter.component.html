@@ -3,17 +3,17 @@
   <div class="row">
     <div class="col-lg-6">
       <div class="boxNew detailsbox">
-        <h2>300</h2>
-        <div class="miniN"><span>New Complaints</span></div>
+        <h2>{{counter.new}}</h2>
+        <div class="miniN"><span><button style="background-color:#c16175;" class="btn"><a style="color:white; " routerLink ="/newcomp">New Complaints</a></button></span></div>
 
       </div>
       <div class="boxOld detailsbox">
-        <h2>500</h2>
-        <div class="miniP"><span>Pending Complaints</span></div>
+        <h2>{{counter.old}}</h2>
+        <div class="miniP"><button style="background-color:#8ab9f7;" class="btn"><a style="color:white; " routerLink ="/pending">Pending Complaints</a></button></div>
       </div>
       <div class="boxCompleted detailsbox">
-        <h2>100</h2>
-        <div class="miniC"><span>Completed Complaints</span></div>
+        <h2>{{counter.comp}}</h2>
+        <div class="miniC"><button style="background-color:#e4c984 ;" class="btn"><a style="color:white; " routerLink ="/compcomp">Completed Complaints</a></button></div>
       </div>
     </div>
   </div>

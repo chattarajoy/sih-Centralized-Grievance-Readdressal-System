@@ -1,0 +1,69 @@
+<navbar-admin></navbar-admin>
+<div class="col-lg-12">
+  <h1><u>Admin Dashboard</u></h1>
+</div>
+
+<div class="container stuff">
+  <div class="row">
+    <div class="col-lg-6">
+       <h3>Completed Complaints Area</h3>
+<div *ngIf="rec">
+       <div *ngFor="let res of rec.completed_complaint" tabindex="2" class="box">
+       <!-- <div class="img-box">
+ <img src="http://images.indianexpress.com/2014/09/construction-main.jpg" alt="">
+ </div> -->
+       <div class="content-box">
+       <h4 class="subject"><span>Town Planning</span></h4>
+       <h6 class="posted_on"><i>Posted on {{res.created_at}}</i></h6>
+       <h6>Assigned to: <span>Diljeet (District Officer)</span></h6>
+       <h6>Status : <span>{{res.status}}</span></h6>
+
+       </div>
+       <iframe width="550" height="200" frameborder="0" style="border:0; margin-top:5px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJQxnYp6LwNToRuJTfZY_XpYs&key=AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 " allowfullscreen></iframe>
+       </div>
+</div>
+
+       <!-- <div tabindex="2" class="box">
+       <div class="img-box">
+
+       </div>
+       <div class="content-box">
+       <h4 class="subject"><span>Parking Issues</span></h4>
+       <h6 class="posted_on"><i>Posted on 21st March 2017</i></h6>
+       <h6>Assigned to: <span>Tajay (Ward Officer)</span></h6>
+       <h6>Status : <span>Pending</span></h6>
+       <p class="address">Guntur Bus Stand</p>
+
+       </div>
+       <iframe width="550" height="200" frameborder="0" style="border:0; margin-top:5px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJY0d2abUKSjoRqmvKk3vpYk0&key=AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 " allowfullscreen></iframe>
+       </div>
+
+       <div tabindex="2" class="box">
+       <div class="img-box">
+
+       </div>
+       <div class="content-box">
+       <h4 class="subject"><span>Removal of Enchroachments</span></h4>
+       <h6 class="posted_on"><i>Posted on 19th February 2017</i></h6>
+       <h6>Assigned to: <span>Waajay (Ward Officer)</span></h6>
+       <h6>Status : <span>Pending</span></h6>
+       <p class="address">Ashok Nagar,Guntur</p>
+
+       </div>
+       <iframe width="550" height="200" frameborder="0" style="border:0; margin-top:5px;"
+src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJK3AIhmZ1SjoROop9g6W7yL0&key=AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 " allowfullscreen></iframe>
+       </div> -->
+    </div>
+    <!-- <div *ngIf="rec">
+    <div *ngFor="let res of rec.new_complaint">
+      <li>{{res.status}}</li>
+    </div>
+    </div> -->
+    <div class="col-lg-6">
+      <admin-counter></admin-counter>
+    </div>
+  </div>
+</div>
+<!--AIzaSyCjEH6zVf-NOoxdoUUK7I70PiCrpKMxHM0 -->
