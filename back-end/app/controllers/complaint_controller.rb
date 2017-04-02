@@ -205,7 +205,8 @@ private
         complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
                                          admin_user_id: district_admin.id,
                                          district_office_id: district_office.id,
-                                         department: subject_of_complaint)
+                                         department: subject_of_complaint,
+                                         status: "new")
 
         if complaint_update.save && complaint_status.save
           return "Complaint forwarded to concerned officer"
