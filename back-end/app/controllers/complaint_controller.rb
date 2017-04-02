@@ -20,20 +20,11 @@ class ComplaintController < ApplicationController
 
       if complaint.save
         # assign new complaint to respective district office
-        if params[:ward]
-          assignment_result = auto_assign_complaint(complaint.id,
-                                                complaint.state,
-                                                complaint.district,
-                                                complaint.subject,
-                                                params[:ward],
-                                                complaint.sub_category)
-        else
           assignment_result = register_new_complaint(complaint.id,
                                                       complaint.state,
                                                       complaint.district,
                                                       complaint.subject,
                                                       complaint.sub_category)
-        end
         #send_sms(user.contact, "Your complaint has been registered. Your complaint id is -" + complaint.id)
         render json: {status: "success", complaint: complaint, message: assignment_result}
       else
