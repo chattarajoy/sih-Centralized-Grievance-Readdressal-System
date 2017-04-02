@@ -249,7 +249,7 @@ private
                                                 department: subject)
           if all_ward_supervisers
             least_complaints = 9999
-            least_complaints_user_id = 6
+            least_complaints_user_id = 13
 
             all_ward_supervisers.each do |superviser|
               total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
@@ -264,7 +264,7 @@ private
 
             complaint_update = ComplaintUpdate.new(complaint_id: complaint_id,
                                                    assigned_to: "superviser: " + final_superviser.name,
-                                                   notes: "Auto Assignment by System to concerned district office")
+                                                   notes: "Auto Assignment by System to concerned office")
 
             complaint_status = ComplaintStatus.new(complaint_id: complaint_id,
                                                     district_office_id: district_office.id,
