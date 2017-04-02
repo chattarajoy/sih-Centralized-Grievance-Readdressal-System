@@ -41,3 +41,44 @@ u=Sla.create(category:"engineering",time:1440,subcategory:"formation of new road
 u=Sla.create(category:"engineering",time:168,subcategory:"repair of drain")
 u=Sla.create(category:"engineering",time:168,subcategory:"repair of road")
 u=Sla.create(category:"engineering",time:720,subcategory:"public parks maintenance")
+
+
+
+district=DistrictOffice.create(state:"Andhra Pradesh",district:"Guntur")
+
+ward=WardOffice.create(district_office_id:1,ward:"1")
+ward=WardOffice.create(district_office_id:1,ward:"2")
+ward=WardOffice.create(district_office_id:1,ward:"3")
+ward=WardOffice.create(district_office_id:1,ward:"4")
+ward=WardOffice.create(district_office_id:1,ward:"5")
+ward=WardOffice.create(district_office_id:1,ward:"6")
+ward=WardOffice.create(district_office_id:1,ward:"7")
+ward=WardOffice.create(district_office_id:1,ward:"8")
+ward=WardOffice.create(district_office_id:1,ward:"9")
+ward=WardOffice.create(district_office_id:1,ward:"10")
+
+
+admin=AdminUser.create(name:"ajay",email:"ajay@gmail.com",password:"ajay",phone:"9999999999",designation:"district officer",municipal_id:"1",department:"Head")
+
+admin=AdminUser.create(name:"sajay",email:"sajay@gmail.com",password:"sajay",phone:"9999999998",designation:"ward officer",municipal_id:"1",department:"deputy")
+admin=AdminUser.create(name:"gajay",email:"gajay@gmail.com",password:"gajay",phone:"9999999997",designation:"ward officer",municipal_id:"2",department:"deputy")
+admin=AdminUser.create(name:"rajay",email:"rajay@gmail.com",password:"rajay",phone:"9999999996",designation:"ward officer",municipal_id:"3",department:"deputy")
+
+
+admin=AdminUser.create(name:"waajay",email:"waajay@gmail.com",password:"waajay",phone:"9999599995",designation:"supervisor",municipal_id:"1",department:"public health")
+admin=AdminUser.create(name:"wajay",email:"wajay@gmail.com",password:"wajay",phone:"9999999994",designation:"supervisor",municipal_id:"1",department:"water supply")
+admin=AdminUser.create(name:"eajay",email:"eajay@gmail.com",password:"eajay",phone:"9999999993",designation:"supervisor",municipal_id:"1",department:"town planning")
+admin=AdminUser.create(name:"tajay",email:"tajay@gmail.com",password:"tajay",phone:"9999999992",designation:"supervisor",municipal_id:"1",department:"street lighting")
+admin=AdminUser.create(name:"yajay",email:"yajay@gmail.com",password:"yajay",phone:"9999999991",designation:"supervisor",municipal_id:"1",department:"engineering")
+
+admin=AdminUser.create(name:"ram",email:"ram@gmail.com",password:"ram",phone:"9999999990",designation:"supervisor",municipal_id:"2",department:"public health")
+admin=AdminUser.create(name:"shyam",email:"shyam@gmail.com",password:"shyam",phone:"9999999980",designation:"supervisor",municipal_id:"2",department:"water supply")
+admin=AdminUser.create(name:"manjeet",email:"manjeet@gmail.com",password:"manjeet",phone:"9999999982",designation:"supervisor",municipal_id:"2",department:"town planning")
+admin=AdminUser.create(name:"diljeet",email:"diljeet@gmail.com",password:"diljeet",phone:"9999999983",designation:"supervisor",municipal_id:"2",department:"street lighting")
+admin=AdminUser.create(name:"xxxx",email:"xxxx@gmail.com",password:"xxxx",phone:"9999999971",designation:"supervisor",municipal_id:"2",department:"engineering")
+
+
+
+
+
+
