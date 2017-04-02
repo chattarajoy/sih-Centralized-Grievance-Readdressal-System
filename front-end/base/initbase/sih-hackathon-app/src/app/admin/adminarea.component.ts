@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import './counter.js';
 
 @Component({
   selector: 'admin-component',

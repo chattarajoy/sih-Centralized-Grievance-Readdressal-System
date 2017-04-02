@@ -73,25 +73,25 @@ export class UserFormComponent implements OnInit{
 
   formSubmit(){
 
-    this._service.getLocation(this.cForm).subscribe((res)=>{
-      console.log('response',res);
-    })
+    // this._service.getLocation(this.cForm).subscribe((res)=>{
+    //   console.log('response',res);
+    // })
 
-    // console.log('Entering',this.store)
-    //   this._service.submitFormX(this.cForm).subscribe((res)=>{
-    //     if(res.status === 'success'){
-    //     console.log('Submitted!', res)
-    //     this._notify.alert('Submitting...','Validating for Errors');
-    //     setTimeout((_router) => {
-    //         this._router.navigate(['sub']);
-    //     }, 6500);
-    //   }
-    //   else if (res.status === 'error'){
-    //     this._notify.error('Errors','Please Check Your Form',{
-    //       showProgressBar : false
-    //     });
-    //   }
-    //   })
+    console.log('Entering',this.store)
+      this._service.submitFormX(this.cForm).subscribe((res)=>{
+        if(res.status === 'success'){
+        console.log('Submitted!', res)
+        this._notify.alert('Submitting...','Validating for Errors');
+        setTimeout((_router) => {
+            this._router.navigate(['sub']);
+        }, 6500);
+      }
+      else if (res.status === 'error'){
+        this._notify.error('Errors','Please Check Your Form',{
+          showProgressBar : false
+        });
+      }
+      })
 
   }
 

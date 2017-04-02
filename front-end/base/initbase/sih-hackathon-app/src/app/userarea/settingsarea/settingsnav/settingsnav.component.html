@@ -1,10 +1,51 @@
-<div class="container">
-<div class="wrapper">
+<form class="form-horizontal">
+  <fieldset>
+    <h3>Verify Aadhar</h3>
+
+    <form [formGroup]="form.getForm()" (ngSubmit)="save()">
+      <div class="form-group">
+        <label>Aadhar Number</label>
+        <input [(ngModel)]="verOTP.aadhar_number" type="text" class="form-control" formControlName="aadhar_number">
+        <div *ngIf="form.hasError('aadhar_number')" class="alert alert-danger">
+          <p>Error</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Contact</label>
+        <input [(ngModel)]="verOTP.contact" type="text" class="form-control" formControlName="contact">
+        <div *ngIf="form.hasError('contact')" class="alert alert-danger">
+          <p>Error</p>
+        </div>
+      </div>
 
 
-  <div class="box1">
-    <a routerlink ="/password-setting"><p>Update Password</p></a>
-  </div>
+  </form>
+
+
+    <div class="form-group">
+      <div class="col-lg-12">
+        <button type="reset" class="btn btn-primary" (click)="verSubmit()">Submit</button>
+
+      </div>
+    </div>
+  </fieldset>
+</form>
+<div *ngIf="statusR.status === 'success'">
+      <h3>OTP</h3>
+
+      <form >
+        <div class="form-group">
+          <input type="text" name="_otp" id="useremail" tabindex="1" class="form-control" placeholder="OTP" [(ngModel)]="finalOTP._otp" value="">
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+              <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Verify" (click)="sendOTP()">
+            </div>
+          </div>
+        </div>
+
+      </form>
 
 </div>
-</div>
+<simple-notifications [options]="options"></simple-notifications>

@@ -15,7 +15,7 @@ export class UserformService {
   ) { }
 
   getLocation(parameters):Observable<any>{
-    
+
     console.log(parameters);
     var headers = new Headers();
     var address = parameters.address;
@@ -74,6 +74,33 @@ console.log(headers);
 
 
 
+    verifyAadhar(form):Observable<any>{
+      let headers = new Headers()
+      var access = window.localStorage.getItem('access_token')
+      var secret = window.localStorage.getItem('secret_key')
+       headers.append('access_token',access)
+       headers.append('secret_key',secret)
+       headers.append('Content-Type','application/json');
+      console.log('submit-form-headers',headers)
+      return this._http.get(`http://54.169.134.133:80/aadhar_verification/verify_aadhar_data?aadhar_number=`+form.aadhar_number+`&contact=`+form.contact,{headers:headers}) // ...using post request
+                       .map(res=> res.json()) // ...and calling .json() on the response to return data
+                       .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+    }
+
+
+
+   verifyOTP(form):Observable<any>{
+     let headers = new Headers()
+     var access = window.localStorage.getItem('access_token')
+     var secret = window.localStorage.getItem('secret_key')
+      headers.append('access_token',access)
+      headers.append('secret_key',secret)
+      headers.append('Content-Type','application/json');
+     console.log('submit-form-headers',headers)
+     return this._http.get(`http://54.169.134.133:80/aadhar_verification/verify_otp?otp=`+form._otp,{headers:headers}) // ...using post request
+                      .map(res=> res.json()) // ...and calling .json() on the response to return data
+                      .catch((error:any) => Observable.throw(error.json().error || 'Server error')); //...errors if any
+   }
 
 
 

@@ -1,0 +1,50 @@
+.details{
+  text-align: center;
+}
+
+.detailsbox{
+  margin-top :71px;
+  height:auto;
+  width:200px;
+  text-align: center;
+  margin-left: 177px;
+  padding : 2px 2px 2px 2px;
+}
+
+.boxNew{
+  background-color: #ffa1b5;
+}
+
+.boxOld{
+ background-color:#86c7f3;
+}
+
+.boxCompleted{
+  background-color:#ffe29a;
+}
+
+.miniN{
+  background: #c16175;
+  color:white;
+}
+
+.miniP{
+  background: #8ab9f7;
+  color:white;
+}
+
+.miniC{
+   background-color:#e4c984 ;
+   color:white;
+}
+
+@media only screen and (max-width:768px) {
+  .detailsbox{
+    margin-top :40px;
+
+    height:auto;
+    width:200px;
+    text-align: center;
+    margin-left: 55px;
+  }
+}
