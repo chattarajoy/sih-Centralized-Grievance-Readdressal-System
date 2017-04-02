@@ -39,4 +39,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.google.android.gms:play-services-appindexing:8.3.0'
     compile 'com.android.volley:volley:1.0.0'
+    compile 'com.android.support:support-v4:25.0.1'
 }
