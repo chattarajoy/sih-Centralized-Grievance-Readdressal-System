@@ -201,7 +201,7 @@ class ComplaintController < ApplicationController
       if params[:ward_id]
         complaint_status.ward_office_id = 1
       elsif params[:supervisor_id]
-        complaint.admin_user_id = 13
+        complaint_status.admin_user_id = 13
       end
       complaint_status.status = "pending"
 
