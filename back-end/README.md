@@ -122,7 +122,7 @@ Returns json
 * `url: /complaint/create`
 ```
 headers: access_token, secret_key
-parameters: subject, description, image, latitude, longitude, address, district, state, pincode
+parameters: subject, sub_category, description, image, latitude, longitude, address, district, state, pincode
 ```
 
 #### Return Structure - New Complaint
@@ -135,6 +135,7 @@ Returns json
   "complaint": {
     "id": 1,
     "subject": "New",
+    sub_category: "",
     "description": "kaafi dikkat hai",
     "image": null,
     "latitude": null,
@@ -169,6 +170,7 @@ sample return data
   {
     "id": 1,
     "subject": null,
+    "sub_category": "",
     "description": null,
     "image": null,
     "latitude": null,
@@ -185,6 +187,7 @@ sample return data
   {
     "id": 2,
     "subject": "New",
+    "sub_category": "",
     "description": "kaafi dikkat hai",
     "image": null,
     "latitude": null,
@@ -263,4 +266,47 @@ RESPONSE
 
 json : {status: "error"/"success", 
         error_message: "Invalid OTP"/ message: "OTP verified"}
+```
+
+# Admin Functions
+
+### Fetch my complaints
+
+* GET/POST : `url: /admin_user/fetch_complaints`
+
+```
+Headers: header tokens
+
+RESPONSE
+
+json: {new_complaint: new_complaint, 
+       pending_complaint: pending_complaint, 
+       completed_complaint: completed_complaint}
+       
+each of new_complaint, pending_complaint and completed_complaint has an architecture of 
+
+{
+  "admin_user_id":,
+  "district_office_id":,
+  "ward_office_id":,
+  "status":,
+  "created_at":,  
+  "updated_at":,   
+  "department":,
+  "sub_category":,
+  "complaint_id":,
+}
+
+```
+
+### Fetch stats
+
+* GET/POST : `url: /admin_user/fetch_statistics`
+
+```
+Headers: header tokens
+
+RESPONSE 
+
+json: {stats: [new_complaint, pending_complaint, completed_complaint] }
 ```

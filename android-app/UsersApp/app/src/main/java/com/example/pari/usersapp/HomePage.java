@@ -33,6 +33,18 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.support.design.widget.TabLayout;
+import com.example.pari.usersapp.FileAComplaintFragment;
+import com.example.pari.usersapp.Verification;
+import com.example.pari.usersapp.TrackFragment;
+import com.example.pari.usersapp.UpdatePasswordFragment;
+import android.support.v7.widget.Toolbar;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Created by pari on 23-03-2017.
  */
@@ -40,12 +52,15 @@ import java.util.Map;
 public class HomePage extends AppCompatActivity {
     Context context = this;
     Bundle b;
-    String URL_FOR_UPDATE_PASSWORD = Constants.SERVER+"/user/update_password";
     String accessToken,secretKey;
     String name,email,status;
     ProgressDialog progressDialog;
     FloatingActionButton sign_out;
-
+    int test = 0;
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    Boolean aadhar_verified;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,45 +70,28 @@ public class HomePage extends AppCompatActivity {
         String loginType = intent.getStringExtra("loginType");
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
-        TextView textView_name = (TextView)findViewById(R.id.textView_name);
-        TextView textView_email = (TextView)findViewById(R.id.textView_email);
         b = intent.getExtras();
         name = b.getString("name");
         email = b.getString("email");
         accessToken = b.getString("accessToken");
         secretKey = b.getString("secretKey");
-        final boolean aadhar_verified = b.getBoolean("aadhar_verified");
+        aadhar_verified = b.getBoolean("aadhar_verified");
+        if(aadhar_verified)
+            test = 1;
         final boolean phone_no_verified = b.getBoolean("phone_no_verified");
         final String password = b.getString("password");
-        textView_name.setText(name);
-        textView_email.setText(email);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
 
-
-        Button button_complain = (Button)findViewById(R.id.button_complain);
-        button_complain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(!aadhar_verified || !phone_no_verified)
-                {
-                    Intent intent = new Intent(HomePage.this,Verification.class);
-                    intent.putExtras(b);
-                    startActivity(intent);
-                }
-                else
-                {
-
-                            Intent intent = new Intent(HomePage.this,Form.class);
-                            intent.putExtras(b);
-                            startActivity(intent);
-
-
-
-                }
-
-            }
-        });
         sign_out = (FloatingActionButton) findViewById(R.id.floatingActionButton);
         sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,159 +100,57 @@ public class HomePage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button button_track = (Button) findViewById(R.id.button_track);
-        button_track.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context,Track.class);
-                intent.putExtras(b);
-                startActivity(intent);
-            }
-        });
-        Button button_change_pass = (Button) findViewById(R.id.button_change_pass);
-        button_change_pass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                LayoutInflater li = LayoutInflater.from(context);
-                View promptsView = li.inflate(R.layout.change_pass_prompt, null);
 
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                        context);
-
-                // set prompts.xml to alertdialog builder
-                alertDialogBuilder.setView(promptsView);
-
-                final EditText current = (EditText) promptsView
-                        .findViewById(R.id.editText9);
-                final EditText new_pass = (EditText) promptsView
-                        .findViewById(R.id.editText10);
-
-                final EditText confirm_new = (EditText) promptsView
-                        .findViewById(R.id.editText11);
-                // set dialog message
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-
-                                      //  while(true) {
-                                            String pass = current.getText().toString();
-                                            String new_password = new_pass.getText().toString();
-                                            String confirm_new_pass = confirm_new.getText().toString();
-                                            if (!pass.equals(password)) {
-                                                Toast toast = Toast.makeText(context, "Incorrect Password", Toast.LENGTH_LONG);
-                                                toast.show();
-                                            } else if (!new_password.equals(confirm_new_pass)) {
-                                                Toast toast = Toast.makeText(context, "Passwords Don't Match", Toast.LENGTH_LONG);
-                                                toast.show();
-                                            } else {
-                                                updatePassword(password,new_password);
-                                              //  break;
-                                            }
-                                     //   }
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
-                alertDialog.show();
-
-            }
-        });
-        Animation animation_complain = AnimationUtils.loadAnimation(this,R.anim.complain);
-        Animation animation_track = AnimationUtils.loadAnimation(this,R.anim.track);
-        Animation animation_updatepass = AnimationUtils.loadAnimation(this,R.anim.updatepass);
-
-        button_change_pass.startAnimation(animation_updatepass);
-        button_complain.startAnimation(animation_complain);
-        button_track.startAnimation(animation_track);
 
     }
-    void updatePassword(final String old_pass,final String new_pass)
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+
+        if(test == 1)
+        {
+            adapter.addFragment(new FileAComplaintFragment(), "REPORT COMPLAINT");
+        }
+        else
+        {
+            adapter.addFragment(new VerificationFragment(), "REPORT COMPLAINT");
+        }
+        adapter.addFragment(new TrackFragment(), "TRACK COMPLAINTS");
+
+        adapter.addFragment(new UpdatePasswordFragment(), "SETTINGS");
+        viewPager.setAdapter(adapter);
+    }
+    public class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+    }
+
+    void setTest()
     {
-        String cancel_req_tag = "update_password";
-        progressDialog.setMessage("Updating Password");
-        showDialog();
-        StringRequest strReq = new StringRequest(Request.Method.POST,
-                URL_FOR_UPDATE_PASSWORD, new Response.Listener<String>() {
-
-            @Override
-            public void onResponse(String response) {
-                hideDialog();
-                JSONObject jObj = null;
-                try {
-                    jObj = new JSONObject(response);
-                    status = jObj.getString("status");
-                    if (status != null && status.equals("success")) {
-                        Toast.makeText(getApplicationContext(),
-                                "Password Updated!", Toast.LENGTH_LONG).show();
-                      //  finish();
-                    }
-
-                    else {
-
-                        String errorMsg = null;
-                        try {
-                            errorMsg = jObj.getString("error_message");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        Toast.makeText(getApplicationContext(),
-                                errorMsg, Toast.LENGTH_LONG).show();
-                    }
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-              //  Log.e(TAG, "Login Error: " + error.getMessage());
-                Toast.makeText(getApplicationContext(),
-                        error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                // Posting params to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("old_password", old_pass);
-                params.put("new_password", new_pass);
-                return params;
-            }
-            @Override
-            public Map<String, String> getHeaders() {
-                // Posting params to login url
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("access_token", accessToken);
-                params.put("secret_key", secretKey);
-                return params;
-            }
-        };
-        // Adding request to request queue
-        AppSingleton.getInstance(getApplicationContext()).addToRequestQueue(strReq,cancel_req_tag);
-    }
-    private void showDialog() {
-        if (!progressDialog.isShowing())
-            progressDialog.show();
-    }
-    private void hideDialog() {
-        if (progressDialog.isShowing())
-            progressDialog.dismiss();
+        test = 1;
     }
 }

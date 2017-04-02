@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
+
 
 //custom-components
 import { NavbarComponent } from './navbar/navbar.component';
@@ -18,6 +19,7 @@ import { PasSettingComponent } from './userarea/settingsarea/passwordsettings/ti
 import { MainPageComponent } from './mainpage/mainpage.component';
 import { SettingsNavComponent } from './userarea/settingsarea/settingsnav/settingsnav.component';
 import { AdminLoginComponent } from './login_signup/adminlogarea/admin-login.component';
+import { AdminPieComponent } from './admin-dashboard/admin-piechart/admin-pie.component';
 import { NavbarAdminComponent } from './navbar-admin/navbar-admin.component';
 //custom-components
 
@@ -33,6 +35,7 @@ import { AdminAuthManager } from './services/auth_admin_man';
 
 
 //externalServices
+import { ChartsModule } from 'ng2-charts';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 //angular2-notifications
 @NgModule({
@@ -53,15 +56,18 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
     SettingsNavComponent,
     MainPageComponent,
     AdminLoginComponent,
-    NavbarAdminComponent
+    NavbarAdminComponent,
+    AdminPieComponent
   ],
   imports: [
+    JsonpModule,
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     SimpleNotificationsModule.forRoot(),
+    ChartsModule
   ],
   providers: [AuthManager,AdminAuthManager],
   bootstrap: [AppComponent]

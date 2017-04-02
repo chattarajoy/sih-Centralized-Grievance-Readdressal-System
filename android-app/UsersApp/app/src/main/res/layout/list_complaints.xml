@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:padding="8dp"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp">
+    android:layout_margin="4dp"
+    android:background="@drawable/shadow">
 
 
     <TextView
         android:text="TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
         android:id="@+id/textView10"
         android:textSize="18sp" />
@@ -21,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView10"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="50dp"
         android:layout_marginRight="20dp"
         android:id="@+id/textView11" />
     <TextView
@@ -29,7 +31,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@+id/textView11"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="50dp"
     android:layout_marginRight="20dp"
     android:id="@+id/textView" />
 

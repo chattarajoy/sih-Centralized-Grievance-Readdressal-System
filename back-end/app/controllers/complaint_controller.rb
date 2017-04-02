@@ -79,7 +79,15 @@ class ComplaintController < ApplicationController
   end
 
   def create_alert
+    user_id = get_logged_in_user_id
 
+    complaint = Complaint.find(params[:complaint_id])
+    complaint_status = Complaint.where(subject: complaint.subject, sub_category: complaint.sub_category)
+    sla = Sla.where(department: complaint.subject, sub_category: complaint.sub_category)
+    time1=Time.now() - complaint_status.created_at
+    time2=sla.time
+
+<<<<<<< HEAD
     if params[:complaint_id] && params[:message]
 
       complaint = Complaint.find(params[:complaint_id])
@@ -168,6 +176,14 @@ class ComplaintController < ApplicationController
         render json: {status: "error", error_message: "Message or Complaint Id can't be blank"}
       end
   end
+=======
+    if time1>time2
+      alert.each do |t|
+        if
+      alert =Alert.new()
+
+    end
+>>>>>>> 739e76ee7fe5a429a08ee5300c4918cf582e9de9
 
   def assign_complaint
   end

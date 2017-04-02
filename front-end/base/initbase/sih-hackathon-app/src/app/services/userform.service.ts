@@ -4,32 +4,41 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/toPromise';
+import {Jsonp} from '@angular/http';
 
 @Injectable()
 export class UserformService {
 
   constructor(
-    private _http : Http
+    private _http : Http,
+    private _jsonP : Jsonp
   ) { }
 
   getLocation(parameters):Observable<any>{
+    
     console.log(parameters);
     var headers = new Headers();
+    var address = parameters.address;
+    var newAddress = address.replace(/([,])/g,"+");
+    console.log('modified address',newAddress);
     var key = 'AIzaSyBJSQWoYevjqqNZQmTrkNCUnZkDW656cbs';
-    headers.append('access-control-expose-headers','*');
-    headers.append('Access-Control-Allow-Origin', 'http://127.0.0.1:4200');
-headers.append('Access-Control-Allow-Headers', 'Content-Type,Accept');
-headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Access-Control-Allow-Origin', '*');
+    headers.append('Access-Control-Allow-Credentials', 'true');
+    headers.append('Access-Control-Allow-Headers', 'Content-Type,Accept');
+    headers.append('Access-Control-Allow-Methods', 'POST');
+    headers.append('Authorization', null);
 console.log(headers);
-    return this._http.post(`https://maps.googleapis.com/maps/api/geocode/json?address=`+parameters.city+`+`+parameters.state+`+`+parameters.pincode+`&key=`+key
+    return this._jsonP.get(`https://maps.googleapis.com/maps/api/geocode/json?address=`+newAddress+`+`+parameters.district+`+`+parameters.state+`+`+parameters.pincode+`&key=`+key+`&format=jsonP&prefix=JSONP_CALLBACK`
 ,{headers:headers})
 
- .map( res => console.log(res.json()));
+ .map( res => console.log('is',res.json()));
   }
 
 
 
   submitFormX (form): Observable<any> {
+
+
 
           let headers = new Headers()
           var imageLink = window.localStorage.getItem('imagefileurl');

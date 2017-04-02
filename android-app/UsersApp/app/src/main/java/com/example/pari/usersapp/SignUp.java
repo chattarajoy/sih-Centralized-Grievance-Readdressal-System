@@ -145,7 +145,7 @@ public class SignUp extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Registration Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),"Error:"+
-                        error.getMessage(), Toast.LENGTH_LONG).show();
+                        "Please Check your Internet Connection!", Toast.LENGTH_LONG).show();
                 hideDialog();
             }
         }) {
