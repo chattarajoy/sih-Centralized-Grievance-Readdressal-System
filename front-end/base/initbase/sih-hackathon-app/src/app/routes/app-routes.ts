@@ -15,7 +15,9 @@ import { PendCompComponent } from '../admin-dashboard/pendcomplaints/pendcomplai
 import { NewCompComponent} from '../admin-dashboard/newcomplaints/newcomp.component';
 import { CompCompComponent } from '../admin-dashboard/compcomplaints/compcomp.component';
 import { PendByIdComponent } from '../admin-dashboard/pendcomplaints/pendingbyid/pendbyid.component';
-
+import { CompByIdComponent } from '../admin-dashboard/compcomplaints/compbyid/compbyid.component';
+import { NewByIdComponent } from '../admin-dashboard/newcomplaints/newbyid/newbyid.component';
+import { AdminSettingsComponent } from '../admin/adminsettings/adminsettings.component';
 //services
 import { AuthManager } from '../services/authmanager.service';
 import { AdminAuthManager } from '../services/auth_admin_man';
@@ -36,5 +38,8 @@ export const routes: Routes = [
   { path : 'pending' , component : PendCompComponent , canActivate:[AdminAuthManager]},
   { path : 'newcomp' , component : NewCompComponent , canActivate:[AdminAuthManager]},
   { path : 'compcomp' , component : CompCompComponent , canActivate:[AdminAuthManager]},
-  { path : 'pendbyid/:id' , component : PendByIdComponent , canActivate:[AdminAuthManager]}
+  { path : 'pendbyid/:id' , component : PendByIdComponent , canActivate:[AdminAuthManager]},
+  { path : 'compbyid/:id' , component : CompByIdComponent , canActivate:[AdminAuthManager]},
+  { path : 'newbyid/:id' , component : NewByIdComponent , canActivate:[AdminAuthManager]},
+  { path : 'admin-settings' , component : AdminSettingsComponent , canActivate:[AdminAuthManager]}
 ]

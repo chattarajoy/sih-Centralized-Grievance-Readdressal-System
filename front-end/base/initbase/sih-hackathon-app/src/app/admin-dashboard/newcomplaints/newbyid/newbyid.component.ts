@@ -5,17 +5,19 @@ import 'rxjs/Rx';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'pendbyid-component',
-  templateUrl: './pendbyid.component.html',
-  styleUrls: ['./pendbyid.component.css'],
+  selector: 'newbyid-component',
+  templateUrl: './newbyid.component.html',
+  styleUrls: ['./newbyid.component.css'],
   providers : [AppService]
 })
-export class PendByIdComponent implements OnInit  {
+export class NewByIdComponent implements OnInit  {
 
  id: string;
   status = {
 
   }
+
+  level = window.localStorage.getItem('level');
 
   constructor(
     private _service : AppService,
