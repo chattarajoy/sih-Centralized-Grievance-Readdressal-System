@@ -83,13 +83,13 @@ class ComplaintController < ApplicationController
     if params[:complaint_id] && params[:message]
 
       complaint = Complaint.find(params[:complaint_id])
-      previous_alert = Alert.where(complaint_id: params[:complaint_id])
+      previous_alert = Alert.where(complaint_id: params[:complaint_id]).first
 
       if previous_alert
 
           time_elapsed = (Time.now() - previous_alert.created_at)/3600
           time_gap_needed = Sla.where(category: complaint.subject,
-                                      sub_category: complaint.sub_category)
+                                      sub_category: complaint.sub_category).first
 
           if time_gap_needed
 
@@ -121,7 +121,7 @@ class ComplaintController < ApplicationController
                                                         district: complaint.district).first
 
                 ward_office = WardOffice.where(district_office_id: district_office.id,
-                                               ward: complaint.ward)
+                                               ward: complaint.ward).first
 
                 person_to_alert = AdminUser.where(designation: "ward officer", municipal_id: ward_office.id).first
 
@@ -143,7 +143,7 @@ class ComplaintController < ApplicationController
 
           time_elapsed = (Time.now() - complaint.created_at)/3600
           time_gap_needed = Sla.where(category: complaint.subject,
-                                      sub_category: complaint.sub_category)
+                                      subcategory: complaint.sub_category).first
 
           if time_gap_needed.time <= time_elapsed
 
