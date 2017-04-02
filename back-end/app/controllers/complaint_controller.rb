@@ -249,6 +249,7 @@ private
                                                 department: subject)
           if all_ward_supervisers
             least_complaints = 9999
+            least_complaints_user_id = 6
 
             all_ward_supervisers.each do |superviser|
               total_complaints = ComplaintStatus.where(admin_user_id: superviser.id,
