@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import 'node_modules/chart.js/src/chart.js';
+import { Component, } from '@angular/core';
+import '../../../../node_modules/chart.js/src/chart.js';
 
 @Component({
   selector: 'admin-pie',
@@ -8,7 +8,7 @@ import 'node_modules/chart.js/src/chart.js';
 })
 export class AdminPieComponent {
 
-   public pieChartLabels:string[] = ['Download Sales', 'In-Store Sales', 'Mail Sales'];
+   public pieChartLabels:string[] = ['New Complaints', 'Pending Complaints', 'Completed Complaints'];
     public pieChartData:number[] = [300, 500, 100];
     public pieChartType:string = 'pie';
 
@@ -20,4 +20,6 @@ export class AdminPieComponent {
     public chartHovered(e:any):void {
       console.log(e);
     }
+
+
 }

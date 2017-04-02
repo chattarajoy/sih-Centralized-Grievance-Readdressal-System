@@ -9,7 +9,7 @@
  </p>
     </div>
     <div *ngIf="data.phone === false " class="col-xs-4 not-verified">
-      <p>Aadhar Verfication Status : <span>Not Verified <i class="fa fa-times" aria-hidden="true"></i></span> 
+      <p>Aadhar Verfication Status : <span>Not Verified <i class="fa fa-times" aria-hidden="true"></i></span>
  </p>
     </div>
   </div>
@@ -21,6 +21,10 @@
       <h1>Form is Disabled , please Verify your aadhar</h1>
       <span><i class="fa fa-exclamation-triangle fa-5x" aria-hidden="true"></i>
 </span>
+<div class="row">
+  <button class="btn btn-primary" routerLink = '/settings'>Verify Aadhar</button>
+</div>
+
     </div>
     <div class="col-xs-12 col-md-6">
       <usercomplaint-component></usercomplaint-component>

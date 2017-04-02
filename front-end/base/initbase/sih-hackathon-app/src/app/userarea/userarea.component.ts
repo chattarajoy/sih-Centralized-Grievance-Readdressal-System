@@ -41,13 +41,14 @@ export class UserComponent implements OnInit {
     this.data.user_name = res.user_name;
     this.data.phone = res.phone_no_verified;
     this.data.aadhar_verified = res.aadhar_verified;
-
     if(res.aadhar_verified === false){
         //alert('Aadhar is not Verified!');
         alert('Aadhar is not verified');
+        window.localStorage.setItem('aadhar_status',res.aadhar_verified);
         // this._router.navigate(['home']);
     }else if(res.aadhar_verified === true){
       console.log('verified');
+        window.localStorage.setItem('aadhar_status',res.aadhar_verified);
     }
     //  window.localStorage.removeItem('a');
     //  window.localStorage.removeItem('b');
