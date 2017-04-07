@@ -23,20 +23,21 @@ As India inches towards becoming a clean and digital country under schemes like 
 ### Services for users
 
 1. User creates an account.
-2. Verifies his/her Aadhar number by OTP    verification.
+2. Verifies his/her Aadhar number by OTP verification.
 3. User files complaints under various categories.
 4. User can upload image of the problem. 
 5. Geo-tagging is used to pin-point the location.
 6. User can track his/her complaints’ status.
+7. Complaint is auto-escllated on expiry of due date.
 
 ### Services for administrator
 
 1. Admin is provided with a dashboard where assigned , pending and completed complaints are shown .
 2. A graphical representation of the statistics of the complaints within his/her jurisdiction.
 3. Admin can assign the subordinates depending on the type of problem.
-4. Service level architecture (SLA) is implemented for Admin
-
-
+4. Service level architecture (SLA), can be specified for certain categories.
+5. Auto assignment of concerned officer in case user fills in all the details properly.
+6. SMS notifications to assigned person, with details on where to report.
 
 ### REQUIREMENTS FOR SYSTEM EXECUTION:
 
@@ -44,4 +45,3 @@ As India inches towards becoming a clean and digital country under schemes like 
 2. Back-end :- Ruby, Rails, SQLite3
 3. Mobile-app :- Android 
 4. Server-hosting :- Linux, AWS
-
