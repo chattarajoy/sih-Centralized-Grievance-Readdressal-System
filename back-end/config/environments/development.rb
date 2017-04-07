@@ -48,14 +48,9 @@ Rails.application.configure do
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
   # SMTP settings for gmail
   config.action_mailer.delivery_method = :ses
-  #config.action_mailer.smtp_settings = {
-  #  address: "email-smtp.us-east-1.amazonaws.com",
-  #  port: 25,
-  #  user_name: "AKIAI7QITEB42CFVW34Q", #Your SMTP user
-  #  password: "AoKFagtDRA4b2SxfL43Gl0VnzstIgx+dRxiT73tAt7Ou", #Your SMTP password
-  #  authentication: :login
-  #}
+
   ActionMailer::Base.add_delivery_method :ses, AWS::SES::Base,
-  access_key_id: "AKIAI4XWYQDCVLFHOW5Q",
-  secret_access_key: "Svcp3OnOvkxzXURE1/cg5Tdia6SwSaYa0DxzErH9"
+  access_key_id: ENV["access_key_id"],
+  secret_access_key: ENV["secret_access_key"]
+
 end
