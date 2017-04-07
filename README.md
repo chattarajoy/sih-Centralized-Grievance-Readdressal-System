@@ -1,20 +1,6 @@
 # Centralized Grievance Readdressal System 
 
-## Team name- lordfanclub1 (Smart India Hackathon)
-
-## TEAM MEMBERS-
-1. SHOBHIT SHEKHAR (TEAM LEADER)
-2. HIMANSHU JHA
-3. PARUL MALIK
-4. JOY LAL CHATTARAJ
-5. SAURAV TIRU
-6. SHUBHAM LAL
-
-* COLLEGE - BIRLA INSTITUTE OF TECHNOLOGY, MESRA
-
-* ADDRESS- BIT MESRA, RANCHI, JHARKHAND-835215
-
-* MENTOR NAMES: N.A.
+#### A solution to a Student's Voice problem in Smart India Hackathon
 
 ### SOLUTION DESCCRIPTION:
 
