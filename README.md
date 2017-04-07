@@ -45,3 +45,9 @@ As India inches towards becoming a clean and digital country under schemes like 
 2. Back-end :- Ruby, Rails, SQLite3
 3. Mobile-app :- Android 
 4. Server-hosting :- Linux, AWS
+
+### Code files Structure
+
+1. Backend - API based Ruby on rails app - backend folder
+2. Web Frontend - Web app based on Angular2 consuming the backend API - frontend folder
+3. Android App - Android based application using backend API - android-app folder
