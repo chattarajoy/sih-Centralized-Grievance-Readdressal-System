@@ -1,4 +1,6 @@
-# Team name- lordfanclub1
+# Centralized Grievance Readdressal System 
+
+## Team name- lordfanclub1 (Smart India Hackathon)
 
 ## TEAM MEMBERS-
 1. SHOBHIT SHEKHAR (TEAM LEADER)
