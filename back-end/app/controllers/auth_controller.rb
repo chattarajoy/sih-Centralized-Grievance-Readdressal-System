@@ -1,94 +1,94 @@
 class AuthController < ApplicationController
 
-  before_action :check_user_logged_in, only: [:logout_user, :logout_admin]
+	before_action :check_user_logged_in, only: [:logout_user, :logout_admin]
 
-  def user_login
+	def user_login
 
-    if params[:password] && params[:email]
+		if params[:password] && params[:email]
 
-        user = User.where(email: params[:email]).first
+			user = User.where(email: params[:email]).first
 
-        if user && user.authenticate(params[:password])
-            api_key = ApiKey.new
-            api_key.user_id = user.id
-            api_key.user_type = "visitor"
-            api_key.save
-            secret_key = api_key.secret_key
-            access_token = api_key.user_token
+			if user && user.authenticate(params[:password])
+				api_key = ApiKey.new
+				api_key.user_id = user.id
+				api_key.user_type = "visitor"
+				api_key.save
+				secret_key = api_key.secret_key
+				access_token = api_key.user_token
 
-            render json: {status: "success",
-                          access_token: access_token,
-                          secret_key: secret_key,
-                          user_name: user.name,
-                          email: user.email,
-                          contact: user.contact,
-                          aadhar_verified: user.aadhar_verified,
-                          phone_no_verified: user.phone_no_verified,
-                          email_verified: user.email_verified}
-        else
-          error_message = "Invalid email or password"
-        end
-    else
-        error_message = "Invalid Params"
-    end
+				render json: {status: "success",
+					access_token: access_token,
+					secret_key: secret_key,
+					user_name: user.name,
+					email: user.email,
+					contact: user.contact,
+					aadhar_verified: user.aadhar_verified,
+					phone_no_verified: user.phone_no_verified,
+				email_verified: user.email_verified}
+			else
+				error_message = "Invalid email or password"
+			end
+		else
+			error_message = "Invalid Params"
+		end
 
-    render json: {status: "error", error_message: error_message} unless access_token
+		render json: {status: "error", error_message: error_message} unless access_token
 
-  end
+	end
 
-  def admin_login
+	def admin_login
 
-      if params[:password] && params[:email]
+		if params[:password] && params[:email]
 
-          user = AdminUser.where(email: params[:email]).first
+			user = AdminUser.where(email: params[:email]).first
 
-          if user && user.authenticate(params[:password])
-              api_key = ApiKey.new
-              api_key.user_id = user.id
-              api_key.user_type = "admin"
-              api_key.save
-              secret_key = api_key.secret_key
-              access_token = api_key.user_token
+			if user && user.authenticate(params[:password])
+				api_key = ApiKey.new
+				api_key.user_id = user.id
+				api_key.user_type = "admin"
+				api_key.save
+				secret_key = api_key.secret_key
+				access_token = api_key.user_token
 
-              render json: {status: "success",
-                            access_token: access_token,
-                            secret_key: secret_key,
-                            user_name: user.name,
-                            email: user.email,
-                            contact: user.phone,
-                            designation: user.designation}
-          else
-            error_message = "Invalid email or password"
-          end
-      else
-          error_message = "Invalid Params"
-      end
-      render json: {status: "error", error_message: error_message} unless access_token
+				render json: {status: "success",
+					access_token: access_token,
+					secret_key: secret_key,
+					user_name: user.name,
+					email: user.email,
+					contact: user.phone,
+				designation: user.designation}
+			else
+				error_message = "Invalid email or password"
+			end
+		else
+			error_message = "Invalid Params"
+		end
+		render json: {status: "error", error_message: error_message} unless access_token
 
-  end
+	end
 
-  def logout_user
+	def logout_user
 
-    key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
-      user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "visitor").first
+		key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
+		user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "visitor").first
 
-    if key.delete
-      render json: {status: "success"}
-    else
-      render json: {status: "error", error_message: key.errors.full_messages}
-    end
-  end
+		if key.delete
+			render json: {status: "success"}
+		else
+			render json: {status: "error", error_message: key.errors.full_messages}
+		end
+	end
 
-  def logout_admin
+	def logout_admin
 
-    key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
-      user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "admin").first
+		key = ApiKey.where(secret_key: request.headers["HTTP_SECRET_KEY"],
+		user_token: request.headers["HTTP_ACCESS_TOKEN"], user_type: "admin").first
 
-    if key.delete
-      render json: {status: "success"}
-    else
-      render json: {status: "error", error_message: key.errors.full_messages}
-    end
-  end
+		if key.delete
+			render json: {status: "success"}
+		else
+			render json: {status: "error", error_message: key.errors.full_messages}
+		end
+	end
 
 end
