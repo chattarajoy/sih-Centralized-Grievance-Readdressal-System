@@ -47,8 +47,8 @@ class ApplicationController < ActionController::API
 		require 'twilio-ruby'
 
 		# put your own credentials here
-		account_sid = 'AC8a38d38238b258b6151360c1240947b0'
-		auth_token = '4a1c77bccb3821e25d48a1f7f680118c'
+		account_sid = ENV['TWILIO_ACCOUNT_SID']
+		auth_token = ENV['TWILIO_AUTH_TOKEN']
 
 		# set up a client to talk to the Twilio REST API
 		@client = Twilio::REST::Client.new account_sid, auth_token
