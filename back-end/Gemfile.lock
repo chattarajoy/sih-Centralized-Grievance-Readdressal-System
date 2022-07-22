@@ -121,7 +121,7 @@ GEM
       builder (>= 2.1.2)
       jwt (~> 1.0)
       multi_json (>= 1.3.0)
-    tzinfo (1.2.2)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     tzinfo-data (1.2017.1)
       tzinfo (>= 1.0.0)
